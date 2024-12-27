@@ -32,7 +32,6 @@ export default function Projects() {
           start: "20% bottom",
           end: "bottom top",
           toggleActions: "play none none reverse",
-          markers: true,
         },
       })
       .fromTo(

@@ -22,7 +22,6 @@ export default function Technologies() {
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reset none reset",
-          markers: true,
         },
       })
       .fromTo(
@@ -47,7 +46,6 @@ export default function Technologies() {
           start: "top bottom",
           end: "bottom top",
           toggleActions: "none reset play reset",
-          markers: true,
         },
       })
       .fromTo(
