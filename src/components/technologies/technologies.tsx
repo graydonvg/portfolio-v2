@@ -4,9 +4,9 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { technologies } from "@/lib/constants";
-import TypographyH2 from "./ui/typography/h2";
-import Section from "./section";
-import TypographyP from "./ui/typography/p";
+import TypographyH2 from "../ui/typography/h2";
+import Section from "../ui/section";
+import TypographyP from "../ui/typography/p";
 import Technology from "./technology";
 
 if (typeof window !== "undefined") {

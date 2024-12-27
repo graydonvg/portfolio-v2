@@ -3,16 +3,19 @@
 import ContactForm from "./contact-form";
 import TypographyP from "../ui/typography/p";
 import Link from "next/link";
-import { EMAIL_ADDRESS, navOptions } from "@/lib/constants";
+import { EMAIL_ADDRESS, navLinks } from "@/lib/constants";
 import TypographyH2 from "../ui/typography/h2";
 import TypographyH3 from "../ui/typography/h3";
 // import { scrollToContactForm } from "@/lib/utils";
 
 export default function ContactMe() {
-  const navOptionsWithLinks = navOptions.filter((option) => option.link);
+  const navOptionsWithLinks = navLinks.filter((option) => option.externalLink);
 
   return (
-    <div className="mx-auto max-w-screen-2xl bg-card px-4 py-16 sm:py-24 md:px-8 lg:px-12 xl:px-[13.5rem]">
+    <div
+      id="contact"
+      className="mx-auto max-w-screen-2xl bg-card px-4 py-16 sm:py-24 md:px-8 lg:px-12 xl:px-[13.5rem]"
+    >
       <TypographyH2>
         Contact <span className="text-accent">Me</span>
       </TypographyH2>
@@ -43,7 +46,7 @@ export default function ContactMe() {
                 return (
                   <span key={index}>
                     <Link
-                      href={option?.link ?? ""}
+                      href={option?.externalLink ?? ""}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-400 hover:text-blue-500 hover:underline"

@@ -5,7 +5,7 @@ import project from "../../public/images/mockups/mystore-mockup.jpg";
 import TypographyH2 from "./ui/typography/h2";
 import TypographyP from "./ui/typography/p";
 import TypographyH3 from "./ui/typography/h3";
-import Section from "./section";
+import Section from "./ui/section";
 
 export default function About() {
   return (

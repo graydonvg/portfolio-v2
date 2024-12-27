@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-export default function GreenSockLogo(props: SVGProps<SVGSVGElement>) {
+export default function GSAP(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       version="1.1"

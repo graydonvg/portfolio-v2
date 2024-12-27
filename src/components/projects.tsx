@@ -17,7 +17,7 @@ import TypographyP from "./ui/typography/p";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import Section from "./section";
+import Section from "./ui/section";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);

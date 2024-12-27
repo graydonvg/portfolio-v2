@@ -1,16 +1,16 @@
-import CSS from "./icons/css";
-import GreenSockLogo from "./icons/gsap";
-import HTML5 from "./icons/html5";
-import JavaScript from "./icons/javascript";
-import MUI from "./icons/mui";
-import Nextjs from "./icons/nextjs";
-import React from "./icons/react";
-import Redux from "./icons/redux";
-import Shadcn from "./icons/shadcn";
-import Supabase from "./icons/supabase";
-import TailwindCSS from "./icons/tailwind";
-import TypeScript from "./icons/typescript";
-import TypographyP from "./ui/typography/p";
+import GSAP from "../icons/gsap";
+import CSS from "../icons/css";
+import HTML5 from "../icons/html5";
+import JavaScript from "../icons/javascript";
+import MUI from "../icons/mui";
+import Nextjs from "../icons/nextjs";
+import React from "../icons/react";
+import Redux from "../icons/redux";
+import Shadcn from "../icons/shadcn";
+import Supabase from "../icons/supabase";
+import TailwindCSS from "../icons/tailwind";
+import TypeScript from "../icons/typescript";
+import TypographyP from "../ui/typography/p";
 
 const ICONS = {
   html: HTML5,
@@ -24,7 +24,7 @@ const ICONS = {
   supabase: Supabase,
   mui: MUI,
   shadcn: Shadcn,
-  gsap: GreenSockLogo,
+  gsap: GSAP,
 };
 
 type Props = {

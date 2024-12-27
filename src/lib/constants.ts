@@ -10,18 +10,30 @@ export const GITHUB_URL = "https://github.com/graydonvg";
 export const LINKED_IN_URL = "https://linkedin.com/in/graydon-von-gossler";
 export const EMAIL_ADDRESS = "graydonvg@gmail.com";
 
-export const navOptions = [
+export const navLinks = [
+  {
+    label: "About",
+    internalLink: "#about",
+  },
+  {
+    label: "Projects",
+    internalLink: "#projects",
+  },
+  {
+    label: "Tech",
+    internalLink: "#technologies",
+  },
+  {
+    label: "Contact",
+    internalLink: "#contact",
+  },
   {
     label: "GitHub",
-    link: GITHUB_URL,
+    externalLink: GITHUB_URL,
   },
   {
     label: "LinkedIn",
-    link: LINKED_IN_URL,
-  },
-  {
-    label: "Contact me",
-    // scrollTo: scrollToContactForm,
+    externalLink: LINKED_IN_URL,
   },
 ];
 
@@ -151,7 +163,7 @@ export const technologies = [
     icon: "shadcn",
   },
   {
-    name: "GreenSock",
+    name: "GSAP",
     icon: "gsap",
   },
 ];
