@@ -27,10 +27,16 @@
     --accent-foreground: 0 0% 0%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+    --input: 0 0% 0%;
+    --input-foreground: 0 0% 100%;
+    --ring: 158.1 64.4% 51.6%;
     --radius: 0.5rem;
   }
+}
+
+.pin-spacer {
+  /* ensure the gsap spacer around the footer is always 100% wide */
+  width: 100% !important;
 }
 
 /* html {

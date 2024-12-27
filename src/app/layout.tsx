@@ -28,7 +28,7 @@ const DESCRIPTION =
   "Portfolio showcasing projects and web development skills in HTML, CSS, JavaScript, TypeScript, React.js, Next.js and more.";
 
 export const metadata: Metadata = {
-	metadataBase: new URL("https://www.graydonvongossler.com"),
+  metadataBase: new URL("https://www.graydonvongossler.com"),
   title: TITLE,
   description: DESCRIPTION,
   applicationName: `${NAME} - Portfolio`,
@@ -140,14 +140,12 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "bg-background font-inter text-foreground antialiased",
+          "overflow-x-hidden bg-background font-inter text-foreground antialiased",
           inter.variable,
         )}
       >
         {children}
       </body>
-
-
 
       <Script
         id="jsonLdSchema"

@@ -51,7 +51,10 @@ export default {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
-        input: "hsl(var(--input))",
+        input: {
+          DEFAULT: "hsl(var(--input))",
+          foreground: "hsl(var(--input-foreground))",
+        },
         ring: "hsl(var(--ring))",
       },
       screens: {

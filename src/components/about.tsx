@@ -5,10 +5,11 @@ import project from "../../public/images/mockups/mystore-mockup.jpg";
 import TypographyH2 from "./ui/typography/h2";
 import TypographyP from "./ui/typography/p";
 import TypographyH3 from "./ui/typography/h3";
+import Section from "./section";
 
 export default function About() {
   return (
-    <section id="about" className="container mx-auto p-4 sm:p-8">
+    <Section id="about">
       <TypographyH2>
         About <span className="text-accent">Me</span>
       </TypographyH2>
@@ -83,14 +84,7 @@ export default function About() {
             />
           </div>
         </div>
-        {/* <div className="h-full rounded-lg border border-border p-6">
-          <TypographyH3>03. Skills</TypographyH3>
-          <p>
-            I am proficient in a wide range of technologies and constantly
-            expanding my skill set to stay at the forefront of web development.
-          </p>
-        </div> */}
       </div>
-    </section>
+    </Section>
   );
 }

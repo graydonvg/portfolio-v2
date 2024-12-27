@@ -84,6 +84,25 @@ export const projects = [
       website: "",
     },
   },
+  {
+    image: galleryAiMockup,
+    title: "Portfolio",
+    description:
+      "Developing a dynamic media gallery platform with advanced management features, allowing users to seamlessly upload and enhance both photos and videos. Key features include Auto-Tagging for efficient categorization and search optimization, Image Optimization for high-quality display across devices, and Smart Editing with AI-driven enhancements.",
+    tags: [
+      "typescript",
+      "react.js",
+      "next.js",
+      "redux",
+      "supabase",
+      "shadcn",
+      "tailwind css",
+      "cloudinary",
+    ],
+    links: {
+      repository: "https://github.com/graydonvg/gallery-ai",
+    },
+  },
 ];
 
 export const technologies = [
@@ -132,7 +151,7 @@ export const technologies = [
     icon: "shadcn",
   },
   {
-    name: "VS Code",
-    icon: "vscode",
+    name: "GreenSock",
+    icon: "gsap",
   },
 ];
