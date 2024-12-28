@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { motion } from "motion/react";
 import TypographyH1 from "./ui/typography/h1";
+import headshot from "../../public/images/headshots/headshot.jpg";
 
 export default function Hero() {
   return (
@@ -34,9 +35,10 @@ export default function Hero() {
 
             <div className="relative z-10 aspect-square w-[250px] overflow-hidden rounded-[50%]">
               <Image
-                src="/images/headshots/headshot-1.jpg"
+                src={headshot}
                 alt="headshot"
                 quality={100}
+                placeholder="blur"
                 priority
                 fill
                 sizes="250px"
@@ -56,10 +58,17 @@ export default function Hero() {
               <br />
               specializing in
               <br className="sm:hidden" />{" "}
-              <span className="text-accent">ReactJS</span>
+              <span className="text-accent">ReactJS.</span>
             </TypographyH1>
-
-            <Button>View my resume</Button>
+            <a
+              tabIndex={-1}
+              href="/docs/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block"
+            >
+              <Button>View my resume</Button>
+            </a>
           </motion.div>
         </div>
       </div>

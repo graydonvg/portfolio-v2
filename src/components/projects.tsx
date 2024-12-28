@@ -18,59 +18,64 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import Section from "./ui/section";
+import useWindowScrollY from "@/hooks/use-window-scroll-y";
+import { useEffect, useState } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Projects() {
-  useGSAP(() => {
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: ".projects-container",
-          start: "20% bottom",
-          end: "bottom top",
-          toggleActions: "play none none reverse",
-        },
-      })
-      .fromTo(
-        ".project",
-        { x: "-110%", opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          ease: "power1.inOut",
-          stagger: {
-            amount: 0.5,
-            from: "start",
-          },
-        },
-      );
+  const currentScrollY = useWindowScrollY();
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isScrollingDown, setIsScrollingDown] = useState(true);
+  const [isInView, setIsInView] = useState(false);
 
-    gsap
-      .timeline({
+  useEffect(() => {
+    if (currentScrollY > lastScrollY) {
+      setIsScrollingDown(true);
+    }
+
+    if (currentScrollY < lastScrollY) {
+      setIsScrollingDown(false);
+    }
+
+    setLastScrollY(currentScrollY);
+  }, [currentScrollY, lastScrollY]);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: ".projects-container",
-          start: "20% bottom",
+          start: "top bottom",
           end: "bottom top",
-          toggleActions: "none reverse play none",
+          toggleActions: "play pause play pause",
+          onEnter: () => setIsInView(true),
+          onEnterBack: () => setIsInView(true),
+          onLeave: () => setIsInView(false),
+          onLeaveBack: () => setIsInView(false),
         },
-      })
-      .fromTo(
+      });
+
+      if (isInView) return;
+
+      tl.fromTo(
         ".project",
-        { x: "110%", opacity: 0 },
+        { x: isScrollingDown ? "-110%" : "110%", opacity: 0 },
         {
           x: 0,
           opacity: 1,
           ease: "power1.inOut",
           stagger: {
             amount: 0.5,
-            from: "end",
+            from: isScrollingDown ? "start" : "end",
           },
         },
       );
-  });
+    },
+    { dependencies: [isScrollingDown], revertOnUpdate: true },
+  );
 
   return (
     <Section id="projects">
@@ -81,7 +86,8 @@ export default function Projects() {
       <Accordion
         type="single"
         collapsible
-        className="projects-container w-full space-y-6 sm:space-y-8"
+        // Need padding botton for focus ring to show on last item
+        className="projects-container h-fit w-full space-y-6 pb-1 sm:space-y-8"
       >
         {projects.map((project, index) => (
           <AccordionItem
@@ -89,7 +95,7 @@ export default function Projects() {
             value={`item-${index + 1}`}
             className="project"
           >
-            <AccordionTrigger className="p-4 sm:p-6">
+            <AccordionTrigger className="focus-ring p-4 sm:p-6">
               <div className="flex items-center justify-end gap-2">
                 <span className="text-h3 font-semibold tracking-tight text-accent">
                   0{index + 1}.
@@ -102,6 +108,7 @@ export default function Projects() {
                 <Image
                   src={project.image}
                   alt={`${project.title} mockup`}
+                  placeholder="blur"
                   className="size-full rounded-lg md:w-1/2"
                   sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                 />
@@ -136,31 +143,29 @@ export default function Projects() {
                         Repository
                       </Button>
                     </Link>
-                    {project.links.website ||
-                      (project.links.website?.length === 0 && (
-                        <Link
-                          tabIndex={-1}
-                          href={project.links.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => {
-                            if (project.links.website?.length === 0) {
-                              e.preventDefault();
-                            }
-                          }}
-                          className={cn("flex-1", {
-                            "cursor-not-allowed":
-                              project.links.website.length === 0,
-                          })}
+                    {project.links.website !== null && (
+                      <Link
+                        tabIndex={-1}
+                        href={project.links.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          if (project.links.website?.length === 0) {
+                            e.preventDefault();
+                          }
+                        }}
+                        className={cn("flex-1", {
+                          "cursor-not-allowed": project.links.website === "",
+                        })}
+                      >
+                        <Button
+                          className="w-full"
+                          disabled={project.links.website === ""}
                         >
-                          <Button
-                            className="w-full"
-                            disabled={project.links.website.length === 0}
-                          >
-                            View website
-                          </Button>
-                        </Link>
-                      ))}
+                          View website
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

@@ -12,6 +12,10 @@ export const EMAIL_ADDRESS = "graydonvg@gmail.com";
 
 export const navLinks = [
   {
+    label: "Home",
+    internalLink: "#hero",
+  },
+  {
     label: "About",
     internalLink: "#about",
   },
@@ -113,6 +117,7 @@ export const projects = [
     ],
     links: {
       repository: "https://github.com/graydonvg/gallery-ai",
+      website: null,
     },
   },
 ];

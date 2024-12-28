@@ -6,7 +6,7 @@ import Link from "next/link";
 import { EMAIL_ADDRESS, navLinks } from "@/lib/constants";
 import TypographyH2 from "../ui/typography/h2";
 import TypographyH3 from "../ui/typography/h3";
-// import { scrollToContactForm } from "@/lib/utils";
+import { handleScrollToContactForm } from "@/lib/utils";
 
 export default function ContactMe() {
   const navOptionsWithLinks = navLinks.filter((option) => option.externalLink);
@@ -34,8 +34,8 @@ export default function ContactMe() {
             <div className="mt-4 text-lg sm:mt-6">
               <Link
                 href={`mailto:${EMAIL_ADDRESS}`}
-                className="text-blue-400 hover:text-blue-500 hover:underline"
-                // onFocus={scrollToContactForm}
+                className="focus-ring rounded-full text-blue-400 hover:text-blue-500 hover:underline"
+                onFocus={handleScrollToContactForm}
               >
                 {EMAIL_ADDRESS}
               </Link>{" "}
@@ -49,8 +49,8 @@ export default function ContactMe() {
                       href={option?.externalLink ?? ""}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-400 hover:text-blue-500 hover:underline"
-                      // onFocus={scrollToContactForm}
+                      className="focus-ring rounded-full text-blue-400 hover:text-blue-500 hover:underline"
+                      onFocus={handleScrollToContactForm}
                     >
                       {option?.label}
                     </Link>

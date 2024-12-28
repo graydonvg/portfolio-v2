@@ -12,9 +12,10 @@ export function handleScrollToContactForm() {
   });
 }
 
-export function handleScrollToInternalLink(link: string) {
+export function handleScrollToInternalLink(link: string, offset: number = 48) {
   const target = document.querySelector(link);
   if (target) {
-    target.scrollIntoView({ behavior: "smooth" });
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
   }
 }

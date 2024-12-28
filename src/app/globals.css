@@ -34,6 +34,11 @@
   }
 }
 
+@layer utilities {
+  .focus-ring {
+    @apply ring-offset-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+}
 .pin-spacer {
   /* ensure the gsap spacer around the footer is always 100% wide */
   width: 100% !important;

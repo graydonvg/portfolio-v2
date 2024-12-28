@@ -1,5 +1,5 @@
 import About from "@/components/about";
-import FixedFooter from "@/components/fixed-footer";
+import FixedContactFormContainer from "@/components/contact/fixed-contact-form-container";
 import Hero from "@/components/hero";
 import Navbar from "@/components/navbar";
 import Projects from "@/components/projects";
@@ -17,7 +17,9 @@ export default function Home() {
         <Projects />
         <Technologies />
       </main>
-      <FixedFooter />
+      <footer>
+        <FixedContactFormContainer />
+      </footer>
     </>
   );
 }

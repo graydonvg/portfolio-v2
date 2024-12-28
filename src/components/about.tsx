@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import project from "../../public/images/mockups/mystore-mockup.jpg";
+import myStoreMockup from "../../public/images/mockups/mystore-mockup.jpg";
+import galleryAiMockup from "../../public/images/mockups/gallery-ai-mockup.jpg";
 import TypographyH2 from "./ui/typography/h2";
 import TypographyP from "./ui/typography/p";
 import TypographyH3 from "./ui/typography/h3";
@@ -55,9 +56,9 @@ export default function About() {
 
           <div className="relative mt-4 h-fit overflow-hidden rounded-lg sm:mt-6">
             <Image
-              src={project}
-              alt="headshot"
-              priority
+              src={galleryAiMockup}
+              alt="project mockup"
+              placeholder="blur"
               className="rounded-lg"
               sizes="(min-width: 1540px) 420px, (min-width: 1280px) 334px, (min-width: 1040px) 249px, (min-width: 780px) 654px, (min-width: 640px) 526px, calc(100vw - 82px)"
             />
@@ -76,9 +77,9 @@ export default function About() {
 
           <div className="relative mt-4 h-fit overflow-hidden rounded-lg sm:mt-6">
             <Image
-              src={project}
-              alt="headshot"
-              priority
+              src={myStoreMockup}
+              alt="project mockup"
+              placeholder="blur"
               className="rounded-lg"
               sizes="(min-width: 1540px) 420px, (min-width: 1280px) 334px, (min-width: 1040px) 249px, (min-width: 780px) 654px, (min-width: 640px) 526px, calc(100vw - 82px)"
             />
