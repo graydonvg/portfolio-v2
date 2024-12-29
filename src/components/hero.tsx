@@ -15,7 +15,7 @@ export default function Hero() {
       <div className="absolute left-1/2 top-[42.5%] min-h-screen w-[200vw] min-w-[2000px] -translate-x-1/2 rounded-[50%] border-[1px] border-[#8CD6DE]/30 bg-[radial-gradient(closest-side,black_85%,#249974)]" />
 
       <div className="absolute left-0 top-0 size-full">
-        <div className="z-10 flex size-full flex-col items-center justify-center gap-8 text-center sm:gap-14">
+        <div className="flex size-full flex-col items-center justify-center gap-8 text-center sm:gap-14">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export default function Hero() {
           >
             <div className="absolute inset-0 overflow-hidden rounded-[50%] bg-gradient-to-b from-emerald-500/20 to-transparent blur-3xl" />
 
-            <div className="relative z-10 aspect-square w-[250px] overflow-hidden rounded-[50%]">
+            <div className="relative aspect-square w-[250px] overflow-hidden rounded-[50%]">
               <Image
                 src={headshot}
                 alt="headshot"

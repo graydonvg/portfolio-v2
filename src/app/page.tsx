@@ -1,16 +1,15 @@
 import About from "@/components/about";
 import FixedContactFormContainer from "@/components/contact/fixed-contact-form-container";
+import Header from "@/components/header";
 import Hero from "@/components/hero";
-import Navbar from "@/components/navbar";
+import NavDrawer from "@/components/nav/nav-drawer";
 import Projects from "@/components/projects";
 import Technologies from "@/components/technologies/technologies";
 
 export default function Home() {
   return (
     <>
-      <header>
-        <Navbar />
-      </header>
+      <Header />
       <main className="relative z-10 border-b border-border bg-background">
         <Hero />
         <About />
@@ -20,6 +19,7 @@ export default function Home() {
       <footer>
         <FixedContactFormContainer />
       </footer>
+      <NavDrawer />
     </>
   );
 }

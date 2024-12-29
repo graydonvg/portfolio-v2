@@ -14,55 +14,58 @@ if (typeof window !== "undefined") {
 }
 
 export default function Technologies() {
-  useGSAP(() => {
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: "#technologies-grid",
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "play reset none reset",
-        },
-      })
-      .fromTo(
-        ".technology",
-        { scale: 0, y: 100 },
-        {
-          scale: 1,
-          y: 0,
-          ease: "power1.inOut",
-          stagger: {
-            amount: 0.5,
-            grid: "auto",
-            from: "start",
+  useGSAP(
+    () => {
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: "#technologies-grid",
+            start: "top bottom",
+            end: "bottom top",
+            toggleActions: "play reset none reset",
           },
-        },
-      );
+        })
+        .fromTo(
+          ".technology",
+          { scale: 0, y: 100 },
+          {
+            scale: 1,
+            y: 0,
+            ease: "power1.inOut",
+            stagger: {
+              amount: 0.5,
+              grid: "auto",
+              from: "start",
+            },
+          },
+        );
 
-    gsap
-      .timeline({
-        scrollTrigger: {
-          trigger: "#technologies-grid",
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "none reset play reset",
-        },
-      })
-      .fromTo(
-        ".technology",
-        { scale: 0, y: 100 },
-        {
-          scale: 1,
-          y: 0,
-          ease: "power1.inOut",
-          stagger: {
-            amount: 0.5,
-            grid: "auto",
-            from: "end",
+      gsap
+        .timeline({
+          scrollTrigger: {
+            trigger: "#technologies-grid",
+            start: "top bottom",
+            end: "bottom top",
+            toggleActions: "none reset play reset",
           },
-        },
-      );
-  });
+        })
+        .fromTo(
+          ".technology",
+          { scale: 0, y: 100 },
+          {
+            scale: 1,
+            y: 0,
+            ease: "power1.inOut",
+            stagger: {
+              amount: 0.5,
+              grid: "auto",
+              from: "end",
+            },
+          },
+        );
+    },
+    { revertOnUpdate: true },
+  );
 
   return (
     <Section id="technologies" className="pb-24">
