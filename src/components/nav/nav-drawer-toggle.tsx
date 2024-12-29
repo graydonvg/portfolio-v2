@@ -15,7 +15,7 @@ export default function NavDrawerToggle() {
   return (
     <div
       onClick={toggleNavDrawer}
-      className="absolute right-5 top-5 rounded border border-white/70 p-2 text-white/70 backdrop-blur-3xl md:hidden"
+      className="pointer-events-auto absolute right-5 top-5 rounded border border-white/70 p-2 text-white/70 backdrop-blur-3xl md:hidden"
     >
       {isNavDrawerOpen ? <X size={30} /> : <Menu size={30} />}
     </div>

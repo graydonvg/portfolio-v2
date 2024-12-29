@@ -3,36 +3,31 @@
 import { useEffect, useRef, useState } from "react";
 import NavDrawerToggle from "./nav/nav-drawer-toggle";
 import Navbar from "./nav/navbar";
-import useWindowScrollY from "@/hooks/use-window-scroll-y";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import useScrollDirection from "@/hooks/use-scroll-direction";
+import useWindowScrollY from "@/hooks/use-window-scroll-y";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
 
 export default function Header() {
-  const headerRef = useRef<HTMLElement>(null);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const scrollDirection = useScrollDirection();
   const currentScrollY = useWindowScrollY();
-  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   useEffect(() => {
-    if (currentScrollY === 0) {
+    if (scrollDirection === "up" || currentScrollY === 0) {
       setIsNavbarVisible(true);
     }
 
-    if (currentScrollY > lastScrollY) {
+    if (scrollDirection === "down" && currentScrollY !== 0) {
       setIsNavbarVisible(false);
     }
-
-    if (currentScrollY < lastScrollY) {
-      setIsNavbarVisible(true);
-    }
-
-    setLastScrollY(currentScrollY);
-  }, [currentScrollY, lastScrollY]);
+  }, [scrollDirection, currentScrollY]);
 
   useGSAP(
     () => {
@@ -51,7 +46,10 @@ export default function Header() {
   );
 
   return (
-    <header ref={headerRef} className="fixed z-50 w-full -translate-y-[100px]">
+    <header
+      ref={headerRef}
+      className="pointer-events-none fixed z-50 w-full -translate-y-[100px]"
+    >
       <Navbar />
       <NavDrawerToggle />
     </header>

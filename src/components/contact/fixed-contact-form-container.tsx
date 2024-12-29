@@ -55,7 +55,7 @@ export default function FixedContactFormContainer() {
   });
 
   return (
-    <div ref={contactFormContainerRef} className="!w-full !max-w-full">
+    <div ref={contactFormContainerRef} className="!w-full !max-w-full bg-card">
       <ContactMe />
     </div>
   );

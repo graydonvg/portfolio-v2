@@ -1,4 +1,4 @@
-import About from "@/components/about";
+import About from "@/components/about/about";
 import FixedContactFormContainer from "@/components/contact/fixed-contact-form-container";
 import Header from "@/components/header";
 import Hero from "@/components/hero";

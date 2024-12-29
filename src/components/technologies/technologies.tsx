@@ -31,7 +31,7 @@ export default function Technologies() {
           {
             scale: 1,
             y: 0,
-            ease: "power1.inOut",
+            ease: "power1.out",
             stagger: {
               amount: 0.5,
               grid: "auto",
@@ -55,7 +55,7 @@ export default function Technologies() {
           {
             scale: 1,
             y: 0,
-            ease: "power1.inOut",
+            ease: "power1.out",
             stagger: {
               amount: 0.5,
               grid: "auto",
@@ -78,6 +78,9 @@ export default function Technologies() {
           <TypographyP>
             I am proficient in a wide range of technologies and constantly
             expanding my skill set to stay at the forefront of web development.
+          </TypographyP>
+          <TypographyP>
+            Here are <span className="text-accent">some</span> of my favorites:
           </TypographyP>
         </div>
 
