@@ -50,8 +50,10 @@ export default function Header() {
       ref={headerRef}
       className="pointer-events-none fixed z-50 w-full -translate-y-[100px]"
     >
-      <Navbar />
-      <NavDrawerToggle />
+      <div className="pointer-events-auto">
+        <Navbar />
+        <NavDrawerToggle />
+      </div>
     </header>
   );
 }

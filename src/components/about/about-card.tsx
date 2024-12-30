@@ -18,7 +18,7 @@ export default function AboutCard({
   return (
     <div className="about-card h-full rounded-lg border border-border bg-card p-6 text-card-foreground">
       <TypographyH3>
-        <span className="text-accent">{number}.</span> {title}
+        <span className="text-accent">0{number}.</span> {title}
       </TypographyH3>
 
       {parapraphs.split("<br />").map((parapraph, index) => (
@@ -26,7 +26,7 @@ export default function AboutCard({
       ))}
 
       {imageSrc && (
-        <div className="relative mt-4 h-fit overflow-hidden rounded-lg sm:mt-6">
+        <div className="relative mt-6 h-fit overflow-hidden rounded-lg sm:mt-8">
           <Image
             src={imageSrc}
             alt="project mockup"

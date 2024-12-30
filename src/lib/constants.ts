@@ -1,6 +1,9 @@
-// import { scrollToContactForm } from "./utils";
 import myStoreMockup from "../../public/images/mockups/mystore-mockup.jpg";
 import galleryAiMockup from "../../public/images/mockups/gallery-ai-mockup.jpg";
+import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-multi-device-mockup.png";
+import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.png";
+import portfolioMockup from "../../public/images/mockups/portfolio-mockup.png";
+// import zentryVideo from "../../public/videos/zentry-clone.mp4";
 
 export const SITE_URL =
   process.env.NODE_ENV === "development"
@@ -51,36 +54,17 @@ export const aboutItems = [
     title: "Expertise",
     parapraphs:
       "I am experienced in HTML, CSS, JavaScript, TypeScript, React.js, Next.js, and more.<br />I specialize in creating responsive, accessible, and performant web applications that are visually appealing and deliver exceptional user experiences.",
-    imageSrc: galleryAiMockup,
+    imageSrc: portfolioMultiDeviceMockup,
   },
   {
     title: "Goals",
     parapraphs:
       "My goal is to contribute to innovative teams where I can grow my skills in both front-end and back-end development, and help create impactful web solutions.",
-    imageSrc: myStoreMockup,
+    imageSrc: portfolioTeamMockup,
   },
 ];
 
 export const projects = [
-  {
-    image: myStoreMockup,
-    title: "Zentry clone",
-    description:
-      "Developed a clothing e-commerce store featuring an admin panel with role-based access control to manage users, products, and orders efficiently. Inspired by South African e-commerce store, Superbalist.",
-    tags: [
-      "typescript",
-      "react.js",
-      "next.js",
-      "redux",
-      "supabase",
-      "mui",
-      "stripe",
-    ],
-    links: {
-      repository: "https://github.com/graydonvg/my-store",
-      website: "https://my-store-henna.vercel.app",
-    },
-  },
   {
     image: myStoreMockup,
     title: "MyStore",
@@ -101,10 +85,21 @@ export const projects = [
     },
   },
   {
+    videoSrc: "/videos/zentry-clone.mp4",
+    title: "Zentry clone",
+    description:
+      'Working on a clone of zentry.com which won the Awwwards "Sit of the Day" on Aug 28, 2024.',
+    tags: ["typescript", "react.js", "next.js", "tailwind css", "gsap"],
+    links: {
+      repository: "https://github.com/graydonvg/zentry-clone",
+      website: "",
+    },
+  },
+  {
     image: galleryAiMockup,
     title: "Gallery AI",
     description:
-      "Developing a dynamic media gallery platform with advanced management features, allowing users to seamlessly upload and enhance both photos and videos. Key features include Auto-Tagging for efficient categorization and search optimization, Image Optimization for high-quality display across devices, and Smart Editing with AI-driven enhancements.",
+      "Developing a dynamic media gallery platform with advanced management features, allowing users to seamlessly upload and enhance both photos and videos. Key features include Image Optimization for high-quality display across devices and Smart Editing with AI-driven enhancements.",
     tags: [
       "typescript",
       "react.js",
@@ -121,19 +116,18 @@ export const projects = [
     },
   },
   {
-    image: galleryAiMockup,
+    image: portfolioMockup,
     title: "Portfolio",
     description:
-      "Developing a dynamic media gallery platform with advanced management features, allowing users to seamlessly upload and enhance both photos and videos. Key features include Auto-Tagging for efficient categorization and search optimization, Image Optimization for high-quality display across devices, and Smart Editing with AI-driven enhancements.",
+      "My portfolio site showcasing projects and web development skills in HTML, CSS, JavaScript, TypeScript, React.js, Next.js and more.",
     tags: [
       "typescript",
       "react.js",
       "next.js",
-      "redux",
-      "supabase",
+      "zustand",
       "shadcn",
       "tailwind css",
-      "cloudinary",
+      "gsap",
     ],
     links: {
       repository: "https://github.com/graydonvg/gallery-ai",

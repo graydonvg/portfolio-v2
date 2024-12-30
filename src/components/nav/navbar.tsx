@@ -61,7 +61,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="pointer-events-auto relative mx-auto mt-8 hidden w-fit overflow-hidden md:block">
+    <div className="relative mx-auto mt-8 hidden w-fit overflow-hidden md:block">
       <div
         ref={navLinkOverlayBeforeRef}
         className="pointer-events-none absolute rounded-3xl bg-primary opacity-0 transition-all duration-300"

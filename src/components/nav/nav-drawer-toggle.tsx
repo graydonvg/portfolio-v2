@@ -13,11 +13,11 @@ export default function NavDrawerToggle() {
   const { isNavDrawerOpen, toggleNavDrawer } = useDrawerStore();
 
   return (
-    <div
+    <button
       onClick={toggleNavDrawer}
-      className="pointer-events-auto absolute right-5 top-5 cursor-pointer rounded border border-white/70 p-2 text-white/70 backdrop-blur-3xl md:hidden"
+      className="focus-ring absolute right-5 top-5 cursor-pointer rounded border border-white/70 p-2 text-white/70 backdrop-blur-3xl md:hidden"
     >
       {isNavDrawerOpen ? <X size={30} /> : <Menu size={30} />}
-    </div>
+    </button>
   );
 }

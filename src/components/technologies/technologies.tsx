@@ -73,7 +73,7 @@ export default function Technologies() {
         Favorite <span className="text-accent">Technologies</span>
       </TypographyH2>
 
-      <div className="mx-auto flex flex-col items-center justify-center gap-8">
+      <div className="mx-auto flex flex-col items-center justify-center gap-12 sm:gap-14">
         <div className="text-center">
           <TypographyP>
             I am proficient in a wide range of technologies and constantly
@@ -84,7 +84,7 @@ export default function Technologies() {
 
         <div
           id="technologies-grid"
-          className="grid h-fit grid-cols-2 gap-6 sm:grid-cols-4 [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6"
+          className="grid h-fit grid-cols-2 gap-6 sm:grid-cols-4"
         >
           {technologies.map((technology, index) => (
             <Technology key={index} {...technology} />
