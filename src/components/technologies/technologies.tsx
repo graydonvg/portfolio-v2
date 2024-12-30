@@ -79,9 +79,7 @@ export default function Technologies() {
             I am proficient in a wide range of technologies and constantly
             expanding my skill set to stay at the forefront of web development.
           </TypographyP>
-          <TypographyP>
-            Here are <span className="text-accent">some</span> of my favorites:
-          </TypographyP>
+          <TypographyP>Here are some of my favorites:</TypographyP>
         </div>
 
         <div
