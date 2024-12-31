@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import TypographyH3 from "./ui/typography/h3";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import TypographyP from "./ui/typography/p";
 import Link from "next/link";
 import { Button } from "./ui/button";
@@ -94,21 +94,16 @@ export default function Projects() {
               {/* Prefetch hidden image */}
               {project.image && (
                 <div className="hidden">
-                  <Image
+                  <ProjectImage
                     src={project.image}
                     alt={`${project.title} preloaded`}
-                    priority
                     className="hidden h-0 w-0"
-                    sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                   />
                   {project.video && (
-                    <Image
+                    <ProjectImage
                       src={project.video.placeholderImage}
                       alt={`${project.title} mockup`}
-                      placeholder="blur"
-                      priority
                       className="hidden h-0 w-0"
-                      sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                     />
                   )}
                 </div>
@@ -125,25 +120,19 @@ export default function Projects() {
               <AccordionContent className="mt-2 flex h-fit flex-col gap-8 rounded-lg border border-border bg-card p-6 md:flex-row">
                 <div className="relative size-full">
                   {project.image && (
-                    <Image
+                    <ProjectImage
                       src={project.image}
                       alt={`${project.title} mockup`}
-                      placeholder="blur"
-                      priority
                       className="size-full rounded-lg"
-                      sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                     />
                   )}
 
                   {project.video && (
                     <>
-                      <Image
+                      <ProjectImage
                         src={project.video.placeholderImage}
                         alt={`${project.title} mockup`}
-                        placeholder="blur"
-                        priority
                         className="size-full rounded-lg"
-                        sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                       />
                       <video
                         src={project.video.src}
@@ -227,5 +216,24 @@ export default function Projects() {
         </Accordion>
       </div>
     </Section>
+  );
+}
+
+type ProjectImageProps = {
+  src: StaticImageData;
+  alt: string;
+  className?: string;
+};
+
+function ProjectImage({ src, alt, className }: ProjectImageProps) {
+  return (
+    <Image
+      src={src}
+      alt={alt}
+      placeholder="blur"
+      priority
+      className={className}
+      sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
+    />
   );
 }
