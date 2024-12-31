@@ -82,7 +82,7 @@ export default function Projects() {
           type="single"
           collapsible
           // Need padding botton for focus ring to show on last item
-          className="h-fit w-full space-y-6 pb-1 sm:space-y-8"
+          className="h-fit w-full space-y-4 pb-1 md:space-y-6"
         >
           {projects.map((project, index) => (
             <AccordionItem

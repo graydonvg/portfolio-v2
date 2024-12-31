@@ -60,7 +60,7 @@ export default function About() {
 
       <div
         id="about-container"
-        className="grid grid-cols-1 gap-4 overflow-hidden lg:grid-cols-3 lg:gap-8"
+        className="grid grid-cols-1 gap-4 overflow-hidden md:gap-6 lg:grid-cols-3"
       >
         {aboutItems.map((item, index) => (
           <AboutCard

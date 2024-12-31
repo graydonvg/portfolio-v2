@@ -84,7 +84,7 @@ export default function Technologies() {
 
         <div
           id="technologies-grid"
-          className="grid h-fit grid-cols-2 gap-6 sm:grid-cols-4"
+          className="grid h-fit grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6"
         >
           {technologies.map((technology, index) => (
             <Technology key={index} {...technology} />

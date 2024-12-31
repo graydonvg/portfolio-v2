@@ -6,7 +6,6 @@
   :root {
     /* Utopia: https://utopia.fyi */
     --h1-lg: clamp(1.875rem, 1.1842rem + 3.4539vw, 4.5rem);
-    /* --h1-lg: clamp(1.875rem, 0.962rem + 4.5652vw, 4.5rem); */
     --h1-sm: clamp(1.5625rem, 1.1rem + 3.8043vw, 3.75rem);
     --h2: clamp(2.5rem, 1.7283rem + 2.6087vw, 3.75rem);
     --h3: clamp(1.25rem, 1.163rem + 0.4348vw, 1.5rem);

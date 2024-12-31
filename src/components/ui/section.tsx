@@ -12,7 +12,7 @@ export default function Section({ id, className, children }: Props) {
     <section
       id={id}
       className={cn(
-        "container mx-auto overflow-x-hidden px-4 sm:px-8 [&:nth-child(n+3)]:mt-24 sm:[&:nth-child(n+3)]:mt-64",
+        "container mx-auto overflow-x-hidden px-4 py-12 sm:px-8 sm:py-24 md:py-32 [&:last-child]:pb-6 sm:[&:last-child]:pb-24 md:[&:last-child]:pb-32",
         className,
       )}
     >
