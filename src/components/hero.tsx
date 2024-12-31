@@ -42,7 +42,7 @@ export default function Hero() {
                 placeholder="blur"
                 priority
                 fill
-                sizes="(min-width: 1880px) 250px, (min-width: 780px) calc(12.96vw + 9px), (min-width: 640px) 350px, 250px"
+                sizes="250px"
                 className="object-cover object-[50%_0%]"
               />
             </div>
