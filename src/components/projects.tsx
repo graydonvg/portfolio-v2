@@ -114,6 +114,14 @@ export default function Projects() {
 
                   {project.videoSrc && project.videoPlaceholderImage && (
                     <>
+                      <Image
+                        src={project.videoPlaceholderImage}
+                        alt={`${project.title} mockup`}
+                        placeholder="blur"
+                        priority
+                        className="size-full rounded-lg"
+                        sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
+                      />
                       <video
                         src={project.videoSrc}
                         autoPlay
@@ -121,19 +129,14 @@ export default function Projects() {
                         playsInline
                         loop
                         preload="metadata"
-                        className="size-full rounded-lg"
+                        className={cn(
+                          "absolute left-0 top-0 hidden size-full rounded-lg",
+                          {
+                            block: isVideoLoaded,
+                          },
+                        )}
                         onLoadedData={() => setIsVideoLoaded(true)}
                       />
-                      {!isVideoLoaded && (
-                        <Image
-                          src={project.videoPlaceholderImage}
-                          alt={`${project.title} mockup`}
-                          placeholder="blur"
-                          priority
-                          className="absolute left-0 top-0 size-full rounded-lg"
-                          sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
-                        />
-                      )}
                     </>
                   )}
 
