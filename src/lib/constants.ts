@@ -4,6 +4,7 @@ import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-mu
 import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.png";
 import portfolioMockup from "../../public/images/mockups/portfolio-mockup.png";
 import zentryCloneMockup from "../../public/images/mockups/zentry-clone-mockup.jpg";
+import { Project } from "./types";
 
 export const SITE_URL =
   process.env.NODE_ENV === "development"
@@ -64,7 +65,7 @@ export const aboutItems = [
   },
 ];
 
-export const projects = [
+export const projects: Project[] = [
   {
     image: myStoreMockup,
     title: "MyStore",
@@ -85,8 +86,10 @@ export const projects = [
     },
   },
   {
-    videoSrc: "/videos/zentry-clone.mp4",
-    videoPlaceholderImage: zentryCloneMockup,
+    video: {
+      placeholderImage: zentryCloneMockup,
+      src: "/videos/zentry-clone.mp4",
+    },
     title: "Zentry clone",
     description:
       'Working on a clone of zentry.com which won the Awwwards "Sit of the Day" on Aug 28, 2024.',

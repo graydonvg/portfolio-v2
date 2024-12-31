@@ -91,6 +91,28 @@ export default function Projects() {
               value={`item-${index + 1}`}
               className="project"
             >
+              {/* Prefetch hidden image */}
+              {project.image && (
+                <div className="hidden">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} preloaded`}
+                    priority
+                    className="hidden h-0 w-0"
+                  />
+                  {project.video && (
+                    <Image
+                      src={project.video.placeholderImage}
+                      alt={`${project.title} mockup`}
+                      placeholder="blur"
+                      priority
+                      className="size-full rounded-lg"
+                      sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
+                    />
+                  )}
+                </div>
+              )}
+
               <AccordionTrigger className="focus-ring p-4 sm:p-6">
                 <div className="flex items-center justify-end gap-2">
                   <span className="text-h3 font-semibold tracking-tight text-accent">
@@ -112,10 +134,10 @@ export default function Projects() {
                     />
                   )}
 
-                  {project.videoSrc && project.videoPlaceholderImage && (
+                  {project.video && (
                     <>
                       <Image
-                        src={project.videoPlaceholderImage}
+                        src={project.video.placeholderImage}
                         alt={`${project.title} mockup`}
                         placeholder="blur"
                         priority
@@ -123,7 +145,7 @@ export default function Projects() {
                         sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                       />
                       <video
-                        src={project.videoSrc}
+                        src={project.video.src}
                         autoPlay
                         muted
                         playsInline
