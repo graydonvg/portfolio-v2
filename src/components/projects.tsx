@@ -99,6 +99,7 @@ export default function Projects() {
                     alt={`${project.title} preloaded`}
                     priority
                     className="hidden h-0 w-0"
+                    sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                   />
                   {project.video && (
                     <Image
@@ -106,7 +107,7 @@ export default function Projects() {
                       alt={`${project.title} mockup`}
                       placeholder="blur"
                       priority
-                      className="size-full rounded-lg"
+                      className="hidden h-0 w-0"
                       sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                     />
                   )}
