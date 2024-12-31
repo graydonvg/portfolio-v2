@@ -51,7 +51,7 @@ export default function Technologies() {
         })
         .fromTo(
           ".technology",
-          { scale: 0, y: 100 },
+          { scale: 0, y: -100 },
           {
             scale: 1,
             y: 0,

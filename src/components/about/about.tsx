@@ -9,12 +9,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import useScrollDirection from "@/hooks/use-scroll-direction";
 import { useState } from "react";
+import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function About() {
+  const windowDimension = useWindowDimensions();
   const scrollDirection = useScrollDirection();
   const [isInView, setIsInView] = useState(false);
 
@@ -35,19 +37,87 @@ export default function About() {
 
       if (isInView) return;
 
-      tl.fromTo(
-        ".about-card",
-        { y: scrollDirection === "down" ? "100%" : "-100%", opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          ease: "power1.out",
-          stagger: {
-            amount: 0.5,
-            from: scrollDirection === "down" ? "start" : "end",
+      if (windowDimension && windowDimension?.width < 1024) {
+        tl.fromTo(
+          ".about-card",
+          {
+            y: scrollDirection === "down" ? "50%" : "-50%",
+            opacity: 0,
+            scale: 0,
           },
-        },
-      );
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            ease: "power1.out",
+            stagger: {
+              amount: 0.5,
+              from: scrollDirection === "down" ? "start" : "end",
+            },
+          },
+        );
+      } else {
+        tl.fromTo(
+          ".about-card-1",
+          {
+            y: scrollDirection === "down" ? "50%" : "-50%",
+            x: "-50%",
+            opacity: 0,
+            scale: 0,
+          },
+          {
+            y: 0,
+            x: 0,
+            opacity: 1,
+            scale: 1,
+            ease: "power1.out",
+            stagger: {
+              amount: 0.5,
+              from: scrollDirection === "down" ? "start" : "end",
+            },
+          },
+        )
+          .fromTo(
+            ".about-card-2",
+            {
+              y: scrollDirection === "down" ? "50%" : "-50%",
+              opacity: 0,
+              scale: 0,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power1.out",
+              stagger: {
+                amount: 0.5,
+                from: scrollDirection === "down" ? "start" : "end",
+              },
+            },
+            0,
+          )
+          .fromTo(
+            ".about-card-3",
+            {
+              y: scrollDirection === "down" ? "50%" : "-50%",
+              x: "50%",
+              opacity: 0,
+              scale: 0,
+            },
+            {
+              y: 0,
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power1.out",
+              stagger: {
+                amount: 0.5,
+                from: scrollDirection === "down" ? "start" : "end",
+              },
+            },
+            0,
+          );
+      }
     },
     { dependencies: [scrollDirection], revertOnUpdate: true },
   );
@@ -69,6 +139,7 @@ export default function About() {
             title={item.title}
             parapraphs={item.parapraphs}
             imageSrc={item.imageSrc}
+            className={`about-card-${index + 1} about-card`}
           />
         ))}
       </div>

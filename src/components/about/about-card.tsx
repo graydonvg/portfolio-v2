@@ -1,12 +1,14 @@
 import Image, { StaticImageData } from "next/image";
 import TypographyP from "../ui/typography/p";
 import TypographyH3 from "../ui/typography/h3";
+import { cn } from "@/lib/utils";
 
 type Props = {
   number: number;
   title: string;
   parapraphs: string;
   imageSrc?: StaticImageData;
+  className: string;
 };
 
 export default function AboutCard({
@@ -14,16 +16,24 @@ export default function AboutCard({
   title,
   parapraphs,
   imageSrc,
+  className,
 }: Props) {
   return (
-    <div className="about-card h-full rounded-lg border border-border bg-card p-6 text-card-foreground">
+    <div
+      className={cn(
+        "h-full rounded-lg border border-border bg-card p-6 text-card-foreground",
+        className,
+      )}
+    >
       <TypographyH3>
         <span className="text-accent">0{number}.</span> {title}
       </TypographyH3>
 
-      {parapraphs.split("<br />").map((parapraph, index) => (
-        <TypographyP key={index}>{parapraph}</TypographyP>
-      ))}
+      <div className="mt-5 sm:mt-7">
+        {parapraphs.split("<br />").map((parapraph, index) => (
+          <TypographyP key={index}>{parapraph}</TypographyP>
+        ))}
+      </div>
 
       {imageSrc && (
         <div className="relative mt-6 h-fit overflow-hidden rounded-lg sm:mt-8">
