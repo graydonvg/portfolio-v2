@@ -72,7 +72,7 @@ export default function Projects() {
       <div className="mx-auto flex flex-col items-center justify-center gap-12 sm:gap-14">
         <div className="text-center">
           <TypographyP>
-            I continue to refine and improve these project, leveraging new
+            I continue to refine and improve these projects, leveraging new
             techniques and tools as I learn them.
           </TypographyP>
         </div>
@@ -109,7 +109,9 @@ export default function Projects() {
                       sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
                     />
                   )}
-
+                  {/* placeholer */}
+                  {/* placeholer */}
+                  {/* placeholer */}
                   {project.videoSrc && (
                     <video
                       src={project.videoSrc}
