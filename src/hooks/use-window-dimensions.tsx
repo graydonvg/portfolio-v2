@@ -8,14 +8,14 @@ export default function useWindowDimensions() {
     height: number;
   } | null>(null);
 
-  useEffect(() => {
-    function getWindowDimensions() {
-      setWindowDimension({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
+  function getWindowDimensions() {
+    setWindowDimension({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  }
 
+  useEffect(() => {
     getWindowDimensions();
 
     window.addEventListener("resize", getWindowDimensions);

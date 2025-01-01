@@ -14,7 +14,8 @@ export default {
         inter: ["var(--font-inter)"],
       },
       fontSize: {
-        "h1-lg": "var(--h1-lg)",
+        "h1-lg-w": "var(--h1-lg-w)",
+        "h1-lg-h": "var(--h1-lg-h)",
         "h1-sm": "var(--h1-sm)",
         h2: "var(--h2)",
         h3: "var(--h3)",

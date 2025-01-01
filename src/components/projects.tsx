@@ -91,7 +91,7 @@ export default function Projects() {
               value={`item-${index + 1}`}
               className="project"
             >
-              {/* Prefetch hidden image */}
+              {/* Prefetch hidden images */}
               {project.image && (
                 <div className="hidden">
                   <ProjectImage
@@ -99,13 +99,16 @@ export default function Projects() {
                     alt={`${project.title} preloaded`}
                     className="hidden h-0 w-0"
                   />
-                  {project.video && (
-                    <ProjectImage
-                      src={project.video.placeholderImage}
-                      alt={`${project.title} mockup`}
-                      className="hidden h-0 w-0"
-                    />
-                  )}
+                </div>
+              )}
+
+              {project.video && (
+                <div className="hidden">
+                  <ProjectImage
+                    src={project.video.placeholderImage}
+                    alt={`${project.title} mockup`}
+                    className="hidden h-0 w-0"
+                  />
                 </div>
               )}
 

@@ -68,7 +68,7 @@ export default function Technologies() {
   );
 
   return (
-    <Section id="technologies" className="pb-24">
+    <Section id="technologies">
       <TypographyH2>
         Favorite <span className="text-accent">Technologies</span>
       </TypographyH2>
