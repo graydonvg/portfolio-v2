@@ -52,8 +52,6 @@ export default function FixedContactFormContainer() {
 
       // Watch for changes in the accordion's height
       const observer = new ResizeObserver(() => {
-        console.log(true);
-
         ScrollTrigger.refresh(); // Recalculate ScrollTrigger on accordion size change
       });
 
