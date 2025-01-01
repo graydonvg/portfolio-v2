@@ -1,8 +1,19 @@
+import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-export default function TypographyP({ children }: { children: ReactNode }) {
+type Props = {
+  className?: string;
+  children: ReactNode;
+};
+
+export default function TypographyP({ className, children }: Props) {
   return (
-    <p className="text-pretty text-base leading-7 [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6">
+    <p
+      className={cn(
+        "text-pretty text-base [&:not(:first-child)]:mt-4 sm:[&:not(:first-child)]:mt-6",
+        className,
+      )}
+    >
       {children}
     </p>
   );

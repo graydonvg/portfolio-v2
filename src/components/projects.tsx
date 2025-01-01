@@ -37,7 +37,7 @@ export default function Projects() {
           trigger: "#projects-accordion",
           start: "top bottom",
           end: "bottom top",
-          toggleActions: "play pause play pause",
+          toggleActions: "play reset play reset",
           onEnter: () => setIsInView(true),
           onEnterBack: () => setIsInView(true),
           onLeave: () => setIsInView(false),
@@ -71,12 +71,10 @@ export default function Projects() {
       </TypographyH2>
 
       <div className="mx-auto flex flex-col items-center justify-center gap-12 sm:gap-14">
-        <div className="text-center">
-          <TypographyP>
-            I continue to refine and improve these projects, leveraging new
-            techniques and tools as I learn them.
-          </TypographyP>
-        </div>
+        <TypographyP className="text-center text-base sm:text-lg">
+          I continue to refine and improve these projects, leveraging new
+          techniques and tools as I learn them.
+        </TypographyP>
 
         <Accordion
           id="projects-accordion"

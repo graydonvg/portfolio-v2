@@ -75,11 +75,13 @@ export default function Technologies() {
 
       <div className="mx-auto flex flex-col items-center justify-center gap-12 sm:gap-14">
         <div className="text-center">
-          <TypographyP>
+          <TypographyP className="text-base sm:text-lg">
             I am proficient in a wide range of technologies and constantly
             expanding my skill set to stay at the forefront of web development.
           </TypographyP>
-          <TypographyP>Here are some of my favorites:</TypographyP>
+          <TypographyP className="text-base sm:text-lg">
+            Here are some of my favorites:
+          </TypographyP>
         </div>
 
         <div

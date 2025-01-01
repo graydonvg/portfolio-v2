@@ -27,7 +27,7 @@ export default function About() {
           trigger: "#about-container",
           start: "top bottom",
           end: "bottom top",
-          toggleActions: "play pause play pause",
+          toggleActions: "play reset play reset",
           onEnter: () => setIsInView(true),
           onEnterBack: () => setIsInView(true),
           onLeave: () => setIsInView(false),
@@ -119,7 +119,7 @@ export default function About() {
           );
       }
     },
-    { dependencies: [scrollDirection], revertOnUpdate: true },
+    { dependencies: [scrollDirection, windowDimension], revertOnUpdate: true },
   );
 
   return (
