@@ -15,10 +15,13 @@ export default function FixedContactFormContainer() {
   const hero =
     typeof window !== "undefined" ? document.getElementById("hero") : null;
 
-  const accordion =
+  const projectsAccordion =
     typeof window !== "undefined"
       ? document.querySelector("#projects-accordion")
       : null;
+
+  const contactSection =
+    typeof window !== "undefined" ? document.querySelector("#contact") : null;
 
   useGSAP(
     () => {
@@ -50,19 +53,20 @@ export default function FixedContactFormContainer() {
         pin: true,
       });
 
-      // Watch for changes in the accordion's height
+      // Watch for changes in the projects accordion height
       const observer = new ResizeObserver(() => {
-        ScrollTrigger.refresh(); // Recalculate ScrollTrigger on accordion size change
+        ScrollTrigger.refresh(); // Recalculate ScrollTrigger on projects accordion size change
       });
 
-      if (accordion) observer.observe(accordion);
+      if (projectsAccordion) observer.observe(projectsAccordion);
+      if (contactSection) observer.observe(contactSection);
 
       return () => {
         observer.disconnect();
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
-    { dependencies: [accordion], revertOnUpdate: true },
+    { dependencies: [projectsAccordion, contactSection], revertOnUpdate: true },
   );
 
   return (
