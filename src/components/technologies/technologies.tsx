@@ -62,7 +62,12 @@ export default function Technologies() {
 
   useGSAP(
     (_context, contextSafe) => {
-      if (!contextSafe || !technologyCards || !isInView) return;
+      // Check if the device is touch-enabled
+      const isTouchDevice =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+      if (!contextSafe || !technologyCards || !isInView || isTouchDevice)
+        return;
 
       const handleMouseMove = contextSafe((event: MouseEvent) => {
         technologyCards.forEach((card) => {
@@ -100,7 +105,12 @@ export default function Technologies() {
 
   useGSAP(
     (_context, contextSafe) => {
-      if (!contextSafe || !technologyCards || !isInView) return;
+      // Check if the device is touch-enabled
+      const isTouchDevice =
+        "ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+      if (!contextSafe || !technologyCards || !isInView || isTouchDevice)
+        return;
 
       const handleScroll = contextSafe(() => {
         technologyCards.forEach((card) => {
