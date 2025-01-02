@@ -36,9 +36,14 @@ export default function Technology({ name, icon }: Props) {
   const Component = ICONS[icon as keyof typeof ICONS];
 
   return (
-    <div className="technology flex h-full max-w-40 flex-col items-center justify-center rounded-lg border border-border bg-card p-6 text-center">
-      <Component height="100%" width="100%" />
-      <TypographyP>{name}</TypographyP>
+    <div className="technology-card -z-30 max-w-40 overflow-hidden rounded-lg bg-border p-[1px]">
+      <div className="relative -z-20 size-full rounded-lg bg-card">
+        <div className="z-50 flex h-full flex-col items-center justify-center rounded-lg bg-card/60 p-[23px] text-center backdrop-blur-3xl">
+          <Component height="100%" width="100%" />
+          <TypographyP>{name}</TypographyP>
+        </div>
+        <div className="card-light absolute left-0 top-0 -z-10 size-full rounded-[50%] bg-primary opacity-0 blur-2xl" />
+      </div>
     </div>
   );
 }

@@ -5,16 +5,14 @@ import NavDrawerToggle from "./nav/nav-drawer-toggle";
 import Navbar from "./nav/navbar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import useScrollDirection from "@/hooks/use-scroll-direction";
-import useWindowScrollY from "@/hooks/use-window-scroll-y";
+import useScrollY from "@/hooks/use-scroll-y";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
 
 export default function Header() {
-  const scrollDirection = useScrollDirection();
-  const currentScrollY = useWindowScrollY();
+  const { currentScrollY, scrollDirection } = useScrollY();
   const headerRef = useRef<HTMLElement>(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);

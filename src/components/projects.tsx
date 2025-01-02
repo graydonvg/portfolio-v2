@@ -19,14 +19,14 @@ import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import Section from "./ui/section";
 import { useState } from "react";
-import useScrollDirection from "@/hooks/use-scroll-direction";
+import useScrollY from "@/hooks/use-scroll-y";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Projects() {
-  const scrollDirection = useScrollDirection();
+  const { scrollDirection } = useScrollY();
   const [isInView, setIsInView] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
@@ -38,7 +38,10 @@ export default function Projects() {
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reset play reset",
-          onEnter: () => setIsInView(true),
+
+          onEnter: () => {
+            setIsInView(true);
+          },
           onEnterBack: () => setIsInView(true),
           onLeave: () => setIsInView(false),
           onLeaveBack: () => setIsInView(false),

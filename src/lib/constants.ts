@@ -132,6 +132,7 @@ export const projects: Project[] = [
       "shadcn",
       "tailwind css",
       "gsap",
+      "motion",
     ],
     links: {
       repository: "https://github.com/graydonvg/gallery-ai",

@@ -8,7 +8,7 @@ import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
 import TypographyP from "../ui/typography/p";
 import Technology from "./technology";
-import useScrollDirection from "@/hooks/use-scroll-direction";
+import useScrollY from "@/hooks/use-scroll-y";
 import { useState } from "react";
 
 if (typeof window !== "undefined") {
@@ -16,8 +16,14 @@ if (typeof window !== "undefined") {
 }
 
 export default function Technologies() {
-  const scrollDirection = useScrollDirection();
+  const { scrollDirection } = useScrollY();
   const [isInView, setIsInView] = useState(false);
+  const technologyCards =
+    typeof window !== "undefined"
+      ? document.querySelectorAll(".technology-card")
+      : null;
+  let cursorX = 0;
+  let cursorY = 0;
 
   useGSAP(
     () => {
@@ -37,7 +43,7 @@ export default function Technologies() {
       if (isInView) return;
 
       tl.fromTo(
-        ".technology",
+        ".technology-card",
         { y: scrollDirection === "down" ? 100 : -100, scale: 0 },
         {
           y: 0,
@@ -52,6 +58,79 @@ export default function Technologies() {
       );
     },
     { dependencies: [scrollDirection], revertOnUpdate: true },
+  );
+
+  useGSAP(
+    (_context, contextSafe) => {
+      if (!contextSafe || !technologyCards || !isInView) return;
+
+      const handleMouseMove = contextSafe((event: MouseEvent) => {
+        technologyCards.forEach((card) => {
+          const cardLight = card.querySelector(".card-light");
+
+          if (!cardLight) return;
+
+          const cardRect = card.getBoundingClientRect();
+          const cardCenterX = cardRect.left + cardRect.width / 2;
+          const cardCenterY = cardRect.top + cardRect.height / 2;
+
+          cursorX = event.clientX;
+          cursorY = event.clientY;
+
+          gsap
+            .timeline()
+            .to(cardLight, {
+              transform: `translate(${event.clientX - cardCenterX}px,${event.clientY - cardCenterY}px)`,
+              duration: 0.3,
+            })
+            .to(cardLight, {
+              opacity: 1,
+            });
+        });
+      });
+
+      window.addEventListener("mousemove", handleMouseMove);
+
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+      };
+    },
+    { dependencies: [isInView], revertOnUpdate: true },
+  );
+
+  useGSAP(
+    (_context, contextSafe) => {
+      if (!contextSafe || !technologyCards || !isInView) return;
+
+      const handleScroll = contextSafe(() => {
+        technologyCards.forEach((card) => {
+          const cardLight = card.querySelector(".card-light");
+
+          if (!cardLight) return;
+
+          const cardRect = card.getBoundingClientRect();
+          const cardCenterX = cardRect.left + cardRect.width / 2;
+          const cardCenterY = cardRect.top + cardRect.height / 2;
+
+          gsap
+            .timeline()
+            .to(cardLight, {
+              transform: `translate(${cursorX - cardCenterX}px,${cursorY - cardCenterY}px)`,
+              duration: 0.3,
+            })
+            .to(cardLight, {
+              opacity: 1,
+            });
+        });
+      });
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    },
+    { dependencies: [isInView], revertOnUpdate: true },
   );
 
   return (

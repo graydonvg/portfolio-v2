@@ -7,7 +7,7 @@ import AboutCard from "./about-card";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
-import useScrollDirection from "@/hooks/use-scroll-direction";
+import useScrollY from "@/hooks/use-scroll-y";
 import { useState } from "react";
 import useWindowDimensions from "@/hooks/use-window-dimensions";
 
@@ -17,7 +17,7 @@ if (typeof window !== "undefined") {
 
 export default function About() {
   const windowDimension = useWindowDimensions();
-  const scrollDirection = useScrollDirection();
+  const { scrollDirection } = useScrollY();
   const [isInView, setIsInView] = useState(false);
 
   useGSAP(
