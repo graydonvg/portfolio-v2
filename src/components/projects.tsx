@@ -30,8 +30,6 @@ export default function Projects() {
   const [isInView, setIsInView] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
-  console.log(isInView);
-
   useGSAP(
     () => {
       const tl = gsap.timeline({
@@ -93,27 +91,23 @@ export default function Projects() {
             >
               {/* Prefetch accordion images once in view */}
               {/* Accordion content not rendered until expanded so cannot load images once they scroll into view */}
-              {project.image && (
-                <div className="hidden">
+              <div className="hidden h-0 w-0">
+                {project.image && (
                   <ProjectImage
                     src={project.image}
                     alt={`${project.title} preloaded`}
                     isInView={isInView}
-                    className="hidden h-0 w-0"
                   />
-                </div>
-              )}
+                )}
 
-              {project.video && (
-                <div className="hidden">
+                {project.video && (
                   <ProjectImage
                     src={project.video.placeholderImage}
                     alt={`${project.title} mockup`}
                     isInView={isInView}
-                    className="hidden h-0 w-0"
                   />
-                </div>
-              )}
+                )}
+              </div>
 
               <AccordionTrigger className="focus-ring p-4 sm:p-6">
                 <div className="flex items-center justify-end gap-2">
@@ -123,7 +117,8 @@ export default function Projects() {
                   <TypographyH3>{project.title}</TypographyH3>
                 </div>
               </AccordionTrigger>
-              <AccordionContent className="mt-2 flex h-fit flex-col gap-8 rounded-lg border border-border bg-card p-6 md:flex-row">
+
+              <AccordionContent className="mt-1 flex h-fit flex-col gap-8 rounded-lg border border-border bg-card p-6 md:flex-row">
                 <div className="relative size-full">
                   {project.image && (
                     <ProjectImage

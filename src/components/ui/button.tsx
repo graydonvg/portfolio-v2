@@ -77,7 +77,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </div>
         <span
           className={cn(
-            "relative px-8 py-4 font-semibold transition-all duration-400 ease-gentle-ease-in-out can-hover:group-hover:text-secondary-foreground",
+            "relative px-8 py-4 font-bold transition-all duration-400 ease-gentle-ease-in-out can-hover:group-hover:text-secondary-foreground",
             {
               "can-hover:group-hover:text-primary-foreground":
                 variant === "secondary" || variant === "outlined",

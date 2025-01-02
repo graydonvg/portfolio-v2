@@ -46,6 +46,7 @@ export default function FixedContactFormContainer() {
         start: () => `top ${windowHeight - getOverlap()}`,
         end: () => `+=${getOverlap()}`,
         pin: true,
+        invalidateOnRefresh: true,
       });
 
       const observer = new ResizeObserver(() => {

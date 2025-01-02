@@ -45,6 +45,7 @@ export default function Technologies() {
           ease: "power1.out",
           stagger: {
             amount: 0.5,
+            grid: "auto",
             from: scrollDirection === "down" ? "start" : "end",
           },
         },
