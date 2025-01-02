@@ -14,12 +14,10 @@ export default function FixedContactFormContainer() {
   const contactFormContainerRef = useRef<HTMLDivElement>(null);
   const hero =
     typeof window !== "undefined" ? document.getElementById("hero") : null;
-  const projectsAccordion =
-    typeof window !== "undefined"
-      ? document.querySelector("#projects-accordion")
-      : null;
+  const mainSection =
+    typeof window !== "undefined" ? document.querySelector("main") : null;
   const contactSection =
-    typeof window !== "undefined" ? document.querySelector("#contact") : null;
+    typeof window !== "undefined" ? document.getElementById("#contact") : null;
 
   useGSAP(
     () => {
@@ -54,8 +52,8 @@ export default function FixedContactFormContainer() {
         ScrollTrigger.refresh(); // Recalculate ScrollTrigger on element size change
       });
 
-      // Watch for changes in the projects accordion height
-      if (projectsAccordion) observer.observe(projectsAccordion);
+      // Watch for changes in the main section height (e.g. accordion expanded)
+      if (mainSection) observer.observe(mainSection);
       // Watch for changes in the contact section height (form error messages change the height)
       if (contactSection) observer.observe(contactSection);
 
@@ -64,7 +62,7 @@ export default function FixedContactFormContainer() {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
-    { dependencies: [projectsAccordion, contactSection], revertOnUpdate: true },
+    { dependencies: [mainSection, contactSection], revertOnUpdate: true },
   );
 
   return (
