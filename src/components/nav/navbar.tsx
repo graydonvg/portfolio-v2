@@ -55,7 +55,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] w-fit rounded-3xl md:block">
+    <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] hidden w-fit rounded-3xl md:block">
       <div
         ref={navLinkOverlayBeforeRef}
         className="pointer-events-none absolute rounded-3xl bg-primary opacity-0 transition-all duration-300"
