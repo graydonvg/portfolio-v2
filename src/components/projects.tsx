@@ -30,6 +30,8 @@ export default function Projects() {
   const [isInView, setIsInView] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
 
+  console.log(isInView);
+
   useGSAP(
     () => {
       const tl = gsap.timeline({
@@ -89,12 +91,14 @@ export default function Projects() {
               value={`item-${index + 1}`}
               className="project"
             >
-              {/* Prefetch hidden images */}
+              {/* Prefetch accordion images once in view */}
+              {/* Accordion content not rendered until expanded so cannot load images once they scroll into view */}
               {project.image && (
                 <div className="hidden">
                   <ProjectImage
                     src={project.image}
                     alt={`${project.title} preloaded`}
+                    isInView={isInView}
                     className="hidden h-0 w-0"
                   />
                 </div>
@@ -105,6 +109,7 @@ export default function Projects() {
                   <ProjectImage
                     src={project.video.placeholderImage}
                     alt={`${project.title} mockup`}
+                    isInView={isInView}
                     className="hidden h-0 w-0"
                   />
                 </div>
@@ -223,16 +228,17 @@ export default function Projects() {
 type ProjectImageProps = {
   src: StaticImageData;
   alt: string;
+  isInView?: boolean;
   className?: string;
 };
 
-function ProjectImage({ src, alt, className }: ProjectImageProps) {
+function ProjectImage({ src, alt, isInView, className }: ProjectImageProps) {
   return (
     <Image
       src={src}
       alt={alt}
       placeholder="blur"
-      priority
+      priority={isInView}
       className={className}
       sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
     />
