@@ -9,7 +9,7 @@ import Section from "../ui/section";
 import TypographyP from "../ui/typography/p";
 import Technology from "./technology";
 import useScrollY from "@/hooks/use-scroll-y";
-import { useState } from "react";
+import { useRef } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -17,30 +17,28 @@ if (typeof window !== "undefined") {
 
 export default function Technologies() {
   const { scrollDirection } = useScrollY();
-  const [isInView, setIsInView] = useState(false);
-  const technologyCards =
-    typeof window !== "undefined"
-      ? document.querySelectorAll(".technology-card")
-      : null;
-  let cursorX = 0;
-  let cursorY = 0;
+  const isInViewRef = useRef(false);
+  const cursorPositionRef = useRef({ x: 0, y: 0 });
+  const technologiesGridRef = useRef<HTMLDivElement>(null);
+  const technologyCardRefs = useRef<HTMLDivElement[]>([]);
+  const isTouchDevice = navigator.maxTouchPoints > 0;
 
   useGSAP(
     () => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: "#technologies-grid",
+          trigger: technologiesGridRef.current,
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reset play reset",
-          onEnter: () => setIsInView(true),
-          onEnterBack: () => setIsInView(true),
-          onLeave: () => setIsInView(false),
-          onLeaveBack: () => setIsInView(false),
+          onEnter: () => (isInViewRef.current = true),
+          onEnterBack: () => (isInViewRef.current = true),
+          onLeave: () => (isInViewRef.current = false),
+          onLeaveBack: () => (isInViewRef.current = false),
         },
       });
 
-      if (isInView) return;
+      if (isInViewRef.current) return;
 
       tl.fromTo(
         ".technology-card",
@@ -57,35 +55,93 @@ export default function Technologies() {
         },
       );
     },
-    { dependencies: [scrollDirection], revertOnUpdate: true },
+    {
+      dependencies: [scrollDirection],
+      revertOnUpdate: true,
+    },
   );
 
   useGSAP(
     (_context, contextSafe) => {
-      // Check if the device is touch-enabled
-      const isTouchDevice =
-        "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-      if (!contextSafe || !technologyCards || !isInView || isTouchDevice)
+      if (
+        !contextSafe ||
+        !technologyCardRefs.current ||
+        !isInViewRef.current ||
+        isTouchDevice
+      )
         return;
 
       const handleMouseMove = contextSafe((event: MouseEvent) => {
-        technologyCards.forEach((card) => {
-          const cardLight = card.querySelector(".card-light");
+        cursorPositionRef.current.x = event.clientX;
+        cursorPositionRef.current.y = event.clientY;
 
-          if (!cardLight) return;
+        technologyCardRefs.current.forEach((card) => {
+          const cardLight = card.querySelector(".card-light"); // Moves
+          const cardLightOriginalPosition = card.querySelector(
+            ".card-light-original-position",
+          ); // Does NOT move
 
-          const cardRect = card.getBoundingClientRect();
-          const cardCenterX = cardRect.left + cardRect.width / 2;
-          const cardCenterY = cardRect.top + cardRect.height / 2;
+          if (!cardLight || !cardLightOriginalPosition) return;
 
-          cursorX = event.clientX;
-          cursorY = event.clientY;
+          // Because card-light moves, use card-light-original-position to calculate the card-light original center point
+          const cardLightOriginalPositionRect =
+            cardLightOriginalPosition.getBoundingClientRect();
+
+          const cardLightOriginalPositionCenterX =
+            cardLightOriginalPositionRect.left +
+            cardLightOriginalPositionRect.width / 2;
+          const cardLightOriginalPositionCenterY =
+            cardLightOriginalPositionRect.top +
+            cardLightOriginalPositionRect.height / 2;
+
+          // Subtract the original center point from the current cursor position to calculate how far the light must be translated to be centered under the cursor
+          const translateX =
+            cursorPositionRef.current.x - cardLightOriginalPositionCenterX;
+          const translateY =
+            cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
 
           gsap
             .timeline()
             .to(cardLight, {
-              transform: `translate(${event.clientX - cardCenterX}px,${event.clientY - cardCenterY}px)`,
+              transform: `translate(${translateX}px,${translateY}px)`,
+              duration: 0.3,
+            })
+            .to(cardLight, {
+              opacity: 1,
+            });
+        });
+      });
+
+      const handleScroll = contextSafe(() => {
+        technologyCardRefs.current.forEach((card) => {
+          const cardLight = card.querySelector(".card-light"); // Moves
+          const cardLightOriginalPosition = card.querySelector(
+            ".card-light-original-position",
+          ); // Does NOT move
+
+          if (!cardLight || !cardLightOriginalPosition) return;
+
+          // Because card-light moves, use card-light-original-position to calculate the card-light original center point
+          const cardLightOriginalPositionRect =
+            cardLightOriginalPosition.getBoundingClientRect();
+
+          const cardLightOriginalPositionCenterX =
+            cardLightOriginalPositionRect.left +
+            cardLightOriginalPositionRect.width / 2;
+          const cardLightOriginalPositionCenterY =
+            cardLightOriginalPositionRect.top +
+            cardLightOriginalPositionRect.height / 2;
+
+          // Subtract the original center point from the current cursor position to calculate how far the light must be translated to be centered under the cursor
+          const translateX =
+            cursorPositionRef.current.x - cardLightOriginalPositionCenterX;
+          const translateY =
+            cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
+
+          gsap
+            .timeline()
+            .to(cardLight, {
+              transform: `translate(${translateX}px,${translateY}px)`,
               duration: 0.3,
             })
             .to(cardLight, {
@@ -95,52 +151,14 @@ export default function Technologies() {
       });
 
       window.addEventListener("mousemove", handleMouseMove);
-
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-      };
-    },
-    { dependencies: [isInView], revertOnUpdate: true },
-  );
-
-  useGSAP(
-    (_context, contextSafe) => {
-      // Check if the device is touch-enabled
-      const isTouchDevice =
-        "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-      if (!contextSafe || !technologyCards || !isInView || isTouchDevice)
-        return;
-
-      const handleScroll = contextSafe(() => {
-        technologyCards.forEach((card) => {
-          const cardLight = card.querySelector(".card-light");
-
-          if (!cardLight) return;
-
-          const cardRect = card.getBoundingClientRect();
-          const cardCenterX = cardRect.left + cardRect.width / 2;
-          const cardCenterY = cardRect.top + cardRect.height / 2;
-
-          gsap
-            .timeline()
-            .to(cardLight, {
-              transform: `translate(${cursorX - cardCenterX}px,${cursorY - cardCenterY}px)`,
-              duration: 0.3,
-            })
-            .to(cardLight, {
-              opacity: 1,
-            });
-        });
-      });
-
       window.addEventListener("scroll", handleScroll);
 
       return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
         window.removeEventListener("scroll", handleScroll);
       };
     },
-    { dependencies: [isInView], revertOnUpdate: true },
+    { dependencies: [isInViewRef.current], revertOnUpdate: true },
   );
 
   return (
@@ -161,11 +179,16 @@ export default function Technologies() {
         </div>
 
         <div
-          id="technologies-grid"
+          ref={technologiesGridRef}
           className="grid h-fit grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6"
         >
           {technologies.map((technology, index) => (
-            <Technology key={index} {...technology} />
+            <Technology
+              key={index}
+              index={index}
+              technologyCardRefs={technologyCardRefs}
+              {...technology}
+            />
           ))}
         </div>
       </div>
