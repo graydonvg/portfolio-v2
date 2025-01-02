@@ -7,13 +7,7 @@ import {
 } from "@/lib/utils";
 import Link from "next/link";
 import { MouseEvent, useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(useGSAP);
-}
 
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
@@ -61,14 +55,14 @@ export default function Navbar() {
   }
 
   return (
-    <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] hidden w-fit overflow-hidden md:block">
+    <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] w-fit rounded-3xl md:block">
       <div
         ref={navLinkOverlayBeforeRef}
         className="pointer-events-none absolute rounded-3xl bg-primary opacity-0 transition-all duration-300"
       />
       <nav
         ref={navRef}
-        className="flex rounded-3xl border border-border p-2 backdrop-blur-3xl"
+        className="relative flex overflow-hidden rounded-3xl border border-border p-2 backdrop-blur-3xl"
       >
         <div
           ref={navLinkOverlayAfterRef}

@@ -72,7 +72,6 @@ export default function About() {
             scale: 1,
             ease: "power1.out",
             stagger: {
-              amount: 0.5,
               from: scrollDirection === "down" ? "start" : "end",
             },
           },
@@ -90,7 +89,6 @@ export default function About() {
               scale: 1,
               ease: "power1.out",
               stagger: {
-                amount: 0.5,
                 from: scrollDirection === "down" ? "start" : "end",
               },
             },
@@ -111,7 +109,6 @@ export default function About() {
               scale: 1,
               ease: "power1.out",
               stagger: {
-                amount: 0.5,
                 from: scrollDirection === "down" ? "start" : "end",
               },
             },
