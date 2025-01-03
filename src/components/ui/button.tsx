@@ -26,12 +26,24 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  reduceScaleOnHover?: boolean;
   asChild?: boolean;
   children: string;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      reduceScaleOnHover,
+      asChild = false,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : "button";
 
     return (
@@ -42,7 +54,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <div
           className={cn(
-            "absolute left-0 top-0 h-full w-full overflow-hidden rounded-full transition-transform duration-400 ease-gentle-ease-in-out group-active:scale-x-[0.9] group-active:scale-y-[0.9] can-hover:group-hover:scale-x-[1.1] can-hover:group-hover:scale-y-[1.1] can-hover:group-active:scale-x-[1] can-hover:group-active:scale-y-[1]",
+            "absolute left-0 top-0 h-full w-full overflow-hidden rounded-full transition-transform duration-400 ease-gentle-ease-in-out group-active:scale-90 can-hover:group-hover:scale-110 can-hover:group-active:scale-100",
+            {
+              "xs:can-hover:group-hover:scale-105": reduceScaleOnHover,
+            },
           )}
         >
           <div

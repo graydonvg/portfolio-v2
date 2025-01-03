@@ -185,7 +185,11 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="flex-1"
                     >
-                      <Button variant="secondary" className="w-full">
+                      <Button
+                        variant="secondary"
+                        className="w-full"
+                        reduceScaleOnHover={project.links.website === null}
+                      >
                         Repository
                       </Button>
                     </Link>

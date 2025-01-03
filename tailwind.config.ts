@@ -9,6 +9,9 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+    },
     extend: {
       fontFamily: {
         inter: ["var(--font-inter)"],
@@ -59,6 +62,7 @@ export default {
         ring: "hsl(var(--ring))",
       },
       screens: {
+        xs: "420px",
         "can-hover": {
           raw: "(hover: hover)",
         },
