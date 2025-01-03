@@ -34,7 +34,7 @@ export default function Hero() {
           >
             <div className="absolute inset-0 rounded-[50%] bg-gradient-to-b from-emerald-500/20 to-transparent blur-3xl" />
 
-            <div className="relative aspect-square h-[250px] overflow-hidden rounded-[50%] sm:h-[350px] md:h-[25vh] md:max-h-[250px] md:max-w-[250px]">
+            <div className="relative aspect-square h-[250px] overflow-hidden rounded-[50%] sm:h-[350px] md:h-[25vh] md:max-h-[250px]">
               <Image
                 src={headshot}
                 alt="headshot"
@@ -43,7 +43,7 @@ export default function Hero() {
                 priority
                 fill
                 sizes="350px"
-                className="object-cover object-[50%_0%]"
+                className="object-cover"
               />
             </div>
           </motion.div>
