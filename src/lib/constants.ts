@@ -1,8 +1,8 @@
 import myStoreMockup from "../../public/images/mockups/mystore-mockup.jpg";
 import galleryAiMockup from "../../public/images/mockups/gallery-ai-mockup.jpg";
-import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-multi-device-mockup.png";
+import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-multi-device-mockup.jpg";
 import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.png";
-import portfolioMockup from "../../public/images/mockups/portfolio-mockup.png";
+import portfolioMockup from "../../public/images/mockups/portfolio-mockup.jpg";
 import zentryCloneMockup from "../../public/images/mockups/zentry-clone-mockup.jpg";
 import { Project } from "./types";
 

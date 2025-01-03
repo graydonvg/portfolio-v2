@@ -43,7 +43,7 @@ export default function AboutCard({
             placeholder="blur"
             priority
             className="rounded-lg"
-            sizes="(min-width: 1540px) 420px, (min-width: 1280px) 334px, (min-width: 1040px) 249px, (min-width: 780px) 654px, (min-width: 640px) 526px, calc(100vw - 82px)"
+            sizes="(min-width: 1540px) 425px, (min-width: 1280px) 340px, (min-width: 1040px) 254px, (min-width: 780px) 654px, (min-width: 640px) 526px, calc(100vw - 82px)"
           />
         </div>
       )}

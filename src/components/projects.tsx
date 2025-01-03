@@ -121,7 +121,7 @@ export default function Projects() {
                 </div>
               </AccordionTrigger>
 
-              <AccordionContent className="mt-1 flex h-fit flex-col gap-8 rounded-lg border border-border bg-card p-6 md:flex-row">
+              <AccordionContent className="mt-1 flex h-fit flex-col gap-8 rounded-lg border border-border bg-card p-6 lg:flex-row">
                 <div className="relative size-full">
                   {project.image && (
                     <ProjectImage
@@ -238,7 +238,7 @@ function ProjectImage({ src, alt, isInView, className }: ProjectImageProps) {
       placeholder="blur"
       priority={isInView}
       className={className}
-      sizes="(min-width: 1540px) 711px, (min-width: 1280px) 583px, (min-width: 1040px) 455px, (min-width: 780px) 327px, (min-width: 640px) 526px, calc(100vw - 82px)"
+      sizes="(min-width: 1540px) 695px, (min-width: 1280px) 567px, (min-width: 1040px) 439px, (min-width: 780px) 654px, (min-width: 640px) 526px, calc(100vw - 82px)"
     />
   );
 }
