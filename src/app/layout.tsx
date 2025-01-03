@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import ogImage from "../../public/opengraph-image.png";
+import ogImage from "../../public/opengraph-image.jpg";
 import type { Viewport } from "next";
 import {
   EMAIL_ADDRESS,
