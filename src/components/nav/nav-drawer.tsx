@@ -164,7 +164,9 @@ export default function NavDrawer() {
               onClick={() => handleScrollLinkClick(link.internalLink!)}
               className="focus-ring"
             >
-              <span className="mr-2 text-accent">0{index + 1}.</span>
+              <span className="mr-2 text-accent" aria-hidden>
+                0{index + 1}.
+              </span>
               {link.label}
             </button>
           </li>
