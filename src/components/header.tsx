@@ -12,20 +12,20 @@ if (typeof window !== "undefined") {
 }
 
 export default function Header() {
-  const { currentScrollY, scrollDirection } = useScrollY();
+  const { scrollY, scrollDirection } = useScrollY();
   const headerRef = useRef<HTMLElement>(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   useEffect(() => {
-    if (scrollDirection === "up" || currentScrollY === 0) {
+    if (scrollDirection === "up" || scrollY === 0) {
       setIsNavbarVisible(true);
     }
 
-    if (scrollDirection === "down" && currentScrollY !== 0) {
+    if (scrollDirection === "down" && scrollY !== 0) {
       setIsNavbarVisible(false);
     }
-  }, [scrollDirection, currentScrollY]);
+  }, [scrollDirection, scrollY]);
 
   useGSAP(
     () => {
