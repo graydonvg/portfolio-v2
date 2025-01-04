@@ -147,49 +147,61 @@ export const technologies = [
   {
     name: "HTML 5",
     icon: "html",
+    ariaLabel: "HTML 5.",
   },
   {
     name: "CSS 3",
     icon: "css",
+    ariaLabel: "CSS 3.",
   },
   {
     name: "Tailwind CSS",
     icon: "tailwind",
+    ariaLabel: "tailwind CSS.",
   },
   {
     name: "JavaScript",
     icon: "javascript",
+    ariaLabel: "java script.",
   },
   {
     name: "TypeScript",
     icon: "typescript",
+    ariaLabel: "type script.",
   },
   {
     name: "React.js",
     icon: "react",
+    ariaLabel: "react JS.",
   },
   {
     name: "Next.js",
     icon: "netxjs",
+    ariaLabel: "next JS.",
   },
   {
     name: "Redux Toolkit",
     icon: "redux",
+    ariaLabel: "redux tool kit.",
   },
   {
     name: "Supabase",
     icon: "supabase",
+    ariaLabel: "supabase.",
   },
   {
     name: "Material UI",
     icon: "mui",
+    ariaLabel: "Material UI.",
   },
   {
     name: "shadcn",
     icon: "shadcn",
+    ariaLabel: "shad CN.",
   },
   {
     name: "GSAP",
     icon: "gsap",
+    ariaLabel: "G sap.",
   },
 ];

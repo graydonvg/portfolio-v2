@@ -32,6 +32,7 @@ type Props = {
   name: string;
   icon: string;
   index: number;
+  ariaLabel: string;
   technologyCardRefs: RefObject<(HTMLDivElement | null)[]>;
 };
 
@@ -39,9 +40,10 @@ export default function Technology({
   name,
   icon,
   index,
+  ariaLabel,
   technologyCardRefs,
 }: Props) {
-  const Component = ICONS[icon as keyof typeof ICONS];
+  const Icon = ICONS[icon as keyof typeof ICONS];
 
   return (
     <div
@@ -52,8 +54,11 @@ export default function Technology({
     >
       <div className="relative -z-20 size-full rounded-lg bg-card">
         <div className="z-50 flex h-full flex-col items-center justify-center rounded-lg bg-card/60 p-[23px] text-center backdrop-blur-3xl">
-          <Component height="100%" width="100%" />
-          <TypographyP>{name}</TypographyP>
+          <Icon height="100%" width="100%" aria-hidden />
+          <span className="mt-4 sm:mt-6" aria-hidden>
+            {name}
+          </span>
+          <span className="sr-only">{ariaLabel}</span>
         </div>
         <div className="card-light absolute left-0 top-0 -z-10 size-full rounded-[50%] bg-primary opacity-0 blur-2xl" />
         {/* card-light-original-position used for measurements in parent component */}
