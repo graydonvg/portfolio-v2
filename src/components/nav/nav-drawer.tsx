@@ -164,9 +164,7 @@ export default function NavDrawer() {
               onClick={() => handleScrollLinkClick(link.internalLink!)}
               className="focus-ring"
             >
-              <span className="mr-2 text-accent" aria-hidden>
-                0{index + 1}.
-              </span>
+              <span className="mr-2 text-accent">0{index + 1}.</span>
               {link.label}
             </button>
           </li>
@@ -189,7 +187,7 @@ export default function NavDrawer() {
               aria-label={`open graydon's ${link.label} in a new tab`}
               className="focus-ring inline-flex size-fit items-center gap-2"
             >
-              <span className="text-accent" aria-hidden>
+              <span className="text-accent">
                 {link.label === "GitHub" ? (
                   <FiGithub size={30} />
                 ) : (
