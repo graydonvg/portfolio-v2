@@ -3,6 +3,7 @@ import { SVGProps } from "react";
 export default function GSAP(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
+      aria-hidden="true"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
