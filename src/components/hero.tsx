@@ -37,7 +37,7 @@ export default function Hero() {
             <div className="relative aspect-square h-[250px] overflow-hidden rounded-[50%] sm:h-[350px] md:h-[25vh] md:max-h-[250px]">
               <Image
                 src={headshot}
-                alt="headshot"
+                alt="headshot image"
                 quality={100}
                 placeholder="blur"
                 priority

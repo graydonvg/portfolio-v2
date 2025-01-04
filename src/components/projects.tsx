@@ -114,7 +114,10 @@ export default function Projects() {
 
               <AccordionTrigger className="focus-ring p-4 sm:p-6">
                 <div className="flex items-center justify-end gap-2">
-                  <span className="text-h3 font-semibold tracking-tight text-accent">
+                  <span
+                    className="text-h3 font-semibold tracking-tight text-accent"
+                    aria-hidden
+                  >
                     0{index + 1}.
                   </span>
                   <TypographyH3>{project.title}</TypographyH3>
@@ -187,6 +190,7 @@ export default function Projects() {
                     >
                       <Button
                         variant="secondary"
+                        aria-label={`open ${project.title} repository in a new tab`}
                         className="w-full"
                         reduceScaleOnHover={project.links.website === null}
                       >
@@ -210,6 +214,7 @@ export default function Projects() {
                       >
                         <Button
                           className="w-full"
+                          aria-label={`open ${project.title} website in a new tab`}
                           disabled={project.links.website === ""}
                         >
                           View website
