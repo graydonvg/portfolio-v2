@@ -38,10 +38,12 @@ export const navLinks = [
   {
     label: "GitHub",
     externalLink: GITHUB_URL,
+    icon: "github",
   },
   {
     label: "LinkedIn",
     externalLink: LINKED_IN_URL,
+    icon: "linkedin",
   },
 ];
 
@@ -135,7 +137,7 @@ export const projects: Project[] = [
       "motion",
     ],
     links: {
-      repository: "https://github.com/graydonvg/gallery-ai",
+      repository: "https://github.com/graydonvg/portfolio-v2",
       website: null,
     },
   },

@@ -23,6 +23,7 @@ export default function About() {
   useGSAP(
     () => {
       const tl = gsap.timeline({
+        //ScrollTrigger.create({...});
         scrollTrigger: {
           trigger: "#about-container",
           start: "top bottom",
@@ -37,6 +38,7 @@ export default function About() {
 
       if (isInView) return;
 
+      // use match media
       if (windowDimension && windowDimension?.width < 1024) {
         tl.fromTo(
           ".about-card",

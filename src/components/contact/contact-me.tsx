@@ -34,7 +34,7 @@ export default function ContactMe() {
             <div className="mt-4 text-lg sm:mt-6">
               <Link
                 href={`mailto:${EMAIL_ADDRESS}`}
-                className="focus-ring rounded-full text-blue-400 hover:text-blue-500 hover:underline"
+                className="focus-ring text-blue-400 hover:text-blue-500 hover:underline"
                 onFocus={handleScrollToContactForm}
               >
                 {EMAIL_ADDRESS}
@@ -49,7 +49,7 @@ export default function ContactMe() {
                       href={option?.externalLink ?? ""}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="focus-ring rounded-full text-blue-400 hover:text-blue-500 hover:underline"
+                      className="focus-ring text-blue-400 hover:text-blue-500 hover:underline"
                       onFocus={handleScrollToContactForm}
                     >
                       {option?.label}

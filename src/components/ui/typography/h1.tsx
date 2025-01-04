@@ -6,7 +6,7 @@ import { ReactNode, useEffect, useState } from "react";
 
 export default function TypographyH1({ children }: { children: ReactNode }) {
   const windowDimension = useWindowDimensions();
-  const [useHeight, setUseHeight] = useState(false);
+  const [respondToHeight, setRespondToHeight] = useState(false);
 
   useEffect(() => {
     if (
@@ -14,18 +14,18 @@ export default function TypographyH1({ children }: { children: ReactNode }) {
       windowDimension?.width &&
       windowDimension?.height < windowDimension?.width * 0.65
     ) {
-      setUseHeight(true);
+      setRespondToHeight(true);
     } else {
-      setUseHeight(false);
+      setRespondToHeight(false);
     }
   }, [windowDimension?.height, windowDimension?.width]);
 
   return (
     <h1
       className={cn(
-        "sm:text-h1-lg-w/tight text-h1-sm/tight font-extrabold tracking-tight",
+        "text-h1-sm/tight font-extrabold tracking-tight sm:text-h1-lg-w/tight",
         {
-          "sm:text-h1-lg-h/tight": useHeight,
+          "sm:text-h1-lg-h/tight": respondToHeight,
         },
       )}
     >

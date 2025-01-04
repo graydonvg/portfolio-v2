@@ -9,6 +9,11 @@ import Link from "next/link";
 import { MouseEvent, useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 
+const icons = {
+  github: FiGithub,
+  linkedin: FiLinkedin,
+};
+
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const navLinkOverlayBeforeRef = useRef<HTMLDivElement>(null);
@@ -16,7 +21,9 @@ export default function Navbar() {
   const internalLinks = navLinks.filter((link) => link.internalLink);
   const externalLinks = navLinks.filter((link) => link.externalLink);
 
-  function handleMouseEnter(e: MouseEvent<HTMLButtonElement>) {
+  function handleMouseEnter(
+    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
+  ) {
     const target = e.target as HTMLElement;
 
     const targetRect = target.getBoundingClientRect();
@@ -62,6 +69,7 @@ export default function Navbar() {
       />
       <nav
         ref={navRef}
+        aria-label="primary navigation"
         className="relative flex overflow-hidden rounded-3xl border border-border p-2 backdrop-blur-3xl"
       >
         <div
@@ -73,10 +81,12 @@ export default function Navbar() {
           {internalLinks.map((link, index) => (
             <li key={index}>
               <button
+                aria-label={`scroll to ${link.label}`}
+                role="link"
                 onClick={() =>
                   link.internalLink === "#contact"
                     ? handleScrollToContactForm()
-                    : handleScrollToInternalLink(link.internalLink!, 48)
+                    : handleScrollToInternalLink(link.internalLink!)
                 }
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
@@ -89,32 +99,28 @@ export default function Navbar() {
         </ul>
         <div className="-z-20 border-l border-border" />
         <ul className="flex items-center justify-center">
-          {externalLinks.map((link, index) => (
-            <li key={index}>
-              <Link
-                tabIndex={-1}
-                href={link.externalLink!}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="size-fit"
-              >
-                <button
+          {externalLinks.map((link, index) => {
+            const ICON = link.icon && icons[link.icon as keyof typeof icons];
+
+            return (
+              <li key={index}>
+                <Link
+                  href={link.externalLink!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`open ${link.label} in a new tab`}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                   className="focus-ring group flex items-center gap-2 rounded-3xl px-4 py-1"
                 >
-                  <span className="text-accent transition-colors duration-300 group-hover:can-hover:text-foreground">
-                    {link.label === "GitHub" ? (
-                      <FiGithub size={16} />
-                    ) : (
-                      <FiLinkedin size={16} />
-                    )}
-                  </span>
+                  {ICON && (
+                    <ICON className="text-base text-accent transition-colors duration-300 group-hover:can-hover:text-foreground" />
+                  )}
                   {link.label}
-                </button>
-              </Link>
-            </li>
-          ))}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>
