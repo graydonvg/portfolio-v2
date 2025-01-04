@@ -10,7 +10,6 @@ import Shadcn from "../icons/shadcn";
 import Supabase from "../icons/supabase";
 import TailwindCSS from "../icons/tailwind";
 import TypeScript from "../icons/typescript";
-import TypographyP from "../ui/typography/p";
 import { RefObject } from "react";
 
 const ICONS = {
