@@ -87,7 +87,6 @@ export default function NavDrawer() {
       const handleTabKey = (e: KeyboardEvent) => {
         // Trap focus on Tab
         if (e.key === "Tab") {
-          console.log("Currently focused element:", document.activeElement);
           if (e.shiftKey) {
             // If Shift + Tab is pressed, move focus backwards
             if (document.activeElement === firstNavItem) {

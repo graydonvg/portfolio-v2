@@ -1,20 +1,32 @@
 "use client";
 
-import { useState } from "react";
-import { useMotionValueEvent, useScroll } from "motion/react";
+import { useEffect, useState } from "react";
 
 export default function useScrollY() {
-  const { scrollY } = useScroll();
-  const [scrollDirection, setScrollDirection] = useState("down");
-  const [currentScrollY, setCurrentScrollY] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
 
-  useMotionValueEvent(scrollY, "change", (current) => {
-    const previous = scrollY.getPrevious() ?? 0;
-    const diff = current - previous;
+  useEffect(() => {
+    let prevScrollY = window.scrollY;
 
-    setScrollDirection(diff > 0 ? "down" : "up");
-    setCurrentScrollY(current);
-  });
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
 
-  return { currentScrollY, scrollDirection };
+      setScrollY(currentScrollY);
+
+      const diff = currentScrollY - prevScrollY;
+
+      setScrollDirection(diff > 0 ? "down" : "up");
+
+      prevScrollY = currentScrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  return { scrollY, scrollDirection };
 }
