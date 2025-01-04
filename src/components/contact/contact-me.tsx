@@ -34,6 +34,7 @@ export default function ContactMe() {
             <div className="mt-4 text-lg sm:mt-6">
               <Link
                 href={`mailto:${EMAIL_ADDRESS}`}
+                aria-label="Send an email to graydonVG@gmail.com"
                 className="focus-ring text-blue-400 hover:text-blue-500 hover:underline"
                 onFocus={handleScrollToContactForm}
               >
@@ -47,6 +48,7 @@ export default function ContactMe() {
                   <span key={index}>
                     <Link
                       href={option?.externalLink ?? ""}
+                      aria-label={`open graydon's ${option?.label} in a new tab`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="focus-ring text-blue-400 hover:text-blue-500 hover:underline"

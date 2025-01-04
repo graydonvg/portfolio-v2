@@ -182,7 +182,7 @@ export default function NavDrawer() {
               onClick={toggleNavDrawer}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`open ${link.label} in a new tab`}
+              aria-label={`open graydon's ${link.label} in a new tab`}
               className="focus-ring inline-flex size-fit items-center gap-2"
             >
               <span className="text-accent">

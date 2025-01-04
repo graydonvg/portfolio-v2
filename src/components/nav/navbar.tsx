@@ -108,7 +108,7 @@ export default function Navbar() {
                   href={link.externalLink!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`open ${link.label} in a new tab`}
+                  aria-label={`open graydon's ${link.label} in a new tab`}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                   className="focus-ring group flex items-center gap-2 rounded-3xl px-4 py-1"
