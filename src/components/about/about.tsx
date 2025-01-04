@@ -8,38 +8,40 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import useScrollY from "@/hooks/use-scroll-y";
-import { useState } from "react";
-import useWindowDimensions from "@/hooks/use-window-dimensions";
+import { useRef } from "react";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function About() {
-  const windowDimension = useWindowDimensions();
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollDirection } = useScrollY();
-  const [isInView, setIsInView] = useState(false);
+  const isInViewRef = useRef(false);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion) return;
+
       const tl = gsap.timeline({
-        //ScrollTrigger.create({...});
         scrollTrigger: {
           trigger: "#about-container",
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reset play reset",
-          onEnter: () => setIsInView(true),
-          onEnterBack: () => setIsInView(true),
-          onLeave: () => setIsInView(false),
-          onLeaveBack: () => setIsInView(false),
+          onEnter: () => (isInViewRef.current = true),
+          onEnterBack: () => (isInViewRef.current = true),
+          onLeave: () => (isInViewRef.current = false),
+          onLeaveBack: () => (isInViewRef.current = false),
         },
       });
 
-      if (isInView) return;
+      if (isInViewRef.current) return;
 
-      // use match media
-      if (windowDimension && windowDimension?.width < 1024) {
+      const mm = gsap.matchMedia();
+
+      mm.add("(max-width: 1023px)", () => {
         tl.fromTo(
           ".about-card",
           {
@@ -52,13 +54,11 @@ export default function About() {
             opacity: 1,
             scale: 1,
             ease: "power1.out",
-            stagger: {
-              amount: 0.5,
-              from: scrollDirection === "down" ? "start" : "end",
-            },
           },
         );
-      } else {
+      });
+
+      mm.add("(min-width: 1024px)", () => {
         tl.fromTo(
           ".about-card-1",
           {
@@ -73,11 +73,9 @@ export default function About() {
             opacity: 1,
             scale: 1,
             ease: "power1.out",
-            stagger: {
-              from: scrollDirection === "down" ? "start" : "end",
-            },
           },
         )
+
           .fromTo(
             ".about-card-2",
             {
@@ -90,12 +88,10 @@ export default function About() {
               opacity: 1,
               scale: 1,
               ease: "power1.out",
-              stagger: {
-                from: scrollDirection === "down" ? "start" : "end",
-              },
             },
             0,
           )
+
           .fromTo(
             ".about-card-3",
             {
@@ -110,15 +106,15 @@ export default function About() {
               opacity: 1,
               scale: 1,
               ease: "power1.out",
-              stagger: {
-                from: scrollDirection === "down" ? "start" : "end",
-              },
             },
             0,
           );
-      }
+      });
     },
-    { dependencies: [scrollDirection, windowDimension], revertOnUpdate: true },
+    {
+      dependencies: [scrollDirection],
+      revertOnUpdate: true,
+    },
   );
 
   return (

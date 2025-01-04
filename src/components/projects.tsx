@@ -18,37 +18,38 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import Section from "./ui/section";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useScrollY from "@/hooks/use-scroll-y";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Projects() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollDirection } = useScrollY();
-  const [isInView, setIsInView] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const isInViewRef = useRef(false);
 
   useGSAP(
     () => {
+      if (prefersReducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: "#projects-accordion",
           start: "top bottom",
           end: "bottom top",
           toggleActions: "play reset play reset",
-
-          onEnter: () => {
-            setIsInView(true);
-          },
-          onEnterBack: () => setIsInView(true),
-          onLeave: () => setIsInView(false),
-          onLeaveBack: () => setIsInView(false),
+          onEnter: () => (isInViewRef.current = true),
+          onEnterBack: () => (isInViewRef.current = true),
+          onLeave: () => (isInViewRef.current = false),
+          onLeaveBack: () => (isInViewRef.current = false),
         },
       });
 
-      if (isInView) return;
+      if (isInViewRef.current) return;
 
       tl.fromTo(
         ".project",
@@ -99,7 +100,7 @@ export default function Projects() {
                   <ProjectImage
                     src={project.image}
                     alt={`${project.title} preloaded`}
-                    isInView={isInView}
+                    isInView={isInViewRef.current}
                   />
                 )}
 
@@ -107,7 +108,7 @@ export default function Projects() {
                   <ProjectImage
                     src={project.video.placeholderImage}
                     alt={`${project.title} mockup`}
-                    isInView={isInView}
+                    isInView={isInViewRef.current}
                   />
                 )}
               </div>

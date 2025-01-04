@@ -17,7 +17,7 @@ export default function FixedContactFormContainer() {
   const mainSection =
     typeof window !== "undefined" ? document.querySelector("main") : null;
   const contactSection =
-    typeof window !== "undefined" ? document.getElementById("#contact") : null;
+    typeof window !== "undefined" ? document.getElementById("contact") : null;
 
   useGSAP(
     () => {
@@ -25,7 +25,7 @@ export default function FixedContactFormContainer() {
 
       const contactFormContainer = contactFormContainerRef.current;
       // Mobile devices calculate the browser viewport as (top bar + document + bottom bar) = 100vh
-      // Using hero height (100vh) instead of window height so that it take mobile browser bars into account
+      // Using hero height (100vh) instead of window height so that it takes mobile browser bars into account
       const windowHeight = hero.offsetHeight;
       const contactFormContainerHeight = contactFormContainer.offsetHeight;
 
@@ -63,7 +63,7 @@ export default function FixedContactFormContainer() {
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
     },
-    { dependencies: [mainSection, contactSection], revertOnUpdate: true },
+    { revertOnUpdate: true },
   );
 
   return (

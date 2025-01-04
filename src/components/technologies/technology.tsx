@@ -54,10 +54,9 @@ export default function Technology({
       <div className="relative -z-20 size-full rounded-lg bg-card">
         <div className="z-50 flex h-full flex-col items-center justify-center rounded-lg bg-card/60 p-[23px] text-center backdrop-blur-3xl">
           <Icon height="100%" width="100%" aria-hidden />
-          <span className="mt-4 sm:mt-6" aria-hidden>
+          <span className="mt-4 sm:mt-6" aria-label={ariaLabel}>
             {name}
           </span>
-          <span className="sr-only">{ariaLabel}</span>
         </div>
         <div className="card-light absolute left-0 top-0 -z-10 size-full rounded-[50%] bg-primary opacity-0 blur-2xl" />
         {/* card-light-original-position used for measurements in parent component */}

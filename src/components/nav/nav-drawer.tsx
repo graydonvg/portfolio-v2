@@ -12,12 +12,14 @@ import gsap from "gsap";
 import useDrawerStore from "@/lib/store/use-drawer-store";
 import { useEffect, useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
 
 export default function NavDrawer() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { isNavDrawerOpen, toggleNavDrawer } = useDrawerStore();
   const navDrawerRef = useRef<HTMLElement>(null);
   const firstNavItemRef = useRef<HTMLElement>(null);
@@ -36,9 +38,9 @@ export default function NavDrawer() {
       // In some cases, there might be a delay in processing the changes, so the second call acts as a safeguard to ensure that the layout changes are finalized and that the next action (scrolling) occurs after everything is rendered.
       requestAnimationFrame(() => {
         if (link === "#contact") {
-          handleScrollToContactForm();
+          handleScrollToContactForm(prefersReducedMotion);
         } else {
-          handleScrollToInternalLink(link);
+          handleScrollToInternalLink(link, prefersReducedMotion);
         }
       });
     });

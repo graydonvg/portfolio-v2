@@ -10,12 +10,14 @@ import TypographyP from "../ui/typography/p";
 import Technology from "./technology";
 import useScrollY from "@/hooks/use-scroll-y";
 import { useRef } from "react";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Technologies() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollDirection } = useScrollY();
   const isInViewRef = useRef(false);
   const cursorPositionRef = useRef({ x: 0, y: 0 });
@@ -25,6 +27,8 @@ export default function Technologies() {
 
   useGSAP(
     () => {
+      if (prefersReducedMotion) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: technologiesGridRef.current,
@@ -66,7 +70,7 @@ export default function Technologies() {
       if (
         !contextSafe ||
         !technologyCardRefs.current ||
-        !isInViewRef.current ||
+        (!isInViewRef.current && !prefersReducedMotion) ||
         isTouchDevice
       )
         return;

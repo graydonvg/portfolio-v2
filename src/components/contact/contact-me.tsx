@@ -7,8 +7,10 @@ import { EMAIL_ADDRESS, navLinks } from "@/lib/constants";
 import TypographyH2 from "../ui/typography/h2";
 import TypographyH3 from "../ui/typography/h3";
 import { handleScrollToContactForm } from "@/lib/utils";
+import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 
 export default function ContactMe() {
+  const prefersReducedMotion = usePrefersReducedMotion();
   const navOptionsWithLinks = navLinks.filter((option) => option.externalLink);
 
   return (
@@ -36,7 +38,7 @@ export default function ContactMe() {
                 href={`mailto:${EMAIL_ADDRESS}`}
                 aria-label="Send an email to graydonVG@gmail.com"
                 className="focus-ring text-blue-400 hover:text-blue-500 hover:underline"
-                onFocus={handleScrollToContactForm}
+                onFocus={() => handleScrollToContactForm(prefersReducedMotion)}
               >
                 {EMAIL_ADDRESS}
               </Link>{" "}
@@ -52,7 +54,9 @@ export default function ContactMe() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="focus-ring text-blue-400 hover:text-blue-500 hover:underline"
-                      onFocus={handleScrollToContactForm}
+                      onFocus={() =>
+                        handleScrollToContactForm(prefersReducedMotion)
+                      }
                     >
                       {option?.label}
                     </Link>
