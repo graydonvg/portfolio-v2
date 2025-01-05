@@ -33,11 +33,11 @@ export default function FixedContactFormContainer() {
     }
 
     // Adjusts the margin-top of the contact section to overlap the proper amount
-    function adjustFooterOverlap() {
+    function adjustOverlap() {
       contactFormContainer.style.marginTop = `-${getOverlap()}px`; // shifts the container up
     }
 
-    adjustFooterOverlap(); // Set initial contact section margin
+    adjustOverlap(); // Set initial contact section margin
 
     ScrollTrigger.create({
       trigger: contactFormContainer,

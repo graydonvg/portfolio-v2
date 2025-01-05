@@ -104,15 +104,15 @@ export default function Technologies() {
           const translateY =
             cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
 
-          gsap
-            .timeline()
-            .to(cardLight, {
-              transform: `translate(${translateX}px,${translateY}px)`,
-              duration: 0.3,
-            })
-            .to(cardLight, {
-              opacity: 1,
-            });
+          const xSetter = gsap.quickSetter(cardLight, "x", "px");
+          const ySetter = gsap.quickSetter(cardLight, "y", "px");
+
+          xSetter(translateX);
+          ySetter(translateY);
+
+          gsap.to(cardLight, {
+            opacity: 1,
+          });
         });
       });
 
@@ -142,15 +142,15 @@ export default function Technologies() {
           const translateY =
             cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
 
-          gsap
-            .timeline()
-            .to(cardLight, {
-              transform: `translate(${translateX}px,${translateY}px)`,
-              duration: 0.3,
-            })
-            .to(cardLight, {
-              opacity: 1,
-            });
+          const xSetter = gsap.quickSetter(cardLight, "x", "px");
+          const ySetter = gsap.quickSetter(cardLight, "y", "px");
+
+          xSetter(translateX);
+          ySetter(translateY);
+
+          gsap.to(cardLight, {
+            opacity: 1,
+          });
         });
       });
 
