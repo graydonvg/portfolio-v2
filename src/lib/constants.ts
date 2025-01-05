@@ -57,7 +57,7 @@ export const aboutContent: AboutContent[] = [
   {
     title: "Expertise",
     parapraphs:
-      "I am experienced in HTML, CSS, JavaScript, TypeScript, React.js, Next.js, and more.<br />I specialize in creating responsive, accessible, and performant web applications that are visually appealing and deliver exceptional user experiences.",
+      "I am experienced in HTML, CSS, JavaScript, TypeScript, React.js, Next.js, and more.<br />I specialize in crafting responsive, accessible, and high-performance web applications that are visually appealing and user-focused.",
     imageSrc: portfolioMultiDeviceMockup,
   },
   {
