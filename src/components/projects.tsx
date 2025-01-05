@@ -41,7 +41,10 @@ export default function Projects() {
           trigger: "#projects-accordion",
           start: "top bottom",
           end: "bottom top",
-          toggleActions: "play reset play reset",
+          toggleActions:
+            scrollDirection === "down"
+              ? "play reset none none"
+              : "none none play reset",
           onEnter: () => (isInViewRef.current = true),
           onEnterBack: () => (isInViewRef.current = true),
           onLeave: () => (isInViewRef.current = false),
@@ -65,7 +68,7 @@ export default function Projects() {
         },
       );
     },
-    { dependencies: [scrollDirection], revertOnUpdate: true },
+    { dependencies: [scrollDirection] },
   );
 
   return (

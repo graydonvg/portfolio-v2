@@ -34,7 +34,10 @@ export default function Technologies() {
           trigger: technologiesGridRef.current,
           start: "top bottom",
           end: "bottom top",
-          toggleActions: "play reset play reset",
+          toggleActions:
+            scrollDirection === "down"
+              ? "play reset none none"
+              : "none none play reset",
           onEnter: () => (isInViewRef.current = true),
           onEnterBack: () => (isInViewRef.current = true),
           onLeave: () => (isInViewRef.current = false),
@@ -61,7 +64,6 @@ export default function Technologies() {
     },
     {
       dependencies: [scrollDirection],
-      revertOnUpdate: true,
     },
   );
 
