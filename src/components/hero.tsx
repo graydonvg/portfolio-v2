@@ -16,15 +16,14 @@ export default function Hero() {
 
       <div className="relative flex min-h-screen w-full flex-col items-center justify-center md:py-24">
         <div className="flex w-full flex-col items-center gap-8 text-center sm:gap-14 lg:gap-[clamp(1rem,5.6vh,3.5rem)]">
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
+            className="text-[clamp(1.125rem,0.9946rem+0.6522vw,1.5rem)]"
           >
-            <p className="text-[clamp(1.125rem,0.9946rem+0.6522vw,1.5rem)]">
-              Hello, I&apos;m Graydon!
-            </p>
-          </motion.div>
+            Hello, I&apos;m Graydon!
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
