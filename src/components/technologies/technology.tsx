@@ -60,7 +60,7 @@ export default function Technology({
         </div>
         <div className="card-light absolute left-0 top-0 -z-10 size-full rounded-[50%] bg-primary opacity-0 blur-2xl" />
         {/* card-light-original-position used for measurements in parent component */}
-        <div className="card-light-original-position invisible absolute left-0 top-0 -z-10 size-full rounded-[50%]" />
+        <div className="card-light-original-position pointer-events-none invisible absolute left-0 top-0 -z-10 size-full select-none rounded-[50%]" />
       </div>
     </div>
   );
