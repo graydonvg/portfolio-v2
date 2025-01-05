@@ -39,6 +39,40 @@ export const metadata: Metadata = {
   publisher: NAME,
   keywords:
     "portfolio, front-end developer, frontend engineer, web development, web developer, frontend developer, creative, problem-solving, team player, javascript developer, typescript developer, react developer, nextjs developer, next.js app router, html, css, javascript, typescript, reactjs, react.js, redux, zustand, nextjs, next.js, tailwind, gsap, framer motion, motion, supabase, mui, material ui, shadcn, remote, hybrid, on-site, startup-friendly, responsive design, high-performance websites, accessible websites, english, german, afrikaans, south africa, international, graydon von gossler, graydon, von gossler",
+  icons: [
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "192x192",
+      url: "/favicon/android-chrome-192x192.png",
+    },
+    {
+      rel: "icon",
+      type: "image/png",
+      sizes: "512x512",
+      url: "/favicon/android-chrome-512x512.png",
+    },
+    {
+      rel: "apple-touch-icon",
+      sizes: "180x180",
+      url: "/favicon/apple-touch-icon.png",
+    },
+    {
+      rel: "icon",
+      sizes: "16x16",
+      url: "/favicon/favicon-16x16.png",
+    },
+    {
+      rel: "icon",
+      sizes: "32x32",
+      url: "/favicon/favicon-32x32.png",
+    },
+    {
+      rel: "icon",
+      type: "image/ico",
+      url: "/favicon/favicon.ico",
+    },
+  ],
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
