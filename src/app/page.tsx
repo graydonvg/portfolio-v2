@@ -5,6 +5,7 @@ import Hero from "@/components/hero";
 import NavDrawer from "@/components/nav/nav-drawer";
 import Projects from "@/components/projects";
 import Technologies from "@/components/technologies/technologies";
+import Toast from "@/components/ui/toast";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <FixedContactFormContainer />
       </footer>
       <NavDrawer />
+      <Toast />
     </>
   );
 }

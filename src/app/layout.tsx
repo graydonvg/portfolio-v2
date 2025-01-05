@@ -8,6 +8,7 @@ import {
   EMAIL_ADDRESS,
   GITHUB_URL,
   LINKED_IN_URL,
+  productionUrl,
   SITE_URL,
 } from "@/lib/constants";
 import Script from "next/script";
@@ -18,17 +19,17 @@ const inter = Inter({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#09090b",
-  colorScheme: "dark light",
+  themeColor: "black",
+  colorScheme: "dark",
 };
 
 const NAME = "Graydon von Gossler";
 const TITLE = `${NAME} | Front-end Web Developer`;
 const DESCRIPTION =
-  "Portfolio showcasing projects and web development skills in HTML, CSS, JavaScript, TypeScript, React.js, Next.js and more.";
+  "Hi, I'm Graydon! A passionate Front-End Web Developer with expertise in modern web technologies and frameworks, including HTML, CSS, JavaScript, TypeScript, React.js, and Next.js. I specialize in crafting responsive, accessible, and high-performance web applications that are visually appealing and user-focused.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.graydonvongossler.com"),
+  metadataBase: new URL(productionUrl),
   title: TITLE,
   description: DESCRIPTION,
   applicationName: `${NAME} - Portfolio`,
@@ -37,41 +38,7 @@ export const metadata: Metadata = {
   creator: NAME,
   publisher: NAME,
   keywords:
-    "portfolio, front-end developer, frontend engineer, web development, web developer, frontend developer, creative, problem-solving, team player, javascript developer, typescript developer, react developer, nextjs developer, next.js app router, html, css, javascript, typescript, reactjs, react.js, redux, nextjs, next.js, tailwind, threejs, three.js, 3D graphics, 3D animations, framer motion, supabase, mui, material ui, shadcn, parallax, remote, hybrid, on-site, startup-friendly, responsive design, high-performance websites, accessible websites, english, german, afrikaans, south africa, international, graydon von gossler, graydon, von gossler",
-  icons: [
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "192x192",
-      url: "/favicon/android-chrome-192x192.png",
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      sizes: "512x512",
-      url: "/favicon/android-chrome-512x512.png",
-    },
-    {
-      rel: "apple-touch-icon",
-      sizes: "180x180",
-      url: "/favicon/apple-touch-icon.png",
-    },
-    {
-      rel: "icon",
-      sizes: "16x16",
-      url: "/favicon/favicon-16x16.png",
-    },
-    {
-      rel: "icon",
-      sizes: "32x32",
-      url: "/favicon/favicon-32x32.png",
-    },
-    {
-      rel: "icon",
-      type: "image/ico",
-      url: "/favicon/favicon.ico",
-    },
-  ],
+    "portfolio, front-end developer, frontend engineer, web development, web developer, frontend developer, creative, problem-solving, team player, javascript developer, typescript developer, react developer, nextjs developer, next.js app router, html, css, javascript, typescript, reactjs, react.js, redux, zustand, nextjs, next.js, tailwind, gsap, framer motion, motion, supabase, mui, material ui, shadcn, remote, hybrid, on-site, startup-friendly, responsive design, high-performance websites, accessible websites, english, german, afrikaans, south africa, international, graydon von gossler, graydon, von gossler",
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
@@ -81,7 +48,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: ogImage.src,
-        alt: `${NAME} - Web Developer`,
+        alt: TITLE,
         width: ogImage.width,
         height: ogImage.height,
       },
@@ -107,7 +74,7 @@ const jsonLdSchema = {
   name: NAME,
   url: SITE_URL,
   sameAs: [LINKED_IN_URL, GITHUB_URL],
-  jobTitle: "Web Developer",
+  jobTitle: "Front-end Web Developer",
   worksFor: {
     "@type": "Organization",
     name: "Freelance",
