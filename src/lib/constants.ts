@@ -4,7 +4,7 @@ import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-mu
 import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.jpg";
 import portfolioMockup from "../../public/images/mockups/portfolio-mockup.jpg";
 import zentryCloneMockup from "../../public/images/mockups/zentry-clone-mockup.jpg";
-import { Project } from "./types";
+import { AboutContent, NavLinks, Project, Technologies } from "./types";
 
 export const productionUrl = "https://www.graydonvongossler.com";
 export const SITE_URL =
@@ -15,7 +15,7 @@ export const GITHUB_URL = "https://github.com/graydonvg";
 export const LINKED_IN_URL = "https://linkedin.com/in/graydon-von-gossler";
 export const EMAIL_ADDRESS = "graydonvg@gmail.com";
 
-export const navLinks = [
+export const navLinks: NavLinks[] = [
   {
     label: "Home",
     internalLink: "#hero",
@@ -48,7 +48,7 @@ export const navLinks = [
   },
 ];
 
-export const aboutItems = [
+export const aboutContent: AboutContent[] = [
   {
     title: "Background",
     parapraphs:
@@ -144,7 +144,7 @@ export const projects: Project[] = [
   },
 ];
 
-export const technologies = [
+export const technologies: Technologies[] = [
   {
     name: "HTML 5",
     icon: "html",

@@ -2,7 +2,7 @@
 
 import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
-import { aboutItems } from "@/lib/constants";
+import { aboutContent } from "@/lib/constants";
 import AboutCard from "./about-card";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -127,7 +127,7 @@ export default function About() {
         id="about-container"
         className="grid grid-cols-1 gap-4 overflow-hidden md:gap-6 lg:grid-cols-3"
       >
-        {aboutItems.map((item, index) => (
+        {aboutContent.map((item, index) => (
           <AboutCard
             key={index}
             number={index + 1}
