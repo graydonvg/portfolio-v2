@@ -4,7 +4,7 @@ import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-mu
 import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.jpg";
 import portfolioMockup from "../../public/images/mockups/portfolio-mockup.jpg";
 import zentryCloneMockup from "../../public/images/mockups/zentry-clone-mockup.jpg";
-import { AboutContent, NavLinks, Project, Technologies } from "./types";
+import { AboutContent, NavLinks, ProjectType, Technologies } from "./types";
 
 export const productionUrl = "https://www.graydonvongossler.com";
 export const SITE_URL =
@@ -68,7 +68,7 @@ export const aboutContent: AboutContent[] = [
   },
 ];
 
-export const projects: Project[] = [
+export const projects: ProjectType[] = [
   {
     image: myStoreMockup,
     title: "MyStore",

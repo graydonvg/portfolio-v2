@@ -3,7 +3,7 @@ import FixedContactFormContainer from "@/components/contact/fixed-contact-form-c
 import Header from "@/components/header";
 import Hero from "@/components/hero";
 import NavDrawer from "@/components/nav/nav-drawer";
-import Projects from "@/components/projects";
+import Projects from "@/components/projects/projects";
 import Technologies from "@/components/technologies/technologies";
 import Toast from "@/components/ui/toast";
 

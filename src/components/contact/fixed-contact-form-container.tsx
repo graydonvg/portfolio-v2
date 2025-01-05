@@ -44,10 +44,6 @@ export default function FixedContactFormContainer() {
       start: () => `top ${windowHeight - getOverlap()}`,
       end: () => `+=${getOverlap()}`,
       pin: true,
-      // invalidateOnRefresh flushes out any internally-recorded starting values.
-      // generally works fine without
-      // in some cases, such as resizing the window when dev tools is open, the container's height fails to resize if invalidateOnRefresh is not used.
-      invalidateOnRefresh: true,
     });
 
     const observer = new ResizeObserver(() => {

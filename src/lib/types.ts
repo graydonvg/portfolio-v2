@@ -13,7 +13,7 @@ export type AboutContent = {
   imageSrc?: StaticImageData;
 };
 
-export type Project = {
+export type ProjectType = {
   title: string;
   image?: StaticImageData;
   video?: {
