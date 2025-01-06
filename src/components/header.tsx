@@ -30,8 +30,7 @@ export default function Header() {
   useGSAP(
     () => {
       gsap.to(headerRef.current, {
-        y: isNavbarVisible ? 0 : -100,
-        opacity: 1,
+        y: isNavbarVisible ? 0 : "-100%",
         duration: isInitialLoad ? 0.8 : 0.5,
         ease: "power1.out",
         onComplete: () => {
@@ -47,7 +46,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className="pointer-events-none fixed z-50 w-full -translate-y-[20px] opacity-0"
+      className="pointer-events-none fixed z-50 w-full -translate-y-[100%]"
     >
       <div className="pointer-events-auto">
         <Navbar />

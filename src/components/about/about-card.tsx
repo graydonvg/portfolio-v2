@@ -29,14 +29,14 @@ export default function AboutCard({
         <span className="text-accent">0{number}.</span> {title}
       </TypographyH3>
 
-      <div className="mt-5 sm:mt-7">
+      <div className="mt-5 sm:mt-6">
         {parapraphs.split("<br />").map((parapraph, index) => (
           <TypographyP key={index}>{parapraph}</TypographyP>
         ))}
       </div>
 
       {imageSrc && (
-        <div className="relative mt-6 h-fit overflow-hidden rounded-lg sm:mt-8">
+        <div className="relative mt-6 h-fit overflow-hidden rounded-lg">
           <Image
             src={imageSrc}
             alt="project mockup"
