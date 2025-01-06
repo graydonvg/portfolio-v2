@@ -40,6 +40,7 @@ export default function FixedContactFormContainer() {
     adjustOverlap(); // Set initial contact section margin
 
     ScrollTrigger.create({
+      // fix top not recalculating
       trigger: contactFormContainer,
       start: () => `top ${windowHeight - getOverlap()}`,
       end: () => `+=${getOverlap()}`,
@@ -81,7 +82,7 @@ export default function FixedContactFormContainer() {
         ref={measurementDivRef}
         className="pointer-events-none absolute -z-50 h-screen w-full select-none"
       />
-      <div ref={contactFormContainerRef} className="bg-card">
+      <div ref={contactFormContainerRef}>
         <ContactMe />
       </div>
     </>

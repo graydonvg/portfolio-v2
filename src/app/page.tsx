@@ -17,7 +17,7 @@ export default function Home() {
         <Projects />
         <Technologies />
       </main>
-      <footer>
+      <footer className="bg-card">
         <FixedContactFormContainer />
       </footer>
       <NavDrawer />
