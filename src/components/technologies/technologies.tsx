@@ -69,13 +69,7 @@ export default function Technologies() {
 
   useGSAP(
     (_context, contextSafe) => {
-      if (
-        !contextSafe ||
-        !technologyCardRefs.current ||
-        (!isInViewRef.current && !prefersReducedMotion) ||
-        isTouchDevice
-      )
-        return;
+      if (!contextSafe || !technologyCardRefs.current || isTouchDevice) return;
 
       const handleMouseMove = contextSafe((event: MouseEvent) => {
         cursorPositionRef.current.x = event.clientX;

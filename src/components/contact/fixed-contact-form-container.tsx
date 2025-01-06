@@ -81,10 +81,7 @@ export default function FixedContactFormContainer() {
         ref={measurementDivRef}
         className="pointer-events-none absolute -z-50 h-screen w-full select-none"
       />
-      <div
-        ref={contactFormContainerRef}
-        className="!w-full !max-w-full bg-card"
-      >
+      <div ref={contactFormContainerRef} className="bg-card">
         <ContactMe />
       </div>
     </>
