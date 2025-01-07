@@ -10,12 +10,14 @@ import gsap from "gsap";
 import useScrollY from "@/hooks/use-scroll-y";
 import { useRef } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
+import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function About() {
+  const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollDirection } = useScrollY();
   const isInViewRef = useRef(false);
@@ -115,7 +117,8 @@ export default function About() {
       });
     },
     {
-      dependencies: [scrollDirection],
+      dependencies: [scrollDirection, windowDimension],
+      revertOnUpdate: true,
     },
   );
 
