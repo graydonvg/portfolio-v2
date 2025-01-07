@@ -8,58 +8,78 @@ import TypographyH2 from "../ui/typography/h2";
 import { Accordion } from "@/components/ui/accordion";
 import TypographyP from "../ui/typography/p";
 import Section from "../ui/section";
-import { useRef } from "react";
-import useScrollY from "@/hooks/use-scroll-y";
+import { useState } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import Project from "./project";
+import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Projects() {
+  const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
-  const { scrollDirection } = useScrollY();
-
-  const isInViewRef = useRef(false);
+  const [isInView, setIsInView] = useState(false);
 
   useGSAP(
     () => {
       if (prefersReducedMotion) return;
 
-      const tl = gsap.timeline({
+      const scrollDownTl = gsap.timeline({
         scrollTrigger: {
           trigger: "#projects-accordion",
           start: "top bottom",
           end: "bottom top",
-          toggleActions:
-            scrollDirection === "down"
-              ? "play reset none none"
-              : "none none play reset",
-          onEnter: () => (isInViewRef.current = true),
-          onEnterBack: () => (isInViewRef.current = true),
-          onLeave: () => (isInViewRef.current = false),
-          onLeaveBack: () => (isInViewRef.current = false),
+          toggleActions: "play reset none reset",
+          onEnter: () => setIsInView(true),
+          onEnterBack: () => setIsInView(true),
+          onLeave: () => setIsInView(false),
+          onLeaveBack: () => setIsInView(false),
         },
       });
 
-      if (isInViewRef.current) return;
-
-      tl.fromTo(
+      scrollDownTl.fromTo(
         ".project",
-        { x: scrollDirection === "down" ? "-110%" : "110%", opacity: 0 },
+        { x: "-110%", opacity: 0 },
         {
           x: 0,
           opacity: 1,
           ease: "power1.out",
           stagger: {
             amount: 0.5,
-            from: scrollDirection === "down" ? "start" : "end",
+            from: "start",
+          },
+        },
+      );
+
+      const scrollUpTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#projects-accordion",
+          start: "top bottom",
+          end: "bottom top",
+          toggleActions: "none reset play reset",
+        },
+      });
+
+      scrollUpTl.fromTo(
+        ".project",
+        { x: "110%", opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          ease: "power1.out",
+          stagger: {
+            amount: 0.5,
+            from: "end",
           },
         },
       );
     },
-    { dependencies: [scrollDirection] },
+    {
+      dependencies: [windowDimension],
+      revertOnUpdate: true,
+    },
   );
 
   return (
@@ -85,7 +105,7 @@ export default function Projects() {
             <Project
               key={index}
               index={index}
-              isInView={isInViewRef.current}
+              isInView={isInView}
               project={project}
             />
           ))}

@@ -8,18 +8,17 @@ import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
 import TypographyP from "../ui/typography/p";
 import Technology from "./technology";
-import useScrollY from "@/hooks/use-scroll-y";
 import { useRef } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
+import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Technologies() {
+  const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
-  const { scrollDirection } = useScrollY();
-  const isInViewRef = useRef(false);
   const cursorPositionRef = useRef({ x: 0, y: 0 });
   const technologiesGridRef = useRef<HTMLDivElement>(null);
   const technologyCardRefs = useRef<HTMLDivElement[]>([]);
@@ -29,27 +28,18 @@ export default function Technologies() {
     () => {
       if (prefersReducedMotion) return;
 
-      const tl = gsap.timeline({
+      const scrollDownTl = gsap.timeline({
         scrollTrigger: {
           trigger: technologiesGridRef.current,
           start: "top bottom",
           end: "bottom top",
-          toggleActions:
-            scrollDirection === "down"
-              ? "play reset none none"
-              : "none none play reset",
-          onEnter: () => (isInViewRef.current = true),
-          onEnterBack: () => (isInViewRef.current = true),
-          onLeave: () => (isInViewRef.current = false),
-          onLeaveBack: () => (isInViewRef.current = false),
+          toggleActions: "play reset none reset",
         },
       });
 
-      if (isInViewRef.current) return;
-
-      tl.fromTo(
+      scrollDownTl.fromTo(
         ".technology-card",
-        { y: scrollDirection === "down" ? 100 : -100, scale: 0 },
+        { y: 100, scale: 0 },
         {
           y: 0,
           scale: 1,
@@ -57,109 +47,131 @@ export default function Technologies() {
           stagger: {
             amount: 0.5,
             grid: "auto",
-            from: scrollDirection === "down" ? "start" : "end",
+            from: "start",
+          },
+        },
+      );
+
+      const scrollUpTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: technologiesGridRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          toggleActions: "none reset play reset",
+        },
+      });
+
+      scrollUpTl.fromTo(
+        ".technology-card",
+        { y: -100, scale: 0 },
+        {
+          y: 0,
+          scale: 1,
+          ease: "power1.out",
+          stagger: {
+            amount: 0.5,
+            grid: "auto",
+            from: "end",
           },
         },
       );
     },
     {
-      dependencies: [scrollDirection],
+      dependencies: [windowDimension],
+      revertOnUpdate: true,
     },
   );
 
-  useGSAP(
-    (_context, contextSafe) => {
-      if (!contextSafe || !technologyCardRefs.current || isTouchDevice) return;
+  useGSAP((_context, contextSafe) => {
+    if (!contextSafe || !technologyCardRefs.current || isTouchDevice) return;
 
-      const handleMouseMove = contextSafe((event: MouseEvent) => {
-        cursorPositionRef.current.x = event.clientX;
-        cursorPositionRef.current.y = event.clientY;
+    const handleMouseMove = contextSafe((event: MouseEvent) => {
+      cursorPositionRef.current.x = event.clientX;
+      cursorPositionRef.current.y = event.clientY;
 
-        technologyCardRefs.current.forEach((card) => {
-          const cardLight = card.querySelector(".card-light"); // Moves
-          const cardLightOriginalPosition = card.querySelector(
-            ".card-light-original-position",
-          ); // Does NOT move
+      technologyCardRefs.current.forEach((card) => {
+        const cardLight = card.querySelector(".card-light"); // Moves
+        const cardLightOriginalPosition = card.querySelector(
+          ".card-light-original-position",
+        ); // Does NOT move
 
-          if (!cardLight || !cardLightOriginalPosition) return;
+        if (!cardLight || !cardLightOriginalPosition) return;
 
-          // Because card-light moves, use card-light-original-position to calculate the card-light original center point
-          const cardLightOriginalPositionRect =
-            cardLightOriginalPosition.getBoundingClientRect();
+        // Because card-light moves, use card-light-original-position to calculate the card-light original center point
+        const cardLightOriginalPositionRect =
+          cardLightOriginalPosition.getBoundingClientRect();
 
-          const cardLightOriginalPositionCenterX =
-            cardLightOriginalPositionRect.left +
-            cardLightOriginalPositionRect.width / 2;
-          const cardLightOriginalPositionCenterY =
-            cardLightOriginalPositionRect.top +
-            cardLightOriginalPositionRect.height / 2;
+        const cardLightOriginalPositionCenterX =
+          cardLightOriginalPositionRect.left +
+          cardLightOriginalPositionRect.width / 2;
+        const cardLightOriginalPositionCenterY =
+          cardLightOriginalPositionRect.top +
+          cardLightOriginalPositionRect.height / 2;
 
-          // Subtract the original center point from the current cursor position to calculate how far the light must be translated to be centered under the cursor
-          const translateX =
-            cursorPositionRef.current.x - cardLightOriginalPositionCenterX;
-          const translateY =
-            cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
+        // Subtract the original center point from the current cursor position to calculate how far the light must be translated to be centered under the cursor
+        const translateX =
+          cursorPositionRef.current.x - cardLightOriginalPositionCenterX;
+        const translateY =
+          cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
 
-          const xSetter = gsap.quickSetter(cardLight, "x", "px");
-          const ySetter = gsap.quickSetter(cardLight, "y", "px");
+        const xSetter = gsap.quickSetter(cardLight, "x", "px");
+        const ySetter = gsap.quickSetter(cardLight, "y", "px");
 
-          xSetter(translateX);
-          ySetter(translateY);
+        xSetter(translateX);
+        ySetter(translateY);
 
-          gsap.to(cardLight, {
-            opacity: 1,
-          });
+        gsap.to(cardLight, {
+          opacity: 1,
         });
       });
+    });
 
-      const handleScroll = contextSafe(() => {
-        technologyCardRefs.current.forEach((card) => {
-          const cardLight = card.querySelector(".card-light"); // Moves
-          const cardLightOriginalPosition = card.querySelector(
-            ".card-light-original-position",
-          ); // Does NOT move
+    const handleScroll = contextSafe(() => {
+      technologyCardRefs.current.forEach((card) => {
+        const cardLight = card.querySelector(".card-light"); // Moves
+        const cardLightOriginalPosition = card.querySelector(
+          ".card-light-original-position",
+        ); // Does NOT move
 
-          if (!cardLight || !cardLightOriginalPosition) return;
+        if (!cardLight || !cardLightOriginalPosition) return;
 
-          // Because card-light moves, use card-light-original-position to calculate the card-light original center point
-          const cardLightOriginalPositionRect =
-            cardLightOriginalPosition.getBoundingClientRect();
+        // Because card-light moves, use card-light-original-position to calculate the card-light original center point
+        const cardLightOriginalPositionRect =
+          cardLightOriginalPosition.getBoundingClientRect();
 
-          const cardLightOriginalPositionCenterX =
-            cardLightOriginalPositionRect.left +
-            cardLightOriginalPositionRect.width / 2;
-          const cardLightOriginalPositionCenterY =
-            cardLightOriginalPositionRect.top +
-            cardLightOriginalPositionRect.height / 2;
+        const cardLightOriginalPositionCenterX =
+          cardLightOriginalPositionRect.left +
+          cardLightOriginalPositionRect.width / 2;
+        const cardLightOriginalPositionCenterY =
+          cardLightOriginalPositionRect.top +
+          cardLightOriginalPositionRect.height / 2;
 
-          // Subtract the original center point from the current cursor position to calculate how far the light must be translated to be centered under the cursor
-          const translateX =
-            cursorPositionRef.current.x - cardLightOriginalPositionCenterX;
-          const translateY =
-            cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
+        // Subtract the original center point from the current cursor position to calculate how far the light must be translated to be centered under the cursor
+        const translateX =
+          cursorPositionRef.current.x - cardLightOriginalPositionCenterX;
+        const translateY =
+          cursorPositionRef.current.y - cardLightOriginalPositionCenterY;
 
-          const xSetter = gsap.quickSetter(cardLight, "x", "px");
-          const ySetter = gsap.quickSetter(cardLight, "y", "px");
+        const xSetter = gsap.quickSetter(cardLight, "x", "px");
+        const ySetter = gsap.quickSetter(cardLight, "y", "px");
 
-          xSetter(translateX);
-          ySetter(translateY);
+        xSetter(translateX);
+        ySetter(translateY);
 
-          gsap.to(cardLight, {
-            opacity: 1,
-          });
+        gsap.to(cardLight, {
+          opacity: 1,
         });
       });
+    });
 
-      window.addEventListener("mousemove", handleMouseMove);
-      window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("scroll", handleScroll);
 
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        window.removeEventListener("scroll", handleScroll);
-      };
-    },
-    { dependencies: [isInViewRef.current], revertOnUpdate: true },
-  );
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
 
   return (
     <Section id="technologies">

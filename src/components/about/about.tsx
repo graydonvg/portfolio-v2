@@ -7,8 +7,6 @@ import AboutCard from "./about-card";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
-import useScrollY from "@/hooks/use-scroll-y";
-import { useRef } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import useWindowDimensions from "@/hooks/use-window-dimensions";
 
@@ -19,38 +17,58 @@ if (typeof window !== "undefined") {
 export default function About() {
   const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
-  const { scrollDirection } = useScrollY();
-  const isInViewRef = useRef(false);
 
   useGSAP(
     () => {
       if (prefersReducedMotion) return;
 
-      const tl = gsap.timeline({
+      gsap.set(
+        [".about-card", ".about-card-1", ".about-card-2", ".about-card-3"],
+        {
+          clearProps: "transform",
+        },
+      );
+
+      const scrollDownTl = gsap.timeline({
         scrollTrigger: {
           trigger: "#about-container",
           start: "top bottom",
           end: "bottom top",
-          toggleActions:
-            scrollDirection === "down"
-              ? "play reset none none"
-              : "none none play reset",
-          onEnter: () => (isInViewRef.current = true),
-          onEnterBack: () => (isInViewRef.current = true),
-          onLeave: () => (isInViewRef.current = false),
-          onLeaveBack: () => (isInViewRef.current = false),
+          toggleActions: "play reset none reset",
         },
       });
 
-      if (isInViewRef.current) return;
+      const scrollUpTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#about-container",
+          start: "top bottom",
+          end: "bottom top",
+          toggleActions: "none reset play reset",
+        },
+      });
 
       const mm = gsap.matchMedia();
 
       mm.add("(max-width: 1023px)", () => {
-        tl.fromTo(
+        scrollDownTl.fromTo(
           ".about-card",
           {
-            y: scrollDirection === "down" ? "50%" : "-50%",
+            y: "50%",
+            opacity: 0,
+            scale: 0,
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            ease: "power1.out",
+          },
+        );
+
+        scrollUpTl.fromTo(
+          ".about-card",
+          {
+            y: "-50%",
             opacity: 0,
             scale: 0,
           },
@@ -64,27 +82,28 @@ export default function About() {
       });
 
       mm.add("(min-width: 1024px)", () => {
-        tl.fromTo(
-          ".about-card-1",
-          {
-            y: scrollDirection === "down" ? "50%" : "-50%",
-            x: "-50%",
-            opacity: 0,
-            scale: 0,
-          },
-          {
-            y: 0,
-            x: 0,
-            opacity: 1,
-            scale: 1,
-            ease: "power1.out",
-          },
-        )
+        scrollDownTl
+          .fromTo(
+            ".about-card-1",
+            {
+              y: "50%",
+              x: "-50%",
+              opacity: 0,
+              scale: 0,
+            },
+            {
+              y: 0,
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power1.out",
+            },
+          )
 
           .fromTo(
             ".about-card-2",
             {
-              y: scrollDirection === "down" ? "50%" : "-50%",
+              y: "50%",
               opacity: 0,
               scale: 0,
             },
@@ -100,7 +119,7 @@ export default function About() {
           .fromTo(
             ".about-card-3",
             {
-              y: scrollDirection === "down" ? "50%" : "-50%",
+              y: "50%",
               x: "50%",
               opacity: 0,
               scale: 0,
@@ -114,10 +133,64 @@ export default function About() {
             },
             0,
           );
+
+        scrollUpTl
+          .fromTo(
+            ".about-card-1",
+            {
+              y: "-50%",
+              x: "-50%",
+              opacity: 0,
+              scale: 0,
+            },
+            {
+              y: 0,
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power1.out",
+            },
+          )
+
+          .fromTo(
+            ".about-card-2",
+            {
+              y: "-50%",
+              opacity: 0,
+              scale: 0,
+            },
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power1.out",
+            },
+            0,
+          )
+
+          .fromTo(
+            ".about-card-3",
+            {
+              y: "-50%",
+              x: "50%",
+              opacity: 0,
+              scale: 0,
+            },
+            {
+              y: 0,
+              x: 0,
+              opacity: 1,
+              scale: 1,
+              ease: "power1.out",
+            },
+            0,
+          );
+
+        console.log(gsap.getProperty(".about-card", "x"));
       });
     },
     {
-      dependencies: [scrollDirection, windowDimension],
+      dependencies: [windowDimension],
       revertOnUpdate: true,
     },
   );
