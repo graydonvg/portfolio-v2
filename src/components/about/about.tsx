@@ -22,6 +22,7 @@ export default function About() {
     () => {
       if (prefersReducedMotion) return;
 
+      // Clear transforms on window resize to avoid lingering x transform (no x transform if vw < 1024px)
       gsap.set(
         [".about-card", ".about-card-1", ".about-card-2", ".about-card-3"],
         {
@@ -185,12 +186,10 @@ export default function About() {
             },
             0,
           );
-
-        console.log(gsap.getProperty(".about-card", "x"));
       });
     },
     {
-      dependencies: [windowDimension],
+      dependencies: [windowDimension?.width],
       revertOnUpdate: true,
     },
   );

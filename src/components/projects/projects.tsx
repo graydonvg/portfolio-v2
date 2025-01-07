@@ -77,7 +77,7 @@ export default function Projects() {
       );
     },
     {
-      dependencies: [windowDimension],
+      dependencies: [windowDimension?.width],
       revertOnUpdate: true,
     },
   );
