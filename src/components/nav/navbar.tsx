@@ -1,6 +1,5 @@
 "use client";
 
-import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { navLinks } from "@/lib/constants";
 import {
   handleScrollToContactForm,
@@ -16,7 +15,6 @@ const icons = {
 };
 
 export default function Navbar() {
-  const prefersReducedMotion = usePrefersReducedMotion();
   const navRef = useRef<HTMLElement>(null);
   const navLinkOverlayBeforeRef = useRef<HTMLDivElement>(null);
   const navLinkOverlayAfterRef = useRef<HTMLDivElement>(null);
@@ -87,11 +85,8 @@ export default function Navbar() {
                 role="link"
                 onClick={() =>
                   link.internalLink === "#contact"
-                    ? handleScrollToContactForm(prefersReducedMotion)
-                    : handleScrollToInternalLink(
-                        link.internalLink!,
-                        prefersReducedMotion,
-                      )
+                    ? handleScrollToContactForm()
+                    : handleScrollToInternalLink(link.internalLink!)
                 }
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
