@@ -18,7 +18,8 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useFormStore from "@/lib/store/use-form-store";
 
 type EmailTemplate = {
   to_name: string;
@@ -28,6 +29,7 @@ type EmailTemplate = {
 };
 
 export default function ContactForm() {
+  const { setFormHasError } = useFormStore();
   const [isSending, setIsSending] = useState(false);
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
@@ -37,6 +39,18 @@ export default function ContactForm() {
       message: "",
     },
   });
+
+  useEffect(() => {
+    if (
+      !form.formState.errors.email ||
+      !form.formState.errors.message ||
+      !form.formState.errors.name
+    ) {
+      setFormHasError(false);
+    } else {
+      setFormHasError(true);
+    }
+  }, [form.formState.errors, setFormHasError]);
 
   async function sendEmail(emailData: EmailTemplate) {
     setIsSending(true);

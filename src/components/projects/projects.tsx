@@ -11,76 +11,67 @@ import Section from "../ui/section";
 import { useState } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import Project from "./project";
-import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Projects() {
-  const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
   const [isInView, setIsInView] = useState(false);
 
-  useGSAP(
-    () => {
-      if (prefersReducedMotion) return;
+  useGSAP(() => {
+    if (prefersReducedMotion) return;
 
-      const scrollDownTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#projects-accordion",
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "play reset none reset",
-          onEnter: () => setIsInView(true),
-          onEnterBack: () => setIsInView(true),
-          onLeave: () => setIsInView(false),
-          onLeaveBack: () => setIsInView(false),
-        },
-      });
+    const tl = gsap.timeline({
+      defaults: {
+        x: 0,
+        autoAlpha: 1,
+        ease: "power1.out",
+      },
+      scrollTrigger: {
+        trigger: "#projects-accordion",
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => {
+          setIsInView(true);
 
-      scrollDownTl.fromTo(
-        ".project",
-        { x: "-110%", opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          ease: "power1.out",
-          stagger: {
-            amount: 0.5,
-            from: "start",
-          },
+          tl.fromTo(
+            ".project",
+            { x: "-110%", autoAlpha: 0 },
+            {
+              stagger: {
+                amount: 0.5,
+                from: "start",
+              },
+            },
+          );
         },
-      );
+        onEnterBack: () => {
+          setIsInView(true);
 
-      const scrollUpTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#projects-accordion",
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "none reset play reset",
+          tl.fromTo(
+            ".project",
+            { x: "110%", autoAlpha: 0 },
+            {
+              stagger: {
+                amount: 0.5,
+                from: "end",
+              },
+            },
+          );
         },
-      });
-
-      scrollUpTl.fromTo(
-        ".project",
-        { x: "110%", opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          ease: "power1.out",
-          stagger: {
-            amount: 0.5,
-            from: "end",
-          },
+        onLeave: () => {
+          setIsInView(false);
+          tl.clear();
         },
-      );
-    },
-    {
-      dependencies: [windowDimension?.width],
-      revertOnUpdate: true,
-    },
-  );
+        onLeaveBack: () => {
+          setIsInView(false);
+          tl.clear();
+        },
+      },
+    });
+  });
 
   return (
     <Section id="projects">

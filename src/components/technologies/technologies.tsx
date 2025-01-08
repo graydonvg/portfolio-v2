@@ -10,77 +10,67 @@ import TypographyP from "../ui/typography/p";
 import Technology from "./technology";
 import { useRef } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function Technologies() {
-  const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
   const cursorPositionRef = useRef({ x: 0, y: 0 });
   const technologiesGridRef = useRef<HTMLDivElement>(null);
   const technologyCardRefs = useRef<HTMLDivElement[]>([]);
   const isTouchDevice = navigator.maxTouchPoints > 0;
 
-  useGSAP(
-    () => {
-      if (prefersReducedMotion) return;
+  useGSAP(() => {
+    if (prefersReducedMotion) return;
 
-      const scrollDownTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: technologiesGridRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "play reset none reset",
+    const tl = gsap.timeline({
+      defaults: {
+        y: 0,
+        scale: 1,
+        autoAlpha: 1,
+        ease: "power1.out",
+      },
+      scrollTrigger: {
+        trigger: technologiesGridRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => {
+          tl.fromTo(
+            ".technology-card",
+            { y: 100, scale: 0, autoAlpha: 0 },
+            {
+              stagger: {
+                amount: 0.5,
+                grid: "auto",
+                from: "start",
+              },
+            },
+          );
         },
-      });
-
-      scrollDownTl.fromTo(
-        ".technology-card",
-        { y: 100, scale: 0 },
-        {
-          y: 0,
-          scale: 1,
-          ease: "power1.out",
-          stagger: {
-            amount: 0.5,
-            grid: "auto",
-            from: "start",
-          },
+        onEnterBack: () => {
+          tl.fromTo(
+            ".technology-card",
+            { y: -100, scale: 0, autoAlpha: 0 },
+            {
+              stagger: {
+                amount: 0.5,
+                grid: "auto",
+                from: "end",
+              },
+            },
+          );
         },
-      );
-
-      const scrollUpTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: technologiesGridRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "none reset play reset",
+        onLeave: () => {
+          tl.clear();
         },
-      });
-
-      scrollUpTl.fromTo(
-        ".technology-card",
-        { y: -100, scale: 0 },
-        {
-          y: 0,
-          scale: 1,
-          ease: "power1.out",
-          stagger: {
-            amount: 0.5,
-            grid: "auto",
-            from: "end",
-          },
+        onLeaveBack: () => {
+          tl.clear();
         },
-      );
-    },
-    {
-      dependencies: [windowDimension?.width],
-      revertOnUpdate: true,
-    },
-  );
+      },
+    });
+  });
 
   useGSAP((_context, contextSafe) => {
     if (!contextSafe || !technologyCardRefs.current || isTouchDevice) return;

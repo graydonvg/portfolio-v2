@@ -8,191 +8,166 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
-import useWindowDimensions from "@/hooks/use-window-dimensions";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
 export default function About() {
-  const windowDimension = useWindowDimensions();
   const prefersReducedMotion = usePrefersReducedMotion();
 
-  useGSAP(
-    () => {
-      if (prefersReducedMotion) return;
+  useGSAP((_context, contextSafe) => {
+    if (prefersReducedMotion || !contextSafe) return;
 
-      // Clear transforms on window resize to avoid lingering x transform (no x transform if vw < 1024px)
-      gsap.set(
-        [".about-card", ".about-card-1", ".about-card-2", ".about-card-3"],
-        {
-          clearProps: "transform",
+    const mm = gsap.matchMedia();
+
+    const tl = gsap.timeline({
+      defaults: {
+        autoAlpha: 1,
+        scale: 1,
+        ease: "power1.out",
+      },
+      scrollTrigger: {
+        trigger: "#about-container",
+        start: "top bottom",
+        end: "bottom top",
+        onEnter: () => {
+          mm.add("(max-width: 1023px)", () => {
+            tl.fromTo(
+              ".about-card",
+              {
+                y: "50%",
+                autoAlpha: 0,
+                scale: 0,
+              },
+              {
+                y: 0,
+              },
+            );
+          });
+
+          mm.add("(min-width: 1024px)", () => {
+            tl.fromTo(
+              ".about-card-1",
+              {
+                y: "50%",
+                x: "-50%",
+                autoAlpha: 0,
+                scale: 0,
+              },
+              {
+                y: 0,
+                x: 0,
+              },
+            )
+              .fromTo(
+                ".about-card-2",
+                {
+                  y: "50%",
+                  autoAlpha: 0,
+                  scale: 0,
+                },
+                {
+                  y: 0,
+                },
+                0,
+              )
+              .fromTo(
+                ".about-card-3",
+                {
+                  y: "50%",
+                  x: "50%",
+                  autoAlpha: 0,
+                  scale: 0,
+                },
+                {
+                  y: 0,
+                  x: 0,
+                },
+                0,
+              );
+          });
         },
-      );
+        onEnterBack: () => {
+          mm.add("(max-width: 1023px)", () => {
+            tl.fromTo(
+              ".about-card",
+              {
+                y: "-50%",
+                autoAlpha: 0,
+                scale: 0,
+              },
+              {
+                y: 0,
+              },
+            );
+          });
 
-      const scrollDownTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#about-container",
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "play reset none reset",
+          mm.add("(min-width: 1024px)", () => {
+            tl.fromTo(
+              ".about-card-1",
+              {
+                y: "-50%",
+                x: "-50%",
+                autoAlpha: 0,
+                scale: 0,
+              },
+              {
+                y: 0,
+                x: 0,
+              },
+            )
+              .fromTo(
+                ".about-card-2",
+                {
+                  y: "-50%",
+                  autoAlpha: 0,
+                  scale: 0,
+                },
+                {
+                  y: 0,
+                },
+                0,
+              )
+              .fromTo(
+                ".about-card-3",
+                {
+                  y: "-50%",
+                  x: "50%",
+                  autoAlpha: 0,
+                  scale: 0,
+                },
+                {
+                  y: 0,
+                  x: 0,
+                },
+                0,
+              );
+          });
         },
-      });
-
-      const scrollUpTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: "#about-container",
-          start: "top bottom",
-          end: "bottom top",
-          toggleActions: "none reset play reset",
+        onLeave: () => {
+          tl.clear();
         },
+        onLeaveBack: () => {
+          tl.clear();
+        },
+      },
+    });
+
+    const handleResize = contextSafe(() => {
+      // Clear transforms and opacity on window resize to avoid lingering x transform (no x transform if vw < 1024px) and keep card visible
+      tl.clear();
+      gsap.set(".about-card", {
+        clearProps: "all",
       });
+    });
 
-      const mm = gsap.matchMedia();
+    window.addEventListener("resize", handleResize);
 
-      mm.add("(max-width: 1023px)", () => {
-        scrollDownTl.fromTo(
-          ".about-card",
-          {
-            y: "50%",
-            opacity: 0,
-            scale: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            ease: "power1.out",
-          },
-        );
-
-        scrollUpTl.fromTo(
-          ".about-card",
-          {
-            y: "-50%",
-            opacity: 0,
-            scale: 0,
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            ease: "power1.out",
-          },
-        );
-      });
-
-      mm.add("(min-width: 1024px)", () => {
-        scrollDownTl
-          .fromTo(
-            ".about-card-1",
-            {
-              y: "50%",
-              x: "-50%",
-              opacity: 0,
-              scale: 0,
-            },
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power1.out",
-            },
-          )
-
-          .fromTo(
-            ".about-card-2",
-            {
-              y: "50%",
-              opacity: 0,
-              scale: 0,
-            },
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power1.out",
-            },
-            0,
-          )
-
-          .fromTo(
-            ".about-card-3",
-            {
-              y: "50%",
-              x: "50%",
-              opacity: 0,
-              scale: 0,
-            },
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power1.out",
-            },
-            0,
-          );
-
-        scrollUpTl
-          .fromTo(
-            ".about-card-1",
-            {
-              y: "-50%",
-              x: "-50%",
-              opacity: 0,
-              scale: 0,
-            },
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power1.out",
-            },
-          )
-
-          .fromTo(
-            ".about-card-2",
-            {
-              y: "-50%",
-              opacity: 0,
-              scale: 0,
-            },
-            {
-              y: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power1.out",
-            },
-            0,
-          )
-
-          .fromTo(
-            ".about-card-3",
-            {
-              y: "-50%",
-              x: "50%",
-              opacity: 0,
-              scale: 0,
-            },
-            {
-              y: 0,
-              x: 0,
-              opacity: 1,
-              scale: 1,
-              ease: "power1.out",
-            },
-            0,
-          );
-      });
-    },
-    {
-      dependencies: [windowDimension?.width],
-      revertOnUpdate: true,
-    },
-  );
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
 
   return (
     <Section id="about">
