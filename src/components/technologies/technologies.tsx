@@ -64,9 +64,11 @@ export default function Technologies() {
         },
         onLeave: () => {
           tl.clear();
+          gsap.set(".technology-card", { y: -100, scale: 0, autoAlpha: 0 });
         },
         onLeaveBack: () => {
           tl.clear();
+          gsap.set(".technology-card", { y: 100, scale: 0, autoAlpha: 0 });
         },
       },
     });

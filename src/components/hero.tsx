@@ -10,9 +10,9 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen overflow-hidden bg-[linear-gradient(to_bottom,black,#071E18_35%,#208A65_67%,#35Fb8E_85%)]"
+      className="relative min-h-screen overflow-hidden bg-[linear-gradient(to_bottom,black,#071E18_35%,#208A65_67%,black_85%)]"
     >
-      <div className="absolute left-1/2 top-[50%] min-h-screen w-[200vw] min-w-[2400px] -translate-x-1/2 rounded-[50%] border-[1px] border-[#8CD6DE]/30 bg-[radial-gradient(closest-side,black_85%,#249974)]" />
+      <div className="absolute left-1/2 top-[50%] h-screen min-h-[400px] w-[200vw] min-w-[2400px] -translate-x-1/2 rounded-[50%] border-[1px] border-[#8CD6DE]/30 bg-[radial-gradient(closest-side,black_85%,#249974)]" />
 
       <div className="relative flex min-h-screen w-full flex-col items-center justify-center md:py-24">
         <div className="flex w-full flex-col items-center gap-8 text-center sm:gap-14 lg:gap-[clamp(1rem,5.6vh,3.5rem)]">

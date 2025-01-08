@@ -64,10 +64,12 @@ export default function Projects() {
         onLeave: () => {
           setIsInView(false);
           tl.clear();
+          gsap.set(".project", { x: "110%", autoAlpha: 0 });
         },
         onLeaveBack: () => {
           setIsInView(false);
           tl.clear();
+          gsap.set(".project", { x: "-110%", autoAlpha: 0 });
         },
       },
     });

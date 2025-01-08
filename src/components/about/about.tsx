@@ -147,9 +147,65 @@ export default function About() {
         },
         onLeave: () => {
           tl.clear();
+
+          mm.add("(max-width: 1023px)", () => {
+            gsap.set(".about-card", {
+              y: "-50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+          });
+
+          mm.add("(min-width: 1024px)", () => {
+            gsap.set(".about-card-1", {
+              y: "-50%",
+              x: "-50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+            gsap.set(".about-card-2", {
+              y: "-50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+            gsap.set(".about-card-3", {
+              y: "-50%",
+              x: "50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+          });
         },
         onLeaveBack: () => {
           tl.clear();
+
+          mm.add("(max-width: 1023px)", () => {
+            gsap.set(".about-card", {
+              y: "50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+          });
+
+          mm.add("(min-width: 1024px)", () => {
+            gsap.set(".about-card-1", {
+              y: "50%",
+              x: "-50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+            gsap.set(".about-card-2", {
+              y: "50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+            gsap.set(".about-card-3", {
+              y: "50%",
+              x: "50%",
+              autoAlpha: 0,
+              scale: 0,
+            });
+          });
         },
       },
     });
