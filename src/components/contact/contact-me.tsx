@@ -14,7 +14,7 @@ export default function ContactMe() {
   return (
     <div
       id="contact"
-      className="mx-auto max-w-screen-2xl px-4 py-16 sm:py-24 md:px-8 lg:px-12 xl:px-[13.5rem]"
+      className="mx-auto max-w-screen-2xl px-4 py-16 sm:px-8 sm:py-24 md:px-16 lg:px-24 xl:px-36"
     >
       <TypographyH2>
         Contact <span className="text-accent">Me</span>
