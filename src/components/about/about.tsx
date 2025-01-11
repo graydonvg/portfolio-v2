@@ -216,10 +216,10 @@ export default function About() {
     });
 
     const handleResize = contextSafe(() => {
-      // Clear transforms and opacity on window resize to avoid lingering x transform (no x transform if vw < 1024px) and keep card visible
-      tl.clear();
+      mm.revert();
       gsap.set(".about-card", {
-        clearProps: "all",
+        autoAlpha: 1,
+        scale: 1,
       });
     });
 
