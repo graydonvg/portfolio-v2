@@ -216,10 +216,12 @@ export default function About() {
     });
 
     const handleResize = contextSafe(() => {
+      // Need to reset animations for  breakpoints when the conditions of the media query no longer apply.
+      // revert() method is used to undo or clean up all animations, timelines, and ScrollTriggers that were created within the context of a specific media query.
       mm.revert();
+      // Clear all properties on window resize to avoid lingering transforms (no x transform if vw < 1024px) and keep card visible
       gsap.set(".about-card", {
-        autoAlpha: 1,
-        scale: 1,
+        clearProps: true,
       });
     });
 
