@@ -21,7 +21,7 @@ export default function AboutCard({
   return (
     <div
       className={cn(
-        "invisible h-full scale-0 rounded-lg border border-border bg-card p-6 text-card-foreground opacity-0",
+        "h-full rounded-lg border border-border bg-card p-6 text-card-foreground",
         className,
       )}
     >
