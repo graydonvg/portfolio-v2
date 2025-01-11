@@ -23,6 +23,7 @@ const icons = {
 
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
+  const navLinksContainerRef = useRef<HTMLDivElement>(null);
   const navLinkBackgroundBeforeRef = useRef<HTMLDivElement>(null);
   const navLinkBackgroundAfterRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | HTMLButtonElement | null)[]>([]);
@@ -34,12 +35,14 @@ export default function Navbar() {
     const navLinkBackgroundBefore = navLinkBackgroundBeforeRef.current;
     const navLinkBackgroundAfter = navLinkBackgroundAfterRef.current;
     const nav = navRef.current;
+    const navLinksContainer = navLinksContainerRef.current;
 
     if (
       !navLinkBackgroundBefore ||
       !navLinkBackgroundAfter ||
       !linkRefs.current ||
       !nav ||
+      !navLinksContainer ||
       !contextSafe
     )
       return;
@@ -119,7 +122,7 @@ export default function Navbar() {
       link?.addEventListener("mouseenter", handleMouseEnter);
     });
 
-    nav.addEventListener("mouseleave", handleMouseLeave);
+    navLinksContainer.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       if (!linkRefs.current) return;
@@ -128,7 +131,7 @@ export default function Navbar() {
         link?.removeEventListener("mouseenter", handleMouseEnter);
       });
 
-      nav.removeEventListener("mouseleave", handleMouseLeave);
+      navLinksContainer.removeEventListener("mouseleave", handleMouseLeave);
     };
   });
 
@@ -141,60 +144,62 @@ export default function Navbar() {
       <nav
         ref={navRef}
         aria-label="primary navigation"
-        className="relative flex overflow-hidden rounded-3xl border border-border p-2 backdrop-blur-3xl"
+        className="relative overflow-hidden rounded-3xl border border-border p-2 backdrop-blur-3xl"
       >
         <div
           ref={navLinkBackgroundAfterRef}
           className="pointer-events-none absolute -z-10 rounded-3xl bg-primary opacity-0"
         />
 
-        <ul className="flex items-center justify-center">
-          {internalLinks.map((link, index) => (
-            <li key={index}>
-              <button
-                aria-label={`scroll to ${link.label}`}
-                role="link"
-                ref={(el) => {
-                  linkRefs.current[index] = el;
-                }}
-                onClick={() =>
-                  link.internalLink === "#contact"
-                    ? handleScrollToContactForm()
-                    : handleScrollToInternalLink(link.internalLink!)
-                }
-                className="focus-ring rounded-3xl px-4 py-1"
-              >
-                {link.label}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <div className="-z-20 mx-2 border-l border-border" />
-        <ul className="flex items-center justify-center">
-          {externalLinks.map((link, index) => {
-            const ICON = link.icon && icons[link.icon as keyof typeof icons];
-
-            return (
+        <div ref={navLinksContainerRef} className="flex justify-between">
+          <ul className="flex items-center justify-center">
+            {internalLinks.map((link, index) => (
               <li key={index}>
-                <Link
-                  href={link.externalLink!}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`open graydon's ${link.label} in a new tab`}
+                <button
+                  aria-label={`scroll to ${link.label}`}
+                  role="link"
                   ref={(el) => {
-                    linkRefs.current[internalLinks.length + index] = el;
+                    linkRefs.current[index] = el;
                   }}
-                  className="focus-ring group flex items-center gap-2 rounded-3xl px-4 py-1"
+                  onClick={() =>
+                    link.internalLink === "#contact"
+                      ? handleScrollToContactForm()
+                      : handleScrollToInternalLink(link.internalLink!)
+                  }
+                  className="focus-ring rounded-3xl px-4 py-1"
                 >
-                  {ICON && (
-                    <ICON className="text-base text-accent transition-colors duration-300 group-hover:can-hover:text-foreground" />
-                  )}
                   {link.label}
-                </Link>
+                </button>
               </li>
-            );
-          })}
-        </ul>
+            ))}
+          </ul>
+          <div className="-z-20 mx-2 border-l border-border" />
+          <ul className="flex items-center justify-center">
+            {externalLinks.map((link, index) => {
+              const ICON = link.icon && icons[link.icon as keyof typeof icons];
+
+              return (
+                <li key={index}>
+                  <Link
+                    href={link.externalLink!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`open graydon's ${link.label} in a new tab`}
+                    ref={(el) => {
+                      linkRefs.current[internalLinks.length + index] = el;
+                    }}
+                    className="focus-ring group flex items-center gap-2 rounded-3xl px-4 py-1"
+                  >
+                    {ICON && (
+                      <ICON className="text-base text-accent transition-colors group-hover:can-hover:text-foreground" />
+                    )}
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </nav>
     </div>
   );
