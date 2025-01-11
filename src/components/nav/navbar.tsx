@@ -6,8 +6,15 @@ import {
   handleScrollToInternalLink,
 } from "@/lib/utils";
 import Link from "next/link";
-import { MouseEvent, useRef } from "react";
+import { useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 const icons = {
   github: FiGithub,
@@ -16,56 +23,120 @@ const icons = {
 
 export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
-  const navLinkOverlayBeforeRef = useRef<HTMLDivElement>(null);
-  const navLinkOverlayAfterRef = useRef<HTMLDivElement>(null);
+  const navLinkBackgroundBeforeRef = useRef<HTMLDivElement>(null);
+  const navLinkBackgroundAfterRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<(HTMLAnchorElement | HTMLButtonElement | null)[]>([]);
+  const isFirstMouseEnterRef = useRef(true);
   const internalLinks = navLinks.filter((link) => link.internalLink);
   const externalLinks = navLinks.filter((link) => link.externalLink);
 
-  function handleMouseEnter(
-    e: MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-  ) {
-    const target = e.target as HTMLElement;
-
-    const targetRect = target.getBoundingClientRect();
-
-    const navRect = navRef.current?.getBoundingClientRect();
+  useGSAP((_context, contextSafe) => {
+    const navLinkBackgroundBefore = navLinkBackgroundBeforeRef.current;
+    const navLinkBackgroundAfter = navLinkBackgroundAfterRef.current;
+    const nav = navRef.current;
 
     if (
-      navLinkOverlayAfterRef.current &&
-      navLinkOverlayBeforeRef.current &&
-      navRect
-    ) {
-      navLinkOverlayAfterRef.current.style.opacity = "1";
-      navLinkOverlayAfterRef.current.style.left =
-        targetRect.left - navRect.left + "px";
-      navLinkOverlayAfterRef.current.style.top =
-        targetRect.top - navRect.top + "px";
-      navLinkOverlayAfterRef.current.style.height = targetRect.height + "px";
-      navLinkOverlayAfterRef.current.style.width = targetRect.width + "px";
-
-      navLinkOverlayBeforeRef.current.style.opacity = "1";
-      navLinkOverlayBeforeRef.current.style.left =
-        targetRect.left - navRect.left + "px";
-      navLinkOverlayBeforeRef.current.style.top =
-        targetRect.top - navRect.top + "px";
-      navLinkOverlayBeforeRef.current.style.height = targetRect.height + "px";
-      navLinkOverlayBeforeRef.current.style.width = targetRect.width + "px";
-    }
-  }
-
-  function handleMouseLeave() {
-    if (!navLinkOverlayAfterRef.current || !navLinkOverlayBeforeRef.current)
+      !navLinkBackgroundBefore ||
+      !navLinkBackgroundAfter ||
+      !linkRefs.current ||
+      !nav ||
+      !contextSafe
+    )
       return;
 
-    navLinkOverlayBeforeRef.current.style.opacity = "0";
-    navLinkOverlayAfterRef.current.style.opacity = "0";
-  }
+    function getNavRect() {
+      return nav!.getBoundingClientRect();
+    }
+
+    const handleMouseEnter = contextSafe((e: Event) => {
+      const target = e.target as HTMLElement;
+      const targetRect = target.getBoundingClientRect();
+      const navRect = getNavRect();
+      const tl = gsap.timeline({ defaults: { duration: 0.3 } });
+
+      const linkBackgroundLeft = targetRect.left - navRect.left;
+      const linkBackgroundHeight = targetRect.height;
+      const linkBackgroundWidth = targetRect.width;
+
+      if (isFirstMouseEnterRef.current) {
+        tl.set(navLinkBackgroundBefore, {
+          left: linkBackgroundLeft,
+          height: linkBackgroundHeight,
+          width: targetRect.width,
+          opacity: 1,
+        });
+        tl.set(
+          navLinkBackgroundAfter,
+          {
+            left: linkBackgroundLeft,
+            height: linkBackgroundHeight,
+            width: linkBackgroundWidth,
+            opacity: 1,
+          },
+          0,
+        );
+
+        isFirstMouseEnterRef.current = false;
+      }
+
+      if (!isFirstMouseEnterRef.current) {
+        tl.to(navLinkBackgroundBefore, {
+          left: linkBackgroundLeft,
+          height: linkBackgroundHeight,
+          width: linkBackgroundWidth,
+          opacity: 1,
+        });
+        tl.to(
+          navLinkBackgroundAfter,
+          {
+            left: linkBackgroundLeft,
+            height: linkBackgroundHeight,
+            width: linkBackgroundWidth,
+            opacity: 1,
+          },
+          0,
+        );
+      }
+    });
+
+    const handleMouseLeave = contextSafe(() => {
+      isFirstMouseEnterRef.current = true;
+      const tl = gsap.timeline({ defaults: { duration: 0.3 } });
+
+      tl.to(navLinkBackgroundBefore, {
+        opacity: 0,
+      });
+      tl.to(
+        navLinkBackgroundAfter,
+        {
+          opacity: 0,
+        },
+        0,
+      );
+    });
+
+    linkRefs.current.forEach((link) => {
+      link?.addEventListener("mouseenter", handleMouseEnter);
+    });
+
+    nav.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      if (!linkRefs.current) return;
+
+      linkRefs.current.forEach((link) => {
+        link?.removeEventListener("mouseenter", handleMouseEnter);
+      });
+
+      nav.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  });
 
   return (
-    <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] hidden w-fit rounded-3xl md:block">
+    <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] hidden w-fit overflow-hidden rounded-3xl md:block">
       <div
-        ref={navLinkOverlayBeforeRef}
-        className="pointer-events-none absolute rounded-3xl bg-primary opacity-0 transition-all duration-300"
+        ref={navLinkBackgroundBeforeRef}
+        className="pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-3xl bg-primary opacity-0"
       />
       <nav
         ref={navRef}
@@ -73,8 +144,8 @@ export default function Navbar() {
         className="relative flex overflow-hidden rounded-3xl border border-border p-2 backdrop-blur-3xl"
       >
         <div
-          ref={navLinkOverlayAfterRef}
-          className="pointer-events-none absolute -z-10 rounded-3xl bg-primary opacity-0 transition-all duration-300"
+          ref={navLinkBackgroundAfterRef}
+          className="pointer-events-none absolute -z-10 rounded-3xl bg-primary opacity-0"
         />
 
         <ul className="flex items-center justify-center">
@@ -83,13 +154,14 @@ export default function Navbar() {
               <button
                 aria-label={`scroll to ${link.label}`}
                 role="link"
+                ref={(el) => {
+                  linkRefs.current[index] = el;
+                }}
                 onClick={() =>
                   link.internalLink === "#contact"
                     ? handleScrollToContactForm()
                     : handleScrollToInternalLink(link.internalLink!)
                 }
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
                 className="focus-ring rounded-3xl px-4 py-1"
               >
                 {link.label}
@@ -97,7 +169,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-        <div className="-z-20 border-l border-border" />
+        <div className="-z-20 mx-2 border-l border-border" />
         <ul className="flex items-center justify-center">
           {externalLinks.map((link, index) => {
             const ICON = link.icon && icons[link.icon as keyof typeof icons];
@@ -109,8 +181,9 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`open graydon's ${link.label} in a new tab`}
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  ref={(el) => {
+                    linkRefs.current[internalLinks.length + index] = el;
+                  }}
                   className="focus-ring group flex items-center gap-2 rounded-3xl px-4 py-1"
                 >
                   {ICON && (
