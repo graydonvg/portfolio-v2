@@ -19,6 +19,11 @@ export default function About() {
   useGSAP((_context, contextSafe) => {
     if (prefersReducedMotion || !contextSafe) return;
 
+    gsap.set(".about-card", {
+      autoAlpha: 0,
+      scale: 0,
+    });
+
     const mm = gsap.matchMedia();
 
     const tl = gsap.timeline({

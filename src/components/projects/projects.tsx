@@ -23,6 +23,8 @@ export default function Projects() {
   useGSAP(() => {
     if (prefersReducedMotion) return;
 
+    gsap.set(".project", { autoAlpha: 0 });
+
     const tl = gsap.timeline({
       defaults: {
         x: 0,

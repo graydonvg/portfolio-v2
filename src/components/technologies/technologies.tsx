@@ -25,6 +25,8 @@ export default function Technologies() {
   useGSAP(() => {
     if (prefersReducedMotion) return;
 
+    gsap.set(".technology-card", { scale: 0, autoAlpha: 0 });
+
     const tl = gsap.timeline({
       defaults: {
         y: 0,

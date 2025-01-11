@@ -49,7 +49,7 @@ export default function Technology({
       ref={(el) => {
         technologyCardRefs.current[index] = el;
       }}
-      className="technology-card invisible -z-30 max-w-40 scale-0 overflow-hidden rounded-lg bg-border p-[1px]"
+      className="technology-card -z-30 max-w-40 overflow-hidden rounded-lg bg-border p-[1px]"
     >
       <div className="relative -z-20 size-full rounded-lg bg-card">
         <div className="z-50 flex h-full flex-col items-center justify-center rounded-lg bg-card/60 p-[23px] text-center backdrop-blur-3xl">

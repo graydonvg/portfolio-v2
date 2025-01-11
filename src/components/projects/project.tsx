@@ -18,7 +18,7 @@ type Props = {
 
 export default function Project({ project, index, isInView }: Props) {
   return (
-    <AccordionItem value={`item-${index + 1}`} className="project invisible">
+    <AccordionItem value={`item-${index + 1}`} className="project">
       {/* Prefetch project mockup images once in view */}
       {/* Accordion content not rendered until expanded so cannot load images once they scroll into view */}
       <PrefechedProjectMockups
