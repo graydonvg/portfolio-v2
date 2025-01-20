@@ -7,6 +7,7 @@ export default function useScrollY() {
   const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
 
   useEffect(() => {
+    const controller = new AbortController();
     let prevScrollY = window.scrollY;
 
     function handleScroll() {
@@ -21,10 +22,12 @@ export default function useScrollY() {
       prevScrollY = currentScrollY;
     }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, {
+      signal: controller.signal,
+    });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      controller.abort();
     };
   }, []);
 

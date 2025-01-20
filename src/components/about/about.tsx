@@ -19,6 +19,8 @@ export default function About() {
   useGSAP((_context, contextSafe) => {
     if (prefersReducedMotion || !contextSafe) return;
 
+    const controller = new AbortController();
+
     gsap.set(".about-card", {
       autoAlpha: 0,
       scale: 0,
@@ -225,10 +227,12 @@ export default function About() {
       });
     });
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, {
+      signal: controller.signal,
+    });
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      controller.abort();
     };
   });
 

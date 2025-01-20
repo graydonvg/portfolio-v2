@@ -79,6 +79,8 @@ export default function Technologies() {
   useGSAP((_context, contextSafe) => {
     if (!contextSafe || !technologyCardRefs.current || isTouchDevice) return;
 
+    const controller = new AbortController();
+
     const handleMouseMove = contextSafe((event: MouseEvent) => {
       cursorPositionRef.current.x = event.clientX;
       cursorPositionRef.current.y = event.clientY;
@@ -158,12 +160,15 @@ export default function Technologies() {
       });
     });
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("mousemove", handleMouseMove, {
+      signal: controller.signal,
+    });
+    window.addEventListener("scroll", handleScroll, {
+      signal: controller.signal,
+    });
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("scroll", handleScroll);
+      controller.abort();
     };
   });
 

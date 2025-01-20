@@ -8,19 +8,25 @@ export default function useWindowDimensions() {
     height: number;
   } | null>(null);
 
-  function getWindowDimensions() {
-    setWindowDimension({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  }
-
   useEffect(() => {
+    const controller = new AbortController();
+
+    function getWindowDimensions() {
+      setWindowDimension({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
     getWindowDimensions();
 
-    window.addEventListener("resize", getWindowDimensions);
+    window.addEventListener("resize", getWindowDimensions, {
+      signal: controller.signal,
+    });
 
-    return () => window.removeEventListener("resize", getWindowDimensions);
+    return () => {
+      controller.abort();
+    };
   }, []);
 
   return windowDimension;

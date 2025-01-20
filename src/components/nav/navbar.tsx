@@ -66,6 +66,7 @@ export default function Navbar() {
           left: linkBackgroundLeft,
           height: linkBackgroundHeight,
           width: targetRect.width,
+          // autoAlpha?
           opacity: 1,
         });
         tl.set(
@@ -74,6 +75,7 @@ export default function Navbar() {
             left: linkBackgroundLeft,
             height: linkBackgroundHeight,
             width: linkBackgroundWidth,
+            // autoAlpha?
             opacity: 1,
           },
           0,
@@ -95,6 +97,7 @@ export default function Navbar() {
             left: linkBackgroundLeft,
             height: linkBackgroundHeight,
             width: linkBackgroundWidth,
+            // autoAlpha?
             opacity: 1,
           },
           0,
@@ -107,11 +110,13 @@ export default function Navbar() {
       const tl = gsap.timeline({ defaults: { duration: 0.3 } });
 
       tl.to(navLinkBackgroundBefore, {
+        // autoAlpha?
         opacity: 0,
       });
       tl.to(
         navLinkBackgroundAfter,
         {
+          // autoAlpha?
           opacity: 0,
         },
         0,

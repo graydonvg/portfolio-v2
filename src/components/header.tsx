@@ -18,6 +18,7 @@ export default function Header() {
   const [isNavbarVisible, setIsNavbarVisible] = useState(false);
 
   useEffect(() => {
+    // use scroll trigger for this
     if (scrollDirection === "up" || scrollY === 0) {
       setIsNavbarVisible(true);
     }
