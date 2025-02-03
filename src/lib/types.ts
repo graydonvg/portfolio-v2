@@ -15,11 +15,7 @@ export type AboutContent = {
 
 export type ProjectType = {
   title: string;
-  image?: StaticImageData;
-  video?: {
-    placeholderImage: StaticImageData;
-    src: string;
-  };
+  image: StaticImageData;
   description: string;
   tags: string[];
   links: {

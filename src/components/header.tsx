@@ -5,33 +5,53 @@ import NavDrawerToggle from "./nav/nav-drawer-toggle";
 import Navbar from "./nav/navbar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import useScrollY from "@/hooks/use-scroll-y";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
 }
 
 export default function Header() {
-  const { scrollY, scrollDirection } = useScrollY();
   const headerRef = useRef<HTMLElement>(null);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
 
   useEffect(() => {
-    // use scroll trigger for this
-    if (scrollDirection === "up" || scrollY === 0) {
-      setIsNavbarVisible(true);
+    const controller = new AbortController();
+    let prevScrollY = window.scrollY;
+
+    if (window.scrollY === 0) {
+      setIsHeaderVisible(true);
     }
 
-    if (scrollDirection === "down" && scrollY !== 0) {
-      setIsNavbarVisible(false);
+    function handleScroll() {
+      const currentScrollY = window.scrollY;
+      const difference = currentScrollY - prevScrollY;
+      const direction = difference > 0 ? "down" : "up";
+
+      if (direction === "up" || currentScrollY === 0) {
+        setIsHeaderVisible(true);
+      }
+
+      if (direction === "down" && currentScrollY !== 0) {
+        setIsHeaderVisible(false);
+      }
+
+      prevScrollY = currentScrollY;
     }
-  }, [scrollDirection, scrollY]);
+
+    window.addEventListener("scroll", handleScroll, {
+      signal: controller.signal,
+    });
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
 
   useGSAP(
     () => {
       gsap.to(headerRef.current, {
-        y: isNavbarVisible ? 0 : -80,
+        y: isHeaderVisible ? 0 : -80,
         duration: isInitialLoad ? 0.8 : 0.5,
         ease: "power1.out",
         onComplete: () => {
@@ -41,7 +61,7 @@ export default function Header() {
         },
       });
     },
-    { dependencies: [isNavbarVisible] },
+    { dependencies: [isHeaderVisible] },
   );
 
   return (

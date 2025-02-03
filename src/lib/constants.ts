@@ -70,6 +70,17 @@ export const aboutContent: AboutContent[] = [
 
 export const projects: ProjectType[] = [
   {
+    image: zentryCloneMockup,
+    title: "Zentry clone",
+    description:
+      'Working on a clone of zentry.com which won the Awwwards "Sit of the Day" on Aug 28, 2024.',
+    tags: ["typescript", "react.js", "next.js", "tailwind css", "gsap"],
+    links: {
+      repository: "https://github.com/graydonvg/zentry-clone",
+      website: "https://zentry-clone-lemon.vercel.app/",
+    },
+  },
+  {
     image: myStoreMockup,
     title: "MyStore",
     description:
@@ -86,20 +97,6 @@ export const projects: ProjectType[] = [
     links: {
       repository: "https://github.com/graydonvg/my-store",
       website: "https://my-store-henna.vercel.app",
-    },
-  },
-  {
-    video: {
-      placeholderImage: zentryCloneMockup,
-      src: "/videos/zentry-clone.mp4",
-    },
-    title: "Zentry clone",
-    description:
-      'Working on a clone of zentry.com which won the Awwwards "Sit of the Day" on Aug 28, 2024.',
-    tags: ["typescript", "react.js", "next.js", "tailwind css", "gsap"],
-    links: {
-      repository: "https://github.com/graydonvg/zentry-clone",
-      website: "",
     },
   },
   {

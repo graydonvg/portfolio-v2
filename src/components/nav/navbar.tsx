@@ -9,11 +9,10 @@ import Link from "next/link";
 import { useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
+  gsap.registerPlugin(useGSAP);
 }
 
 const icons = {
@@ -27,7 +26,6 @@ export default function Navbar() {
   const navLinkBackgroundBeforeRef = useRef<HTMLDivElement>(null);
   const navLinkBackgroundAfterRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | HTMLButtonElement | null)[]>([]);
-  const isFirstMouseEnterRef = useRef(true);
   const internalLinks = navLinks.filter((link) => link.internalLink);
   const externalLinks = navLinks.filter((link) => link.externalLink);
 
@@ -51,6 +49,8 @@ export default function Navbar() {
       return nav!.getBoundingClientRect();
     }
 
+    let isFirstMouseEnter = true;
+
     const handleMouseEnter = contextSafe((e: Event) => {
       const target = e.target as HTMLElement;
       const targetRect = target.getBoundingClientRect();
@@ -61,13 +61,12 @@ export default function Navbar() {
       const linkBackgroundHeight = targetRect.height;
       const linkBackgroundWidth = targetRect.width;
 
-      if (isFirstMouseEnterRef.current) {
+      if (isFirstMouseEnter) {
         tl.set(navLinkBackgroundBefore, {
           left: linkBackgroundLeft,
           height: linkBackgroundHeight,
           width: targetRect.width,
-          // autoAlpha?
-          opacity: 1,
+          autoAlpha: 1,
         });
         tl.set(
           navLinkBackgroundAfter,
@@ -75,21 +74,20 @@ export default function Navbar() {
             left: linkBackgroundLeft,
             height: linkBackgroundHeight,
             width: linkBackgroundWidth,
-            // autoAlpha?
-            opacity: 1,
+            autoAlpha: 1,
           },
           0,
         );
 
-        isFirstMouseEnterRef.current = false;
+        isFirstMouseEnter = false;
       }
 
-      if (!isFirstMouseEnterRef.current) {
+      if (!isFirstMouseEnter) {
         tl.to(navLinkBackgroundBefore, {
           left: linkBackgroundLeft,
           height: linkBackgroundHeight,
           width: linkBackgroundWidth,
-          opacity: 1,
+          autoAlpha: 1,
         });
         tl.to(
           navLinkBackgroundAfter,
@@ -97,8 +95,7 @@ export default function Navbar() {
             left: linkBackgroundLeft,
             height: linkBackgroundHeight,
             width: linkBackgroundWidth,
-            // autoAlpha?
-            opacity: 1,
+            autoAlpha: 1,
           },
           0,
         );
@@ -106,18 +103,16 @@ export default function Navbar() {
     });
 
     const handleMouseLeave = contextSafe(() => {
-      isFirstMouseEnterRef.current = true;
+      isFirstMouseEnter = true;
       const tl = gsap.timeline({ defaults: { duration: 0.3 } });
 
       tl.to(navLinkBackgroundBefore, {
-        // autoAlpha?
-        opacity: 0,
+        autoAlpha: 0,
       });
       tl.to(
         navLinkBackgroundAfter,
         {
-          // autoAlpha?
-          opacity: 0,
+          autoAlpha: 0,
         },
         0,
       );
@@ -144,7 +139,7 @@ export default function Navbar() {
     <div className="relative mx-auto mt-[clamp(1rem,2.4vh,1.5rem)] hidden w-fit overflow-hidden rounded-3xl md:block">
       <div
         ref={navLinkBackgroundBeforeRef}
-        className="pointer-events-none absolute top-1/2 -translate-y-1/2 rounded-3xl bg-primary opacity-0"
+        className="pointer-events-none invisible absolute top-1/2 -translate-y-1/2 rounded-3xl bg-primary opacity-0"
       />
       <nav
         ref={navRef}
@@ -153,7 +148,7 @@ export default function Navbar() {
       >
         <div
           ref={navLinkBackgroundAfterRef}
-          className="pointer-events-none absolute -z-10 rounded-3xl bg-primary opacity-0"
+          className="pointer-events-none invisible absolute -z-10 rounded-3xl bg-primary opacity-0"
         />
 
         <div ref={navLinksContainerRef} className="flex justify-between">

@@ -8,7 +8,7 @@ import TypographyH2 from "../ui/typography/h2";
 import { Accordion } from "@/components/ui/accordion";
 import TypographyP from "../ui/typography/p";
 import Section from "../ui/section";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import Project from "./project";
 
@@ -18,6 +18,7 @@ if (typeof window !== "undefined") {
 
 export default function Projects() {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const projectsAccordionRef = useRef(null);
   const [isInView, setIsInView] = useState(false);
 
   useGSAP(() => {
@@ -32,7 +33,7 @@ export default function Projects() {
         ease: "power1.out",
       },
       scrollTrigger: {
-        trigger: "#projects-accordion",
+        trigger: projectsAccordionRef.current,
         start: "top bottom",
         end: "bottom top",
         onEnter: () => {
@@ -90,7 +91,7 @@ export default function Projects() {
         </TypographyP>
 
         <Accordion
-          id="projects-accordion"
+          ref={projectsAccordionRef}
           type="single"
           collapsible
           // Need padding botton for focus ring to show on last item

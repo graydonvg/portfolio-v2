@@ -24,7 +24,6 @@ export default function Project({ project, index, isInView }: Props) {
       <PrefechedProjectMockups
         title={project.title}
         image={project.image}
-        video={project.video}
         isInView={isInView}
       />
 
@@ -36,7 +35,6 @@ export default function Project({ project, index, isInView }: Props) {
         <ProjectMockup
           title={project.title}
           image={project.image}
-          video={project.video}
           isLive={project.links.website?.length !== 0}
         />
 
