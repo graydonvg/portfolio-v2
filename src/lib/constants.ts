@@ -74,7 +74,14 @@ export const projects: ProjectType[] = [
     title: "Zentry clone",
     description:
       'Working on a clone of zentry.com which won the Awwwards "Sit of the Day" on Aug 28, 2024.',
-    tags: ["typescript", "react.js", "next.js", "tailwind css", "gsap"],
+    tags: [
+      "typescript",
+      "react.js",
+      "next.js",
+      "zustand",
+      "tailwind css",
+      "gsap",
+    ],
     links: {
       repository: "https://github.com/graydonvg/zentry-clone",
       website: "https://zentry-clone-lemon.vercel.app/",
