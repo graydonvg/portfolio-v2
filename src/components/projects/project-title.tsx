@@ -9,10 +9,10 @@ export default function ProjectTitle({ title, index }: Props) {
   return (
     <div className="flex items-center justify-end gap-2">
       <span
-        className="text-h3 font-semibold tracking-tight text-accent"
+        className="font-mono text-h3 font-semibold tracking-tight text-accent"
         aria-hidden
       >
-        0{index + 1}.
+        {String(index + 1).padStart(2, "0")}.
       </span>
       <TypographyH3>{title}</TypographyH3>
     </div>

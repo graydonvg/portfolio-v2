@@ -26,7 +26,10 @@ export default function AboutCard({
       )}
     >
       <TypographyH3>
-        <span className="text-accent">0{number}.</span> {title}
+        <span aria-hidden className="font-mono text-accent">
+          {String(number).padStart(2, "0")}.
+        </span>{" "}
+        {title}
       </TypographyH3>
 
       <div className="mt-5 sm:mt-6">
