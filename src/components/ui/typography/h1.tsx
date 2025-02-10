@@ -22,12 +22,9 @@ export default function TypographyH1({ children }: { children: ReactNode }) {
 
   return (
     <h1
-      className={cn(
-        "text-h1-sm/tight font-extrabold tracking-tight sm:text-h1-lg-w/tight",
-        {
-          "sm:text-h1-lg-h/tight": respondToHeight,
-        },
-      )}
+      className={cn("text-h1-sm font-black leading-[1.1] sm:text-h1-lg-w", {
+        "sm:text-h1-lg-h": respondToHeight,
+      })}
     >
       {children}
     </h1>
