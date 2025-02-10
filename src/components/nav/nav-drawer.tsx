@@ -12,6 +12,7 @@ import gsap from "gsap";
 import useDrawerStore from "@/lib/store/use-drawer-store";
 import { useEffect, useRef } from "react";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
+import ItemNumber from "../item-number";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(useGSAP);
@@ -162,10 +163,7 @@ export default function NavDrawer() {
               onClick={() => handleScrollLinkClick(link.internalLink!)}
               className="focus-ring"
             >
-              <span className="mr-2 text-accent" aria-hidden>
-                0{index + 1}.
-              </span>
-              {link.label}
+              <ItemNumber number={index + 1} /> {link.label}
             </button>
           </li>
         ))}

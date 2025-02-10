@@ -2,6 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import TypographyP from "../ui/typography/p";
 import TypographyH3 from "../ui/typography/h3";
 import { cn } from "@/lib/utils";
+import ItemNumber from "../item-number";
 
 type Props = {
   number: number;
@@ -26,10 +27,7 @@ export default function AboutCard({
       )}
     >
       <TypographyH3>
-        <span aria-hidden className="font-mono text-accent">
-          {String(number).padStart(2, "0")}.
-        </span>{" "}
-        {title}
+        <ItemNumber number={number} /> {title}
       </TypographyH3>
 
       <div className="mt-5 sm:mt-6">

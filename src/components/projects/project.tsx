@@ -6,9 +6,10 @@ import {
 import { ProjectType } from "@/lib/types";
 import ProjectMockup from "./project-mockup";
 import ProjectButtons from "./project-buttons";
-import ProjectTitle from "./project-title";
 import PrefechedProjectMockups from "./prefeched-project-mockups";
 import ProjectDetails from "./project-details";
+import TypographyH3 from "../ui/typography/h3";
+import ItemNumber from "../item-number";
 
 type Props = {
   project: ProjectType;
@@ -28,7 +29,10 @@ export default function Project({ project, index, isInView }: Props) {
       />
 
       <AccordionTrigger className="focus-ring p-4 sm:p-6">
-        <ProjectTitle title={project.title} index={index} />
+        <TypographyH3>
+          <ItemNumber number={index + 1} />
+          {project.title}
+        </TypographyH3>
       </AccordionTrigger>
 
       <AccordionContent className="mt-1 flex h-fit flex-col gap-8 rounded-lg border border-border bg-card p-6 lg:flex-row">
