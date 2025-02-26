@@ -120,6 +120,7 @@ export const projects: ProjectType[] = [
       "typescript",
       "react.js",
       "next.js",
+      "zustand",
       "supabase",
       "shadcn",
       "tailwind css",
