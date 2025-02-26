@@ -10,7 +10,7 @@ import {
   LINKED_IN_URL,
   productionUrl,
   SITE_URL,
-} from "@/lib/constants";
+} from "@/config/site";
 import Script from "next/script";
 
 const inter = Inter({

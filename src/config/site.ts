@@ -1,10 +1,15 @@
 import myStoreMockup from "../../public/images/mockups/mystore-mockup.jpg";
-import galleryAiMockup from "../../public/images/mockups/gallery-ai-mockup.jpg";
+import underConstruction from "../../public/images/mockups/under-construction.jpg";
 import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-multi-device-mockup.jpg";
 import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.jpg";
 import portfolioMockup from "../../public/images/mockups/portfolio-mockup.jpg";
 import zentryCloneMockup from "../../public/images/mockups/zentry-clone-mockup.jpg";
-import { AboutContent, NavLinks, ProjectType, Technologies } from "./types";
+import {
+  AboutContent,
+  NavLinks,
+  ProjectType,
+  Technologies,
+} from "../lib/types";
 
 export const productionUrl = "https://www.graydonvongossler.com";
 export const SITE_URL =
@@ -91,7 +96,7 @@ export const projects: ProjectType[] = [
     image: myStoreMockup,
     title: "MyStore",
     description:
-      "Developed a clothing e-commerce store featuring an admin panel with role-based access control to manage users, products, and orders efficiently. Inspired by South African e-commerce store, Superbalist.",
+      "A clothing e-commerce store featuring an admin panel with role-based access control to manage users, products, and orders efficiently. Inspired by South African e-commerce store, Superbalist.",
     tags: [
       "typescript",
       "react.js",
@@ -107,22 +112,22 @@ export const projects: ProjectType[] = [
     },
   },
   {
-    image: galleryAiMockup,
-    title: "Gallery AI",
+    image: underConstruction,
+    title: "ScrapeBot",
     description:
-      "Developing a dynamic media gallery platform with advanced management features, allowing users to seamlessly upload and enhance both photos and videos. Key features include Image Optimization for high-quality display across devices and Smart Editing with AI-driven enhancements.",
+      "A full-stack SaaS platform that enables users to visually create and manage web scrapers without writing code. It simplifies data extraction with an intuitive drag-and-drop interface and a scheduling system for automating data collection. Additionally, it includes a secure credential management system for storing AI API tokens, allowing users to integrate AI into the web scraping process if desired.",
     tags: [
       "typescript",
       "react.js",
       "next.js",
-      "redux",
       "supabase",
       "shadcn",
       "tailwind css",
-      "cloudinary",
+      "react flow",
+      "stripe",
     ],
     links: {
-      repository: "https://github.com/graydonvg/gallery-ai",
+      repository: "https://github.com/graydonvg/scrape-bot",
       website: "",
     },
   },

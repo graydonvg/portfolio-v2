@@ -2,7 +2,7 @@
 
 import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
-import { aboutContent } from "@/lib/constants";
+import { aboutContent } from "@/config/site";
 import AboutCard from "./about-card";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

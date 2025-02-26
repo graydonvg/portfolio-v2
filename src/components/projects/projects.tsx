@@ -1,6 +1,6 @@
 "use client";
 
-import { projects } from "@/lib/constants";
+import { projects } from "@/config/site";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";

@@ -3,7 +3,7 @@
 import ContactForm from "./contact-form";
 import TypographyP from "../ui/typography/p";
 import Link from "next/link";
-import { EMAIL_ADDRESS, navLinks } from "@/lib/constants";
+import { EMAIL_ADDRESS, navLinks } from "@/config/site";
 import TypographyH2 from "../ui/typography/h2";
 import TypographyH3 from "../ui/typography/h3";
 import { handleScrollToContactForm } from "@/lib/utils";

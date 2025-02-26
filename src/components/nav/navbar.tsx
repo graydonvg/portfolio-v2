@@ -1,6 +1,6 @@
 "use client";
 
-import { navLinks } from "@/lib/constants";
+import { navLinks } from "@/config/site";
 import {
   handleScrollToContactForm,
   handleScrollToInternalLink,

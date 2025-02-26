@@ -3,7 +3,7 @@
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
-import { technologies } from "@/lib/constants";
+import { technologies } from "@/config/site";
 import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
 import TypographyP from "../ui/typography/p";
