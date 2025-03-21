@@ -121,6 +121,8 @@ export const projects: ProjectType[] = [
       "react.js",
       "next.js",
       "zustand",
+      "react context",
+      "react query",
       "supabase",
       "shadcn",
       "tailwind css",
