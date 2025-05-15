@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import GSAP from "../icons/gsap";
 import CSS from "../icons/css";
 import HTML5 from "../icons/html5";
@@ -10,7 +11,10 @@ import Shadcn from "../icons/shadcn";
 import Supabase from "../icons/supabase";
 import TailwindCSS from "../icons/tailwind";
 import TypeScript from "../icons/typescript";
-import { RefObject } from "react";
+import TanStack from "../icons/tanStack";
+import Zustand from "../icons/zustand";
+import Prismic from "../icons/prismic";
+import Motion from "../icons/motion";
 
 const ICONS = {
   html: HTML5,
@@ -25,6 +29,10 @@ const ICONS = {
   mui: MUI,
   shadcn: Shadcn,
   gsap: GSAP,
+  tanStack: TanStack,
+  zustand: Zustand,
+  prismic: Prismic,
+  motion: Motion,
 };
 
 type Props = {

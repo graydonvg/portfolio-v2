@@ -160,17 +160,14 @@ export const technologies: Technologies[] = [
   {
     name: "HTML 5",
     icon: "html",
-    ariaLabel: "HTML 5",
   },
   {
     name: "CSS 3",
     icon: "css",
-    ariaLabel: "CSS 3",
   },
   {
     name: "Tailwind CSS",
     icon: "tailwind",
-    ariaLabel: "tailwind CSS",
   },
   {
     name: "JavaScript",
@@ -198,14 +195,20 @@ export const technologies: Technologies[] = [
     ariaLabel: "redux tool kit",
   },
   {
+    name: "Zustand",
+    icon: "zustand",
+  },
+  {
+    name: "React Query",
+    icon: "tanStack",
+  },
+  {
     name: "Supabase",
     icon: "supabase",
-    ariaLabel: "supabase",
   },
   {
     name: "Material UI",
     icon: "mui",
-    ariaLabel: "Material UI",
   },
   {
     name: "shadcn",
@@ -216,5 +219,14 @@ export const technologies: Technologies[] = [
     name: "GSAP",
     icon: "gsap",
     ariaLabel: "G sap",
+  },
+  {
+    name: "Motion",
+    icon: "motion",
+  },
+
+  {
+    name: "Prismic CMS",
+    icon: "prismic",
   },
 ];
