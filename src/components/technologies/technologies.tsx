@@ -3,7 +3,6 @@
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
-import { technologies } from "@/config/site";
 import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
 import TypographyP from "../ui/typography/p";
@@ -11,6 +10,7 @@ import Technology from "./technology";
 import { useRef } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import { useIsTouchOnlyDevice } from "@/hooks/use-is-touch-only-device";
+import { technologies } from "@/data/technologies";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);

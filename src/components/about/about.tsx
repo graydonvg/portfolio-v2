@@ -2,12 +2,12 @@
 
 import TypographyH2 from "../ui/typography/h2";
 import Section from "../ui/section";
-import { aboutContent } from "@/config/site";
 import AboutCard from "./about-card";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
+import { aboutContent } from "@/data/about";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);

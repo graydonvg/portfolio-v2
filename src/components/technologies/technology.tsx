@@ -39,7 +39,7 @@ type Props = {
   name: string;
   icon: string;
   index: number;
-  ariaLabel: string;
+  ariaLabel?: string;
   technologyCardRefs: RefObject<(HTMLDivElement | null)[]>;
 };
 

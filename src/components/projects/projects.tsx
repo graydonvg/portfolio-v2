@@ -1,6 +1,5 @@
 "use client";
 
-import { projects } from "@/config/site";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
@@ -11,6 +10,7 @@ import Section from "../ui/section";
 import { useRef, useState } from "react";
 import usePrefersReducedMotion from "@/hooks/use-prefers-reduced-motion";
 import Project from "./project";
+import { projects } from "@/data/projects";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);

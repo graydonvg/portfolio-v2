@@ -1,24 +1,129 @@
-import myStoreMockup from "../../public/images/mockups/mystore-mockup.jpg";
-import underConstruction from "../../public/images/mockups/under-construction.jpg";
-import portfolioMultiDeviceMockup from "../../public/images/mockups/portfolio-multi-device-mockup.jpg";
-import portfolioTeamMockup from "../../public/images/mockups/portfolio-team-mockup.jpg";
-import portfolioMockup from "../../public/images/mockups/portfolio-mockup.jpg";
-import zentryCloneMockup from "../../public/images/mockups/zentry-clone-mockup.jpg";
-import {
-  AboutContent,
-  NavLinks,
-  ProjectType,
-  Technologies,
-} from "../lib/types";
+import { Metadata, Viewport } from "next";
+import { NavLinks } from "../lib/types";
+import ogImage from "../../public/opengraph-image.jpg";
 
-export const productionUrl = "https://www.graydonvongossler.com";
+const NAME = "Graydon von Gossler";
+const TITLE = `${NAME} | Front-end Web Developer`;
+const DESCRIPTION =
+  "Hi, I'm Graydon! A passionate Front-End Web Developer with expertise in modern web technologies and frameworks, including HTML, CSS, JavaScript, TypeScript, React.js, and Next.js. I specialize in crafting responsive, accessible, and high-performance web applications that are visually appealing and user-focused.";
+
+const GITHUB_URL = "https://github.com/graydonvg";
+const LINKED_IN_URL = "https://linkedin.com/in/graydon-von-gossler";
+export const EMAIL_ADDRESS = "graydonvg@gmail.com";
+
+const PRODUCTION_URL = "https://www.graydonvongossler.com";
 export const SITE_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
-    : productionUrl;
-export const GITHUB_URL = "https://github.com/graydonvg";
-export const LINKED_IN_URL = "https://linkedin.com/in/graydon-von-gossler";
-export const EMAIL_ADDRESS = "graydonvg@gmail.com";
+    : PRODUCTION_URL;
+
+export const siteConfig = {
+  viewport: {
+    themeColor: "black",
+    colorScheme: "dark",
+  } as Viewport,
+  metadata: {
+    metadataBase: new URL(PRODUCTION_URL),
+    title: TITLE,
+    description: DESCRIPTION,
+    applicationName: `${NAME} - Portfolio`,
+    generator: "Next.js",
+    authors: [{ name: NAME }],
+    creator: NAME,
+    publisher: NAME,
+    keywords:
+      "portfolio, front-end developer, frontend engineer, web development, web developer, frontend developer, creative, problem-solving, team player, javascript developer, typescript developer, react developer, nextjs developer, next.js app router, html, css, javascript, typescript, reactjs, react.js, redux, zustand, nextjs, next.js, tailwind, gsap, framer motion, motion, supabase, mui, material ui, shadcn, remote, hybrid, on-site, startup-friendly, responsive design, high-performance websites, accessible websites, english, german, afrikaans, south africa, international, graydon von gossler, graydon, von gossler",
+    icons: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "192x192",
+        url: "/favicon/android-chrome-192x192.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "512x512",
+        url: "/favicon/android-chrome-512x512.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        url: "/favicon/apple-touch-icon.png",
+      },
+      {
+        rel: "icon",
+        sizes: "16x16",
+        url: "/favicon/favicon-16x16.png",
+      },
+      {
+        rel: "icon",
+        sizes: "32x32",
+        url: "/favicon/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/ico",
+        url: "/favicon/favicon.ico",
+      },
+    ],
+    openGraph: {
+      title: TITLE,
+      description: DESCRIPTION,
+      siteName: NAME,
+      type: "website",
+      url: SITE_URL,
+      images: [
+        {
+          url: ogImage.src,
+          alt: TITLE,
+          width: ogImage.width,
+          height: ogImage.height,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: TITLE,
+      description: DESCRIPTION,
+      images: [ogImage.src],
+    },
+    verification: {
+      google: "VmkBdmFmPIAyVGnHGuapflceNwi1XqFcP_aW99qbGIw",
+    },
+    alternates: {
+      canonical: SITE_URL,
+    },
+  } as Metadata,
+  jsonLdSchema: {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: NAME,
+    url: SITE_URL,
+    sameAs: [LINKED_IN_URL, GITHUB_URL],
+    jobTitle: "Front-end Web Developer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Freelance",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "email",
+      email: EMAIL_ADDRESS,
+    },
+  },
+  websiteSchema: {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: SITE_URL,
+    name: `${NAME} - Portfolio`,
+    description: DESCRIPTION,
+    publisher: {
+      "@type": "Person",
+      name: NAME,
+    },
+  },
+};
 
 export const navLinks: NavLinks[] = [
   {
@@ -50,183 +155,5 @@ export const navLinks: NavLinks[] = [
     label: "LinkedIn",
     externalLink: LINKED_IN_URL,
     icon: "linkedin",
-  },
-];
-
-export const aboutContent: AboutContent[] = [
-  {
-    title: "Background",
-    parapraphs:
-      "I started my career in hospitality as a restaurant manager, but I soon craved more intellectual challenges.<br />My love for problem-solving, sparked by high school calculus, led me to explore applied mathematics and programming languages such as C++, MATLAB, and R.<br />Curiosity then brought me to web development, where I began with HTML, CSS, and JavaScript, eventually falling in love with React and Next.js.<br />I thrive on the creative problem-solving that coding offers, and I'm always excited to tackle new challenges.",
-  },
-  {
-    title: "Expertise",
-    parapraphs:
-      "I am experienced in HTML, CSS, JavaScript, TypeScript, React.js, Next.js, and more.<br />I specialize in crafting responsive, accessible, and high-performance web applications that are visually appealing and user-focused.",
-    imageSrc: portfolioMultiDeviceMockup,
-  },
-  {
-    title: "Goals",
-    parapraphs:
-      "My goal is to contribute to innovative teams where I can grow my skills in both front-end and back-end development, and help create impactful web solutions.",
-    imageSrc: portfolioTeamMockup,
-  },
-];
-
-export const projects: ProjectType[] = [
-  {
-    image: zentryCloneMockup,
-    title: "Zentry clone",
-    description:
-      'Working on a clone of zentry.com which won the Awwwards "Sit of the Day" on Aug 28, 2024.',
-    tags: [
-      "typescript",
-      "react.js",
-      "next.js",
-      "zustand",
-      "tailwind css",
-      "gsap",
-    ],
-    links: {
-      repository: "https://github.com/graydonvg/zentry-clone",
-      website: "https://zentry-clone-lemon.vercel.app/",
-    },
-  },
-  {
-    image: myStoreMockup,
-    title: "MyStore",
-    description:
-      "A clothing e-commerce store featuring an admin panel with role-based access control to manage users, products, and orders efficiently. Inspired by South African e-commerce store, Superbalist.",
-    tags: [
-      "typescript",
-      "react.js",
-      "next.js",
-      "redux",
-      "supabase",
-      "mui",
-      "stripe",
-    ],
-    links: {
-      repository: "https://github.com/graydonvg/my-store",
-      website: "https://my-store-henna.vercel.app",
-    },
-  },
-  {
-    image: underConstruction,
-    title: "ScrapeBot",
-    description:
-      "A full-stack SaaS platform that enables users to visually create and manage web scrapers without writing code. It simplifies data extraction with an intuitive drag-and-drop interface and a scheduling system for automating data collection. Additionally, it includes a secure credential management system for storing AI API tokens, allowing users to integrate AI into the web scraping process if desired.",
-    tags: [
-      "typescript",
-      "react.js",
-      "next.js",
-      "zustand",
-      "react context",
-      "react query",
-      "supabase",
-      "shadcn",
-      "tailwind css",
-      "react flow",
-      "stripe",
-    ],
-    links: {
-      repository: "https://github.com/graydonvg/scrape-bot",
-      website: "",
-    },
-  },
-  {
-    image: portfolioMockup,
-    title: "Portfolio",
-    description:
-      "My portfolio site showcasing projects and web development skills in HTML, CSS, JavaScript, TypeScript, React.js, Next.js and more.",
-    tags: [
-      "typescript",
-      "react.js",
-      "next.js",
-      "zustand",
-      "shadcn",
-      "tailwind css",
-      "gsap",
-      "motion",
-    ],
-    links: {
-      repository: "https://github.com/graydonvg/portfolio-v2",
-      website: null,
-    },
-  },
-];
-
-export const technologies: Technologies[] = [
-  {
-    name: "HTML 5",
-    icon: "html",
-  },
-  {
-    name: "CSS 3",
-    icon: "css",
-  },
-  {
-    name: "Tailwind CSS",
-    icon: "tailwind",
-  },
-  {
-    name: "JavaScript",
-    icon: "javascript",
-    ariaLabel: "java script",
-  },
-  {
-    name: "TypeScript",
-    icon: "typescript",
-    ariaLabel: "type script",
-  },
-  {
-    name: "React.js",
-    icon: "react",
-    ariaLabel: "react JS",
-  },
-  {
-    name: "Next.js",
-    icon: "netxjs",
-    ariaLabel: "next JS",
-  },
-  {
-    name: "Redux Toolkit",
-    icon: "redux",
-    ariaLabel: "redux tool kit",
-  },
-  {
-    name: "Zustand",
-    icon: "zustand",
-  },
-  {
-    name: "React Query",
-    icon: "tanStack",
-  },
-  {
-    name: "Supabase",
-    icon: "supabase",
-  },
-  {
-    name: "Material UI",
-    icon: "mui",
-  },
-  {
-    name: "shadcn",
-    icon: "shadcn",
-    ariaLabel: "shad CN",
-  },
-  {
-    name: "GSAP",
-    icon: "gsap",
-    ariaLabel: "G sap",
-  },
-  {
-    name: "Motion",
-    icon: "motion",
-  },
-
-  {
-    name: "Prismic CMS",
-    icon: "prismic",
   },
 ];
